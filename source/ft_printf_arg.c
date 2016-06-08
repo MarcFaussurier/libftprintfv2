@@ -22,7 +22,6 @@ short int 		ft_printf_hash (char *str)
 	return (i);
 }
 
-
 void			ft_printf_id_add (t_printf_fn callable, ...)
 {
 	va_list		ap;
@@ -51,6 +50,22 @@ void			ft_printf_id_add (t_printf_fn callable, ...)
 	va_end(ap);
 }
 
+static int		ft_read_num(char const **fmt, va_list ap)
+{
+	int			o;
+
+	o = 0;
+	if (**fmt == '*' && ++(*fmt))
+		return (va_arg(ap, int));
+	while ((((**fmt) >= '0') && (**fmt <= '9')) || **fmt == '-')
+	{
+		o += **fmt;
+		*fmt += 1;
+		o *= 10;
+	}
+	return (o);
+}
+
 t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 {
 	char		label[11];
@@ -58,27 +73,46 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 	short int 	hash;
 	char		c;
 
+	*ctx = (t_printf_ctx)
+	{
+		.minus = 0,
+		.zero = 0,
+		.dot = 0,
+		.sharp = 0,
+		.space = 0,
+		.plus = 0,
+		.width = 0,
+		.precision = 0,
+		.label = {0},
+		.format = ctx->format,
+	};
 	*(ctx->format) += 1;
 	i = 0;
 	while (1)
 	{
+
 		c = (*(ctx->format))[i];
 		if (c == '-')
 			ctx->minus = 1;
 		else if (c == '0')
 			ctx->zero = 1;
 		else if (c == '.')
+		{
 			ctx->dot = 1;
+			ctx->precision = ft_read_num(ctx->format, ap);
+		}
 		else if (c == '#')
 			ctx->sharp = 1;
 		else if (c == ' ')
 			ctx->space = 1;
 		else if (c == '+')
 			ctx->plus = 1;
-		else 
+		else if (c < '0' || c > '9')
 			break ;
+		ctx->width = ft_read_num(ctx->format, ap);
 		i += 1;
 	}
+	printf("-precision: %i\n-pdding: %i\n", ctx->precision, ctx->width);
 	*(ctx->format) += i;
 	i = 0;
 	while ((*(ctx->format))[i])
