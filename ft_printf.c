@@ -1,5 +1,4 @@
-#include "ft_printf.h"
-
+#include "libftprintf.h"
 
 int	ft_printf(const char *format, ...)
 {
@@ -12,82 +11,47 @@ int	ft_printf(const char *format, ...)
 	return (i);
 }
 
-int	ft_vdprintf(int fd, const char *format, ...)
+int	ft_dprintf(int fd, const char *format, ...)
 {
 	int 	i;
 	va_list	ap;
 
 	va_start(ap, format);
-	i = ft_vdprintf(format, ap);
+	i = ft_vdprintf(fd, format, ap);
 	va_end(ap);
 	return (i);
 }
 
-int	ft_vsprintf(char *str, const char *format, ...)
+int	ft_sprintf(char *str, const char *format, ...)
 {
 	int 	i;
 	va_list	ap;
 
 	va_start(ap, format);
-	i = ft_vdprintf(format, ap);
+	i = ft_vsprintf(str, format, ap);
 	va_end(ap);
 	return (i);
 }
 
 
-int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
+int	ft_snprintf(char *str, size_t size, const char *format, ...)
 {
 	int 	i;
 	va_list	ap;
 
 	va_start(ap, format);
-	i = ft_vdprintf(format, ap);
+	i = ft_vsnprintf(str, size, format, ap);
 	va_end(ap);
 	return (i);
 }
 
-
-
-int	ft_vasprintf(char **ret, const char *format, va_list ap)
+int	ft_asprintf(char **ret, const char *format, ...)
 {
 	int 	i;
 	va_list	ap;
 
 	va_start(ap, format);
-	i = ft_vdprintf(format, ap);
+	i = ft_vasprintf(ret, format, ap);
 	va_end(ap);
 	return (i);
 }
-
-
-/*
-	parse_flags(&ctx, format);
-	ctx.width = parse_int(&ctx, format);
-	if (**format == '.')
-		ctx.precision = parse_int(&ctx, ++format);
-	c1 = *(*format++);
-	c2 = *(*format++);
-uyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyh	c3 = *(*format++);
-	
-	ft_printf_route(&ctx)(ap);
-
-	while (**format)
-	{
-		if (**format == '-')
-			ctx.minux = 1;
-		else if (**format == '0')
-			ctx.zero = 1;
-		else if (**format == '+')
-			ctx.plus = 1;
-		else if (**format == ' ')
-			ctx.space = 1;
-		else if (**format == '#')
-			ctx.sharp = 1;
-		else
-			break ;
-		*format += 1;
-	}
-	if (**format >= '0' && format <= '9')
-*/
-
-
