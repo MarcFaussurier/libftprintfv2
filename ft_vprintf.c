@@ -28,15 +28,17 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
 
 	if (!g_printf_ids[0])
 		ft_printf_default();
-	printf("%i ft_printf warning generated.\n", g_i);
+	printf("--------------------\n");
+	printf("%i ft_printf hashmap collisions.\n", g_i);
+	printf("--------------------\n");
 	i = 0;
 	while (*format)
 		if (*format == '%' && ++format)
-			i += 1;//ft_printf_arg(&ctx, &format, ap)(&ctx, str + i, size - i, ap);
+			i += ft_printf_arg(&ctx, &format, ap)(&ctx, str + i, size - i, ap);
 		else 
 		{
-		//	if (size--)
-		//		str[i] =  *format;
+			if (size--)
+				str[i] =  *format;
 			i += 1;
 			format += 1;
 		}	

@@ -4,6 +4,9 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <limits.h>
+
+# include <stdio.h>
+
 # ifndef PRINTF_BUFFER_SIZE
 #  define PRINTF_BUFFER_SIZE 4096
 # endif
