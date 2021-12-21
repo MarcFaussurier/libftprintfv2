@@ -3,17 +3,21 @@
 
 t_printf_fn		g_printf_ids[127 * 3];
 
+char*			g_printf_labels[127 * 3];
+
 short int		ft_printf_hash(char *str)
 {
 	int			i;
+	int 		l;
 
 	i = 0;
+	l = 0;
 	while (*str)
 	{
-		i += *str;
+		i += *str - l;
 		str += 1;
 	}
-	return (i);
+	return (i % 127 * 3);
 }
 
 void		ft_printf_id_add(t_printf_fn callable, ...)
@@ -26,16 +30,16 @@ void		ft_printf_id_add(t_printf_fn callable, ...)
 	while (1)
 	{
 		id = va_arg(ap, char *);
-		if (!id)
+		if (!id[0])
 			break;
 		h = ft_printf_hash(id);
 		if (g_printf_ids[h])
 		{
-			printf("ft_printf: warning identifier \
-					[id=%s, h=%i] already exists!\n",
-					id, h);
+			printf("warning: printf identifier [id=%s, h=%i] already exists as %s!\n",
+					id, h, g_printf_labels[h]);
 		}
 		g_printf_ids[ft_printf_hash(id)] = callable;
+		g_printf_labels[ft_printf_hash(id)] = id;
 	}
 	va_end(ap);
 }

@@ -7,7 +7,7 @@ static void		ft_phase_a()
 	ft_printf_id_add(&ft_vsnprintf_int, "d", "i",								_);
 	ft_printf_id_add(&ft_vsnprintf_long, "ld", "li",							_);
 	ft_printf_id_add(&ft_vsnprintf_llong, "Ld", "lld", "zd",
-			"hhD", "hD", "D", "lD", "LD", "llD", "zD", 	_);
+			"hhD", "hD", "D", "lD", "LD", "llD", "zD", _);
 	ft_printf_id_add(&ft_vsnprintf_usshrt, "hhu",								_);
 	ft_printf_id_add(&ft_vsnprintf_ushrt, "hu",								_);
 	ft_printf_id_add(&ft_vsnprintf_uint, "u",									_);
@@ -49,9 +49,9 @@ static void		ft_phase_c()
 	ft_printf_id_add(&ft_vsnprintf_percent, "%", _);
 	ft_printf_id_add(&ft_vsnprintf_flt, "hhf", "hf", "f", "lf",
 			"llf", "zf", "hhF", "hF", "F", "lF", 
-			"llF", "zF"					_);
-	ft_printf_id_add(&ft_vsnprintf_dbl, "lf", "lF" 		_);
-	ft_printf_id_add(&ft_vsnprintf_ldbl, "Lf", "LF"	 	_);
+			"llF", "zF",					_);
+	ft_printf_id_add(&ft_vsnprintf_dbl, "lf", "lF", 		_);
+	ft_printf_id_add(&ft_vsnprintf_ldbl, "Lf", "LF",	 	_);
 }
 
 static void		ft_phase_d()

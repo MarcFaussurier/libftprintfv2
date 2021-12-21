@@ -11,7 +11,7 @@
 # define b8 "01234567x"
 # define b16 "0123456789abcdefx"
 # define B16 "0123456789ABCDEFX"
-# define _ -42
+# define _ ""
 # define __ void
 int				ft_printf(const char *  format, ...);
 int				ft_sprintf(char *  str, const char *  format, ...);
