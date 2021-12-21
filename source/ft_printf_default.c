@@ -33,7 +33,7 @@ static void ft_phase_b()
 	ft_printf_id_add(&ft_vsnprintf_xshrt_up, "hX", 		_);
 	ft_printf_id_add(&ft_vsnprintf_xint_up, "X",	 		_);
 	ft_printf_id_add(&ft_vsnprintf_xlong_up, "lX", 		_);
-	ft_printf_id_add(&ft_vsnprintf_xllong_up, "lX", "llX", "zX", 	_);
+	ft_printf_id_add(&ft_vsnprintf_xllong_up, "llX", "zX", 	_);
 }
 
 static void		ft_phase_c()
@@ -51,7 +51,7 @@ static void		ft_phase_c()
 			"llf", "zf", "hhF", "hF", "F", "lF", 
 			"llF", "zF",					_);
 	ft_printf_id_add(&ft_vsnprintf_dbl, "lf", "lF", 		_);
-	ft_printf_id_add(&ft_vsnprintf_ldbl, "Lf", "LF",	 	_);
+	ft_printf_id_add(&ft_vsnprintf_ldbl, "LF",	 	_);
 }
 
 static void		ft_phase_d()

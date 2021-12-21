@@ -23,6 +23,7 @@ int				ft_vsprintf(char *  str, const char *  format, va_list ap);
 int				ft_vsnprintf(char *  str, size_t size, const char *  format, va_list ap);
 int				ft_vasprintf(char **ret, const char *format, va_list ap);
 int				ft_vdprintf(int fd, const char *  format, va_list ap);
+extern int g_i;
 typedef struct	s_printf_ctx
 {
 	char		minus:	1;
@@ -38,7 +39,7 @@ typedef struct	s_printf_ctx
 }				t_printf_ctx;
 typedef			int (*t_printf_fn)(t_printf_ctx *ctx, char *str, size_t size, va_list ap);
 t_printf_fn		ft_printf_arg(t_printf_ctx *ctx, const char **format, va_list ap);
-extern			t_printf_fn g_printf_ids[127 * 3];
+extern			t_printf_fn g_printf_ids[127 * 8];
 short int		ft_printf_hash(char *str);
 void			ft_printf_id_add(t_printf_fn callable, ...);
 void			ft_printf_default();

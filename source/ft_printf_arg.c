@@ -1,24 +1,22 @@
 #include "../libftprintf.h"
 #include "stdio.h"
 
-t_printf_fn		g_printf_ids[127 * 3];
+t_printf_fn		g_printf_ids[127 * 8];
 
-char*			g_printf_labels[127 * 3];
+char*			g_printf_labels[127 * 8];
 
-short int		ft_printf_hash(char *str)
+int 			g_i = 0;
+
+short int 	ft_printf_hash (char * word)
 {
-	int			i;
-	int 		l;
-
-	i = 0;
-	l = 0;
-	while (*str)
-	{
-		i += *str - l;
-		str += 1;
-	}
-	return (i % 127 * 3);
+    unsigned int hash = 0;
+    for (int i = 0 ; word[i] != '\0' ; i++)
+    {
+        hash = 31 * hash + word[i];
+    }
+    return hash % (127 * 8);
 }
+
 
 void		ft_printf_id_add(t_printf_fn callable, ...)
 {
@@ -37,6 +35,7 @@ void		ft_printf_id_add(t_printf_fn callable, ...)
 		{
 			printf("warning: printf identifier [id=%s, h=%i] already exists as %s!\n",
 					id, h, g_printf_labels[h]);
+			g_i += 1;
 		}
 		g_printf_ids[ft_printf_hash(id)] = callable;
 		g_printf_labels[ft_printf_hash(id)] = id;
