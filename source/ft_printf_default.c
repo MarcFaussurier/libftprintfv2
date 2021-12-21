@@ -47,8 +47,8 @@ static void		ft_phase_c()
 	ft_printf_id_add(&ft_vsnprintf_cnt, "hhn", "hn", "n", "ln", "lln", "zn", "Ln",
 			_);
 	ft_printf_id_add(&ft_vsnprintf_percent, "%", _);
-	ft_printf_id_add(&ft_vsnprintf_flt, "hhf", "hf", "f", "lf",
-			"llf", "zf", "hhF", "hF", "F", "lF", 
+	ft_printf_id_add(&ft_vsnprintf_flt, "hhf", "hf", "f", 
+			"llf", "zf", "hhF", "hF", "F",  
 			"llF", "zF",					_);
 	ft_printf_id_add(&ft_vsnprintf_dbl, "lf", "lF", 		_);
 	ft_printf_id_add(&ft_vsnprintf_ldbl, "LF",	 	_);
@@ -56,27 +56,27 @@ static void		ft_phase_c()
 
 static void		ft_phase_d()
 {
-	ft_printf_id_add(&ft_vsnprintf_eflt, "hhe", "he", "e", "le",
+	ft_printf_id_add(&ft_vsnprintf_eflt, "hhe", "he", "e", 
 			"lle", "ze", 					_);
 	ft_printf_id_add(&ft_vsnprintf_edbl, "le", 			_);
 	ft_printf_id_add(&ft_vsnprintf_eldbl, "Le", 		 	_);
-	ft_printf_id_add(&ft_vsnprintf_eflt_up, "hhE", "hE", "E", "lE",
+	ft_printf_id_add(&ft_vsnprintf_eflt_up, "hhE", "hE", "E",
 			"llE", "zE", 					_);
 	ft_printf_id_add(&ft_vsnprintf_edbl_up, "lE", 			_);
 	ft_printf_id_add(&ft_vsnprintf_eldbl_up, "LE", 		_);
-	ft_printf_id_add(&ft_vsnprintf_gflt, "hhg", "hg", "g", "lg",
+	ft_printf_id_add(&ft_vsnprintf_gflt, "hhg", "hg", "g", 
 			"llg", "zg", 					_);
 	ft_printf_id_add(&ft_vsnprintf_gdbl, "lg", 			_);
 	ft_printf_id_add(&ft_vsnprintf_gldbl, "Lg", 		 	_);
-	ft_printf_id_add(&ft_vsnprintf_gflt_up, "hhG", "hG", "G", "lG",
+	ft_printf_id_add(&ft_vsnprintf_gflt_up, "hhG", "hG", "G",
 			"llG", "zG", 					_);
 	ft_printf_id_add(&ft_vsnprintf_gdbl_up, "lG", 			_);
 	ft_printf_id_add(&ft_vsnprintf_gldbl_up, "LG", 		_);
-	ft_printf_id_add(&ft_vsnprintf_aflt, "hha", "ha", "a", "la",
+	ft_printf_id_add(&ft_vsnprintf_aflt, "hha", "ha", "a",
 			"lla", "za", 					_);
 	ft_printf_id_add(&ft_vsnprintf_adbl, "la", 			_);
 	ft_printf_id_add(&ft_vsnprintf_aldbl, "La", 		 	_);
-	ft_printf_id_add(&ft_vsnprintf_aflt_up, "hhA", "hA", "A", "lA", 
+	ft_printf_id_add(&ft_vsnprintf_aflt_up, "hhA", "hA", "A", 
 			"llA", "zA", 					_);
 	ft_printf_id_add(&ft_vsnprintf_adbl_up, "lA", 			_);
 	ft_printf_id_add(&ft_vsnprintf_aldbl_up, "LA", 		_);

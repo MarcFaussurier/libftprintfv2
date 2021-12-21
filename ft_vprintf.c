@@ -28,7 +28,7 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
 
 	if (!g_printf_ids[0])
 		ft_printf_default();
-	printf("%i\n", g_i);
+	printf("%i ft_printf warning generated.\n", g_i);
 	i = 0;
 	while (*format)
 		if (*format == '%' && ++format)
