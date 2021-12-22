@@ -1,17 +1,18 @@
 #include "../libftprintf.h"
 
-inline void 		ft_nstr_append(int *i, char **str, size_t *size, char c)
+inline int 		ft_nstr_append(int *i, char **str, size_t *size, char c)
 {
-	if (!c)
-	{
-		**str = c;
-		return ;	
-	}
+	int 		r;
+
+	r = 0;
 	if (*size)
 	{
 		*size -= 1;
 		**str = c;
+//		printf(" -- %c\n", c);
 		*str += 1;
+		r = 1;
 	}
 	*i += 1;
+	return (r);
 }

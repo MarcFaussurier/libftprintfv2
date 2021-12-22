@@ -39,7 +39,7 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
 	i = 0;
 	while (*format)
 		if (*format == '%' && ++format)
-			i += ft_printf_arg(&ctx, &format, ap)(&ctx, &str, size - i, ap);
+			i += ft_printf_arg(&ctx, &format, ap)(&ctx, &str, &size, ap);
 		else 
 			ft_nstr_append(&i, &str, &size, *format++);
 	if (i < size) 
@@ -53,8 +53,11 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
 int	ft_vasprintf(char **ret, const char *format, va_list ap)
 {
 	int 	i;
+	va_list	apc;
 
-	i = ft_vsnprintf(0, 0, format, ap) + 1;
+	va_copy(apc, ap);
+	i = ft_vsnprintf(0, 0, format, apc) + 1;
+	va_end(apc);
 	*ret = malloc(i * sizeof(char));
 	if (!*ret)
 		return (-1);

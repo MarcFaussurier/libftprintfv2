@@ -1,0 +1,9 @@
+--------------------
+ - 0 ft_printf hashmap collisions.
+--------------------
+success at line 44 (test no 1):  Bonjour, 42!
+success at line 45 (test no 2):  --40 + --2 = 42!
+success at line 46 (test no 3):  INT_MAX = 2147483647 :]
+success at line 47 (test no 4):  INT_MIN = -2147483648 :)
+success at line 48 (test no 5):  ZERO = 0 ;)
+5 / 5 test succeed.
