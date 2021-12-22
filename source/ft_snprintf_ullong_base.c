@@ -1,6 +1,6 @@
 #include "../libftprintf.h"
 
-int 					ft_snprintf_ullong_base(t_printf_ctx *ctx, char *str, size_t size, unsigned long long n, const char *b)
+int 					ft_snprintf_ullong_base(t_printf_ctx *ctx, char **str, size_t size, unsigned long long n, const char *b)
 {
 	int 				r;
 	int 				y;
@@ -8,21 +8,25 @@ int 					ft_snprintf_ullong_base(t_printf_ctx *ctx, char *str, size_t size, unsi
 
 	r = 0;
 	k = 0;
-	y = 0;
-	ft_nstr_append(&r, &str, &size, '-');
+
 	while (1)
 	{
-		ft_nstr_append(&r, &str, &size, n % 10);
+		ft_nstr_append(&r, str, &size, (n % 10) + '0');
 		k += 1;
-		n /= 10;
+		n = n / 10;
 		if (!n)
 			break ;
 	}
-	while (k - y >= 0)
+	**str = 0;	
+	y = 0;
+	while (k > y * 2)
 	{
-		*(str - y) = *(str - k + y);
+
+		char c;
+		c = *(*str - y - 1);
+		*(*str - y - 1) = *(*str - k + y);
+		*(*str - k + y) = c;
 		y += 1;
 	}
-	ft_nstr_append(&r, &str, &size, 0);
 	return (r);
 }

@@ -1,6 +1,6 @@
 #include "../libftprintf.h"
 
-void 		ft_nstr_append(int *i, char **str, size_t *size, char c)
+inline void 		ft_nstr_append(int *i, char **str, size_t *size, char c)
 {
 	if (!c)
 	{

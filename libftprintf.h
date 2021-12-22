@@ -40,7 +40,7 @@ typedef struct	s_printf_ctx
 	char		c2;
 	char		c3;
 }				t_printf_ctx;
-typedef			int (*t_printf_fn)(t_printf_ctx *ctx, char *str, size_t size, va_list ap);
+typedef			int (*t_printf_fn)(t_printf_ctx *ctx, char **str, size_t size, va_list ap);
 t_printf_fn		ft_printf_arg(t_printf_ctx *ctx, const char **format, va_list ap);
 extern			t_printf_fn g_printf_ids[127 * 8];
 short int		ft_printf_hash(char *str);
@@ -49,15 +49,15 @@ void			ft_printf_default();
 /**/
 void 			ft_nstr_append(int *i, char **str, size_t *size, char c);
 /**/
-int 			ft_snprintf_llong_base(t_printf_ctx *ctx, char *str, size_t size, long long n, const char *b);
-int 			ft_snprintf_ullong_base(t_printf_ctx *ctx, char *str, size_t size, unsigned long long n, const char *b);
+int 			ft_snprintf_llong_base(t_printf_ctx *ctx, char **str, size_t size, long long n, const char *b);
+int 			ft_snprintf_ullong_base(t_printf_ctx *ctx, char **str, size_t size, unsigned long long n, const char *b);
 
 /**/
-int 			ft_vsnprintf_sshrt(t_printf_ctx *ctx, char *str, size_t size, va_list ap);
-int 			ft_vsnprintf_shrt(t_printf_ctx *ctx, char *str, size_t size, va_list ap);
-int 			ft_vsnprintf_int(t_printf_ctx *ctx, char *str, size_t size, va_list ap);
-int 			ft_vsnprintf_long(t_printf_ctx *ctx, char *str, size_t size, va_list ap);
-int 			ft_vsnprintf_llong(t_printf_ctx *ctx, char *str, size_t size, va_list ap);
+int 			ft_vsnprintf_sshrt(t_printf_ctx *ctx, char **str, size_t size, va_list ap);
+int 			ft_vsnprintf_shrt(t_printf_ctx *ctx, char **str, size_t size, va_list ap);
+int 			ft_vsnprintf_int(t_printf_ctx *ctx, char **str, size_t size, va_list ap);
+int 			ft_vsnprintf_long(t_printf_ctx *ctx, char **str, size_t size, va_list ap);
+int 			ft_vsnprintf_llong(t_printf_ctx *ctx, char **str, size_t size, va_list ap);
 /**/
 int 			ft_vsnprintf_usshrt(t_printf_ctx *ctx, char *str, size_t size, va_list ap);
 int 			ft_vsnprintf_ushrt(t_printf_ctx *ctx, char *str, size_t size, va_list ap);

@@ -11,6 +11,7 @@ int	ft_vdprintf(int fd, const char *format, va_list ap)
 	char 	buffer[PRINTF_BUFFER_SIZE + 1];
 	int 	i;
 
+	buffer[0] = 0;
 	i = ft_vsnprintf(buffer, PRINTF_BUFFER_SIZE, format, ap);
 	write(fd, buffer, i);
 	return (i);
@@ -27,27 +28,27 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
 	int				i;
 
 	if (!g_printf_ids[0])
+	{
 		ft_printf_default();
-	printf("--------------------\n");
-	printf("%i ft_printf hashmap collisions.\n", g_i);
-	printf("--------------------\n");
+		printf("--------------------\n");
+		printf(" - %i ft_printf hashmap collisions.\n", g_i);
+		printf("--------------------\n");
+		if (!g_printf_ids[0])
+			g_printf_ids[0] = 1;
+	}
 	i = 0;
 	while (*format)
 		if (*format == '%' && ++format)
-			i += ft_printf_arg(&ctx, &format, ap)(&ctx, str + i, size - i, ap);
+			i += ft_printf_arg(&ctx, &format, ap)(&ctx, &str, size - i, ap);
 		else 
-		{
-			if (size--)
-				str[i] =  *format;
-			i += 1;
-			format += 1;
-		}	
+			ft_nstr_append(&i, &str, &size, *format++);
 	if (i < size) 
 		str[i] = 0;
 	if (size)
 		str[size] = 0;
 	return (i);
 }
+
 
 int	ft_vasprintf(char **ret, const char *format, va_list ap)
 {

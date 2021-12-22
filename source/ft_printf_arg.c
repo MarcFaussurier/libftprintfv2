@@ -47,9 +47,8 @@ void			ft_printf_id_add (t_printf_fn callable, ...)
 	va_end(ap);
 }
 
-t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, const char **format, va_list ap)
+t_printf_fn		ft_printf_arg (t_printf_ctx *ctx,  const char **format, va_list ap)
 {
-
-
-	return (0);
+	*format += 1;
+	return (ft_vsnprintf_int);
 }

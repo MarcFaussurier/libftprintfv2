@@ -6,9 +6,9 @@
 
 int main()
 {
-	ft_printf("42\n");
-
-	printf("%w%hhX Wadwa", ULLONG_MAX, CHAR_MAX);
-	printf("%G\n\n%LG\n", (float) LDBL_MAX, LDBL_MAX);
-	printf("%i", snprintf(0, 0, "%s", "hello"));
+	ft_printf("TEST\t1\t: %i\n", -4201);
+	ft_printf("TEST\t2\t: %i\n", LLONG_MAX);
+	ft_printf("TEST\t3\t: %i\n", 4201);
+	ft_printf("TEST\t4\t: %i\n", 0);
+	ft_printf("TEST\t5\t: %i\n", 4);
 }
