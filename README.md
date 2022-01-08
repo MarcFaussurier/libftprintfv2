@@ -1,5 +1,5 @@
 # libftprintfv2
-[WIP] fastest hashmap based dynamic printf implementation (compile-time parser / routing using ft_cedille)
+[WIP] dynamic printf implementation
 
 Dynamic identifier usage:
 
