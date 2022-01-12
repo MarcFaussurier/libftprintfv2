@@ -10,12 +10,12 @@ int 			g_i = 0;
 short int 		ft_printf_hash (char *str)
 {
     unsigned 	hash;
-	unsigned 	i;
+    unsigned 	i;
 
-	hash = 0;
-	i = 0;
-	if (str[0] == 'l' && str[1] == 'g')
-		return (127 * 8 - 42);
+    hash = 0;
+    i = 0;
+    if (str[0] == 'l' && str[1] == 'g')
+        return (127 * 8 - 42);
     while (str[i])
         hash = 31 * hash + str[i++];
     return (hash % (127 * 8));
