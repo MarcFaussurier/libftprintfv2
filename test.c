@@ -20,10 +20,12 @@ static void 	test(int line, const char *format, ...)
 	va_list		apc;
 	struct timeval begin, end;
 	long seconds, microseconds;
-	double elapsed, elapsed2;
+	long double elapsed, elapsed2;
 	if (!line && !format)
 	{
 		printf("%i / %i test succeed.\n", s, i);
+		s = 0;
+		i = 0;
 		return ;
 	}
 	i += 1;
@@ -48,18 +50,42 @@ static void 	test(int line, const char *format, ...)
 	else
 	{
 		s += 1;
-		printf("[speed: +%f%%] success at line %i (test no %i): %s\n", elapsed2 - elapsed, line, i, given);
+		printf("[speed: %+Lf%%] success at line %i (test no %i): %s\n", elapsed - elapsed2, line, i, given);
 	}
 	va_end(ap);
 	va_end(apc);
 }
 
+
 int main()
 {
-	test(_, " Bonjour, %i!", 42, 43);
-	test(_, " %i + %i = %i!", -40, -2, -42);
-	test(_, " INT_MAX = %i :]", INT_MAX);
+	printf("----------------------------------------\n--- boot time\n");
+	test(_, "boot time test");
+	//
+	printf(" - regular tests\n");
+	test(_, "Bonjour, %i! %", 42, 43);
+	test(_, "%i + %i = %i!", -40, -2, -42);
+	test(_, "INT_MAX = %i :]", INT_MAX);
 	test(_, " INT_MIN = %i :)",  INT_MIN);
 	test(_, " ZERO = %i ;)", 0);
+	test(_, "%k i");
+	//
 	test(0, 0);
+	printf("----------------------------------------\n--- bonus tests\n");
+	printf("----------------------------------------\n--- personal tests\n");
+	printf("----------------------------------------\n--- testing if vsnpf trims correctly\n");
+	char	buffer[255];
+	char	buffer2[255];
+	snprintf(buffer, 5, "-%i", 12345);
+	printf("GCC: %s\n", buffer);
+	ft_snprintf(buffer2, 5, "-%i", 12345);
+	printf("YOU: %s\n", buffer2);
+	if (!strcmp(buffer, buffer2))
+	{
+		printf ("OK\n");
+	}
+	else
+		printf ("KO\n");
+
+
 }

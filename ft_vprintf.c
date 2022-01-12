@@ -27,6 +27,7 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
 	t_printf_ctx 	ctx;
 	int				i;
 
+	ctx.format = &format;
 	if (!g_printf_ids[0])
 	{
 		ft_printf_default();
@@ -38,14 +39,14 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
 	}
 	i = 0;
 	while (*format)
-		if (*format == '%' && ++format)
-			i += ft_printf_arg(&ctx, &format, ap)(&ctx, &str, &size, ap);
-		else 
-			ft_nstr_append(&i, &str, &size, *format++);
+		if (*format == '%')
+			i += ft_printf_arg(&ctx, ap)(&ctx, &str, &size, ap);
+		else
+			i += ft_vsnprintf_fmt(&ctx, &str, &size, ap);
 	if (i < size) 
 		str[i] = 0;
 	if (size)
-		str[size] = 0;
+		str[size - 1] = 0;
 	return (i);
 }
 

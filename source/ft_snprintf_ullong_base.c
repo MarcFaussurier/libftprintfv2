@@ -5,31 +5,23 @@ int 					ft_snprintf_ullong_base(t_printf_ctx *ctx, char **str, size_t *size, un
 	int 				r;
 	int 				y;
 	int 				k;
-	int 				rrev;
+	char				c;
+	char				buffer[65];
 
 	r = 0;
-	k = 0;
-	rrev = *size;
+	k = 65;
 	while (1)
 	{
-		rrev = ft_nstr_append(&r, str, size, (n % 10) + '0') && rrev;
-		k += 1;
+		k -= 1;
+		buffer[k] = n % 10 + '0';
 		n = n / 10;
 		if (!n)
 			break ;
 	}
-	y = 0;
-	// TODO:: Deal with end of size while itoa was in progress
-	// compare with vsnpf behaviour
-	if (rrev)
-	while (k > y * 2)
+	while (k < 65)
 	{
-
-		char c;
-		c = *(*str - y - 1);
-		*(*str - y - 1) = *(*str - k + y);
-		*(*str - k + y) = c;
-		y += 1;
+		ft_nstr_append(&r, str, size, buffer[k]);
+		k += 1;
 	}
 	return (r);
 }

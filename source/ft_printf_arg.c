@@ -37,18 +37,46 @@ void			ft_printf_id_add (t_printf_fn callable, ...)
 		h = ft_printf_hash (id);
 		if (g_printf_ids[h])
 		{
-			printf("warning: printf identifier [id=%s, h=%i]", id, h);
-			printf(" already exists as %s!\n", g_printf_labels[h]);
+			printf("error: printf identifier [id=%s, h=%i]", id, h);
+			printf(" already exists as %s, use a different label!\n", g_printf_labels[h]);
 			g_i += 1;
+		} 
+		else
+		{
+			g_printf_ids[ft_printf_hash(id)] = callable;
+			g_printf_labels[ft_printf_hash(id)] = id;
 		}
-		g_printf_ids[ft_printf_hash(id)] = callable;
-		g_printf_labels[ft_printf_hash(id)] = id;
 	}
 	va_end(ap);
 }
 
-t_printf_fn		ft_printf_arg (t_printf_ctx *ctx,  const char **format, va_list ap)
+t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 {
-	*format += 1;
-	return (ft_vsnprintf_int);
+	char		label[11];
+	size_t		i;
+	short int 	hash;
+
+	*(ctx->format) += 1;
+	i = 0;
+	while ((*(ctx->format))[i])
+	{
+		label[i] = (*(ctx->format))[i];
+		if (!**(ctx->format))
+		{
+			break ;
+		}
+		i += 1;
+		label[i] = 0;
+		hash = ft_printf_hash(label);
+		if (g_printf_ids[hash])
+		{
+			*(ctx->format) += i;
+			//printf("FOUND %%%s with %s\n", g_printf_labels[hash], label);
+			return (g_printf_ids[hash]);
+		}
+	}
+//	*(ctx->format) += i;
+	label[i] = 0;
+//	printf("NOT FOUND %%%s\n", label);
+	return (ft_vsnprintf_fmt);
 }
