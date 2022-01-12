@@ -62,7 +62,6 @@ int main()
 	printf("----------------------------------------\n--- boot time\n");
 	test(_, "boot time test");
 	printf("----------------------------------------\n--- madatory tests\n");
-	printf(" - regular tests\n");
 	//
 	test(_, "Bonjour, %i! %", 42, 43);
 	test(_, "%i + %i = %i!", -40, -2, -42);
