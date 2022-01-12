@@ -1,7 +1,6 @@
 #include "../libftprintf.h"
 
-int 					ft_snprintf_llong_base
-(t_printf_ctx *ctx, char **str, size_t *size, long long n, const char *b)
+int 					ft_snprintf_llong_base(t_printf_ctx *ctx, char **str, size_t *size, long long n, const char *b)
 {
 	int 				r;
 

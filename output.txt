@@ -1,25 +1,23 @@
 ----------------------------------------
 --- boot time
 [0 ft_printf hashmap collisions.]
-[speed: -0.000021%] success at line 63 (test no 1): boot time test
+[speed: -0.000020%] success at line 63 (test no 1): boot time test
 ----------------------------------------
 --- madatory tests
-[speed: -0.000003%] success at line 66 (test no 2): Bonjour, 42! 
+[speed: -0.000004%] success at line 66 (test no 2): Bonjour, 42! 
 [speed: +0.000000%] success at line 67 (test no 3): -40 + -2 = -42!
 [speed: +0.000000%] success at line 68 (test no 4): INT_MAX = 2147483647 :]
-[speed: -0.000001%] success at line 69 (test no 5):  INT_MIN = -2147483648 :)
+[speed: +0.000000%] success at line 69 (test no 5):  INT_MIN = -2147483648 :)
 [speed: -0.000001%] success at line 70 (test no 6):  ZERO = 0 ;)
-[speed: -0.000001%] success at line 72 (test no 7): k i
-error at line 74 (test no 8):
-	 - expected:	is '%' a percent ?
-	 - got:		is '' a percent ?
+[speed: +0.000000%] success at line 72 (test no 7): k i
+[speed: -0.000004%] success at line 74 (test no 8): is '%' a percent ?
 error at line 76 (test no 9):
 	 - expected:	is 'le 101' 'le 101' ?
 	 - got:		is '' 'le 101' ?
 error at line 78 (test no 10):
 	 - expected:	is '(null)' '(null) ?
 	 - got:		is '' '(null) ?
-7 / 10 test succeed.
+8 / 10 test succeed.
 ----------------------------------------
 --- bonus tests
 ----------------------------------------

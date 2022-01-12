@@ -1,6 +1,6 @@
 #include "../libftprintf.h"
 
-int 			ft_vsnprintf_eflt_up(t_printf_ctx *ctx, char *str, size_t size, va_list ap)
+int 			ft_vsnprintf_eflt_up(t_printf_ctx *ctx, char **str, size_t *size, va_list ap)
 {
 	(void) str;
 	(void) ctx;
@@ -10,7 +10,7 @@ int 			ft_vsnprintf_eflt_up(t_printf_ctx *ctx, char *str, size_t size, va_list a
 }
 
 
-int 			ft_vsnprintf_edbl_up(t_printf_ctx *ctx, char *str, size_t size, va_list ap)
+int 			ft_vsnprintf_edbl_up(t_printf_ctx *ctx, char **str, size_t *size, va_list ap)
 {
 	(void) str;
 	(void) ctx;
@@ -20,7 +20,7 @@ int 			ft_vsnprintf_edbl_up(t_printf_ctx *ctx, char *str, size_t size, va_list a
 }
 
 
-int 			ft_vsnprintf_eldbl_up(t_printf_ctx *ctx, char *str, size_t size, va_list ap)
+int 			ft_vsnprintf_eldbl_up(t_printf_ctx *ctx, char **str, size_t *size, va_list ap)
 {
 	(void) str;
 	(void) ctx;
