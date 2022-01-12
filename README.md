@@ -2,8 +2,8 @@
 
 42 school project, subject [here](https://github.com/Binary-Hackers/42_Subjects/blob/master/00_Projects/02_Algorithmic/ft_printf.pdf).
 
-[See test sources](test.c)<br />
-[See test results](output.txt)
+[See tests](test.c)<br />
+[See tests results](output.txt)
 
 ### Dynamic vs non-dynamic printf
 
