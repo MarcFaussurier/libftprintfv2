@@ -3,12 +3,12 @@
 --------------------
  - 0 ft_printf hashmap collisions.
 --------------------
-[speed: -0.000023%] success at line 63 (test no 1): boot time test
+[speed: -0.000018%] success at line 63 (test no 1): boot time test
  - regular tests
-[speed: -0.000005%] success at line 66 (test no 2): Bonjour, 42! 
+[speed: -0.000004%] success at line 66 (test no 2): Bonjour, 42! 
 [speed: +0.000000%] success at line 67 (test no 3): -40 + -2 = -42!
 [speed: +0.000000%] success at line 68 (test no 4): INT_MAX = 2147483647 :]
-[speed: -0.000001%] success at line 69 (test no 5):  INT_MIN = -2147483648 :)
+[speed: +0.000000%] success at line 69 (test no 5):  INT_MIN = -2147483648 :)
 [speed: -0.000001%] success at line 70 (test no 6):  ZERO = 0 ;)
 [speed: +0.000000%] success at line 71 (test no 7): k i
 7 / 7 test succeed.

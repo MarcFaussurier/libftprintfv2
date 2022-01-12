@@ -1,5 +1,6 @@
 #include "../libftprintf.h"
 
+
 static void		ft_phase_a()
 {
 	ft_printf_id_add(&ft_vsnprintf_sshrt, "hhd", "hhi",						_);
@@ -84,13 +85,19 @@ static void		ft_phase_d()
 
 void	ft_printf_default()
 {
-	ft_phase_a();
-	ft_phase_b();
-	ft_phase_c();
-	ft_phase_d();
+	static int	initialised;
 
-
-
-	ft_printf_id_add(&ft_vsnprintf_aldbl_up, "b", 		_);
-	ft_printf_id_add(&ft_vsnprintf_aldbl_up, "_banane", 		_);
+	if (!initialised)
+	{
+		ft_phase_a();
+		ft_phase_b();
+		ft_phase_c();
+		ft_phase_d();
+		//ft_printf_id_add(&ft_vsnprintf_aldbl_up, "b", 		_);
+		//ft_printf_id_add(&ft_vsnprintf_aldbl_up, "_banane", 		_);
+		printf("--------------------\n");
+		printf(" - %i ft_printf hashmap collisions.\n", g_i);
+		printf("--------------------\n");
+		initialised = 1;
+	}
 }

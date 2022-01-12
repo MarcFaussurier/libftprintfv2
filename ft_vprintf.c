@@ -28,15 +28,7 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
 	int				i;
 
 	ctx.format = &format;
-	if (!g_printf_ids[0])
-	{
-		ft_printf_default();
-		printf("--------------------\n");
-		printf(" - %i ft_printf hashmap collisions.\n", g_i);
-		printf("--------------------\n");
-		if (!g_printf_ids[0])
-			g_printf_ids[0] = 1;
-	}
+	ft_printf_default();	
 	i = 0;
 	while (*format)
 		if (*format == '%')

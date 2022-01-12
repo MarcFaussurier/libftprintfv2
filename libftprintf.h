@@ -41,13 +41,14 @@ typedef struct	s_printf_ctx
 }				t_printf_ctx;
 typedef			int (*t_printf_fn)(t_printf_ctx *ctx, char **str, size_t size, va_list ap);
 t_printf_fn		ft_printf_arg(t_printf_ctx *ctx, va_list ap);
-extern			t_printf_fn g_printf_ids[127 * 8];
+extern t_printf_fn g_printf_ids[127 * 8];
+extern int		g_printf_initialised;	
 short int		ft_printf_hash(char *str);
 void			ft_printf_id_add(t_printf_fn callable, ...);
 void			ft_printf_default();
 /**/
-inline int 		ft_vsnprintf_fmt(t_printf_ctx *ctx, char **str, size_t *size, va_list ap);
-inline int		ft_nstr_append(int *i, char **str, size_t *size, char c);
+int 		ft_vsnprintf_fmt(t_printf_ctx *ctx, char **str, size_t *size, va_list ap);
+int		ft_nstr_append(int *i, char **str, size_t *size, char c);
 /**/
 int 			ft_snprintf_llong_base(t_printf_ctx *ctx, char **str, size_t *size, long long n, const char *b);
 int 			ft_snprintf_ullong_base(t_printf_ctx *ctx, char **str, size_t *size, unsigned long long n, const char *b);
