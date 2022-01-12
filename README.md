@@ -16,7 +16,7 @@ Usage:
 
 ### Hashmap vs no hasmap
 
-Hashmap is O(n) while a classic router that compares all strings is O(n*n) but here specifier lenghts should not be that long so the difference should not be important. Current implementation works with all clang flags without collision. <br />
+Hashmap is O(n) while a classic router that compares all strings is O(n*n) but here specifier lenghts should not be that long so the difference should not be important. Current implementation works with all clang specifiers without collision. <br />
 <br />
 [Implementation here](https://github.com/MarcFaussurier/libftprintfv2/blob/master/source/ft_printf_arg.c)
 
