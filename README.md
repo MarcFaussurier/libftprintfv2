@@ -1,10 +1,13 @@
 # libftprintfv2
 
-[See progress](output.txt)
+42 school project, subject [here](https://github.com/Binary-Hackers/42_Subjects/blob/master/00_Projects/02_Algorithmic/ft_printf.pdf).
+
+[See tests](output.txt)<br />
+[See test results](output.txt)
 
 ### Dynamic vs non-dynamic printf
 
-Dynamic PF allows user to register new specifiers at run-rime.
+Dynamic PF allows user to register new specifiers at run-rime.<br />
 Usage:
 ```C
 	ft_printf_id_add(&ft_vsnprintf_ullong, "Lu", "llu", "zu", _);
@@ -13,15 +16,19 @@ Usage:
 
 ### Hashmap vs no hasmap
 
-Hashmap is O(n) while a classic router that compares all strings is O(n*n) but here specifier lenghts should not be that long so the difference should not be important. Current implementation works with all clang flags without collision. 
-[implemented here](https://github.com/MarcFaussurier/libftprintfv2/blob/master/source/ft_printf_arg.c)
+Hashmap is O(n) while a classic router that compares all strings is O(n*n) but here specifier lenghts should not be that long so the difference should not be important. Current implementation works with all clang flags without collision. <br />
+<br />
+[Implementation here](https://github.com/MarcFaussurier/libftprintfv2/blob/master/source/ft_printf_arg.c)
 
-### TODOS
+### Roadmap
 
-- [x] architecture and basic tests
+- [x] architecture
+- [x] dynamic specifiers
+- [x] hashmap for specifiers
+- [x] pass some basic tests
 - [ ] pass mandatory tests
-- [ ] pass bonus tests
+- [ ] pass all specifiers tests
 - [ ] %b to print binary
-- [ ] all specifiers
-- [ ] compile ft_printf(...) to bypass parsing and routing in static formats. Parse source-code to find-out custom (but non-run-time) specifiers
-- [ ] store reccurent run-time PF formats parsing results
+- [ ] {colors}
+- [ ] compile-time ft_printf(...) to bypass parsing and routing in compile-time formats
+- [ ] store reccurent PF formats parsing results in run-time formats
