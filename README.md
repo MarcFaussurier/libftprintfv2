@@ -11,7 +11,7 @@ Dynamic PF allows user to register new specifiers at run-rime.<br />
 Usage:
 ```C
 	ft_printf_id_add(&ft_vsnprintf_ullong, "Lu", "llu", "zu", _);
-	printf(...);
+	ft_printf(...);
 ```
 
 ### Hashmap vs no hasmap
