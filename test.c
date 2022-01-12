@@ -61,14 +61,22 @@ int main()
 {
 	printf("----------------------------------------\n--- boot time\n");
 	test(_, "boot time test");
-	//
+	printf("----------------------------------------\n--- madatory tests\n");
 	printf(" - regular tests\n");
+	//
 	test(_, "Bonjour, %i! %", 42, 43);
 	test(_, "%i + %i = %i!", -40, -2, -42);
 	test(_, "INT_MAX = %i :]", INT_MAX);
 	test(_, " INT_MIN = %i :)",  INT_MIN);
 	test(_, " ZERO = %i ;)", 0);
+	//
 	test(_, "%k i");
+	//
+	test(_, "is '%%' a percent ?");
+	//
+	test(_, "is '%s' 'le 101' ?", "le 101");
+	//
+	test(_, "is '%s' '(null) ?", 0);
 	//
 	test(0, 0);
 	printf("----------------------------------------\n--- bonus tests\n");

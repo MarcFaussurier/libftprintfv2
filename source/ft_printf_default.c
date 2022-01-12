@@ -95,9 +95,7 @@ void	ft_printf_default()
 		ft_phase_d();
 		//ft_printf_id_add(&ft_vsnprintf_aldbl_up, "b", 		_);
 		//ft_printf_id_add(&ft_vsnprintf_aldbl_up, "_banane", 		_);
-		printf("--------------------\n");
-		printf(" - %i ft_printf hashmap collisions.\n", g_i);
-		printf("--------------------\n");
+		printf("[%i ft_printf hashmap collisions.]\n", g_i);
 		initialised = 1;
 	}
 }
