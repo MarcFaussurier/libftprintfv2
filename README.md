@@ -26,7 +26,7 @@ Hashmap is O(n) while a classic router that compares all strings is O(n*n) but h
 - [x] dynamic specifiers
 - [x] hashmap for specifiers
 - [x] pass some basic tests
-- [ ] pass mandatory tests
+- [x] pass mandatory tests
 - [ ] pass all specifiers tests
 - [ ] %b to print binary
 - [ ] {colors}
