@@ -3,9 +3,7 @@
 #include <string.h>
 #include <float.h>
 #include <sys/time.h>
-
 #include "libftprintf.h"
-
 #undef _
 #define _ __LINE__
 
@@ -70,6 +68,10 @@ int main()
 	test(_, " ZERO = %i ;)", 0);
 	//
 	test(_, "%k i");
+
+	test(_, "%c is that a L?", 'L');
+
+	test(_, "%c is that \xff ? ", '\xff');
 	//
 	test(_, "is '%%' a percent ?");
 	//

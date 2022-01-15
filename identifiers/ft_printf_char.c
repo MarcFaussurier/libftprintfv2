@@ -2,9 +2,12 @@
 
 int 			ft_vsnprintf_char(t_printf_ctx *ctx, char **str, size_t *size, va_list ap)
 {
-	(void) str;
+	char		c;
+	int			r;
+
 	(void) ctx;
-	(void) size;
-	(void) ap;
-	return (0);
+	r = 0;
+	c = va_arg(ap, int);
+	ft_nstr_append(&r, str, size, c);
+	return (r);
 }
