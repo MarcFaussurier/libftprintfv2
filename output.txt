@@ -1,20 +1,20 @@
 ----------------------------------------
 --- boot time
 [0 ft_printf hashmap collisions.]
-[speed: -0.000038%] success at line 61 (test no 1): boot time test
+[speed: -0.000040%] success at line 61 (test no 1): boot time test
 ----------------------------------------
 --- madatory tests
-[speed: -0.000004%] success at line 64 (test no 2): Bonjour, 42! 
-[speed: +0.000000%] success at line 65 (test no 3): -40 + -2 = -42!
+[speed: -0.000003%] success at line 64 (test no 2): Bonjour, 42! 
+[speed: +0.000001%] success at line 65 (test no 3): -40 + -2= -42!
 [speed: -0.000002%] success at line 66 (test no 4): INT_MAX = 2147483647 :]
-[speed: +0.000000%] success at line 67 (test no 5):  INT_MIN = -2147483648 :)
-[speed: +0.000000%] success at line 68 (test no 6):  ZERO = 0 ;)
-[speed: +0.000001%] success at line 70 (test no 7): k i
-[speed: -0.000001%] success at line 72 (test no 8): L is that a L?
-[speed: -0.000001%] success at line 74 (test no 9): ÿ is that ÿ ? 
+[speed: -0.000001%] success at line 67 (test no 5):  INT_MIN = -2147483648 :)
+[speed: -0.000001%] success at line 68 (test no 6):  ZERO = 0 ;)
+[speed: +0.000000%] success at line 70 (test no 7): k i
+[speed: +0.000000%] success at line 72 (test no 8): L is that a L?
+[speed: +0.000001%] success at line 74 (test no 9): ÿ is that ÿ ? 
 [speed: -0.000014%] success at line 76 (test no 10): is '%' a percent ?
-[speed: +0.000000%] success at line 78 (test no 11): is 'le 101' 'le 101' ?
-[speed: -0.000004%] success at line 80 (test no 12): 0xc304d ptr test!
+[speed: -0.000002%] success at line 78 (test no 11): is 'le 101' 'le 101' ?
+[speed: -0.000003%] success at line 80 (test no 12): 0xc304d ptr test!
 [speed: -0.000001%] success at line 82 (test no 13): 0x0 ptr test 2!
 [speed: +0.000000%] success at line 84 (test no 14): is '(null)' '(null) ?
 14 / 14 test succeed.

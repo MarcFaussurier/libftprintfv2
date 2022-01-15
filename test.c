@@ -62,7 +62,7 @@ int main()
 	printf("----------------------------------------\n--- madatory tests\n");
 	//
 	test(_, "Bonjour, %i! %", 42, 43);
-	test(_, "%i + %i = %i!", -40, -2, -42);
+	test(_, "%i + %d= %i!", -40, -2, -42);
 	test(_, "INT_MAX = %i :]", INT_MAX);
 	test(_, " INT_MIN = %i :)",  INT_MIN);
 	test(_, " ZERO = %i ;)", 0);
