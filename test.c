@@ -61,7 +61,7 @@ int main()
 	test(_, "boot time test");
 	printf("----------------------------------------\n--- madatory tests\n");
 
-	test(_, "un%Jnow");;
+	test(_, "un%k%Jnow");;
 	test(_, "%c is that a L?", 'L');
 	test(_, "%c is that \xff ? ", '\xff');
 	test(_, "is '%s' '(null) ?", 0);

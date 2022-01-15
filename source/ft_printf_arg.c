@@ -1,6 +1,6 @@
 #include "../libftprintf.h"
 #include "stdio.h"
-
+#include "string.h"
 t_printf_fn		g_printf_ids[127 * 8];
 
 char*			g_printf_labels[127 * 8];
@@ -124,6 +124,8 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 		label[i] = 0;
 		hash = ft_printf_hash(label);
 		if (!g_printf_ids[hash])
+			continue ;
+		if (strcmp (label, g_printf_labels[hash]))
 			continue ;
 		*(ctx->format) += i;
 		return (g_printf_ids[hash]);
