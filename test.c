@@ -60,30 +60,25 @@ int main()
 	printf("----------------------------------------\n--- boot time\n");
 	test(_, "boot time test");
 	printf("----------------------------------------\n--- madatory tests\n");
-	//
+
+	test(_, "un%Jnow");;
+	test(_, "%c is that a L?", 'L');
+	test(_, "%c is that \xff ? ", '\xff');
+	test(_, "is '%s' '(null) ?", 0);
+	test(_, "is '%s' 'le 101' ?", "le 101");
+	test(_, "%p ptr test!", 798797);
+	test(_, "%p ptr test 2!", 0);
+	test(_, "%d", 42);
 	test(_, "Bonjour, %i! %", 42, 43);
 	test(_, "%i + %d= %i!", -40, -2, -42);
 	test(_, "INT_MAX = %i :]", INT_MAX);
 	test(_, " INT_MIN = %i :)",  INT_MIN);
 	test(_, " ZERO = %i ;)", 0);
-	//
-	test(_, "%k i");
-
-	test(_, "%c is that a L?", 'L');
-
-	test(_, "%c is that \xff ? ", '\xff');
-	//
-	test(_, "is '%%' a percent ?");
-	//
-	test(_, "is '%s' 'le 101' ?", "le 101");
-
-	test(_, "%p ptr test!", 798797);
-
-	test(_, "%p ptr test 2!", 0);
-	//
-	test(_, "is '%s' '(null) ?", 0);
-	//
+	test(_, "octal %o! ", 42);
+	test(_, "octal %u! ", 42);
 	test(_, "is '%x' is that'f' ?\n", 15);
+	test(_, "is '%X' is that'f' ?\n", 15);
+	test(_, "is '%%' a percent ?");
 	//
 	test(0, 0);
 	printf("----------------------------------------\n--- bonus tests\n");

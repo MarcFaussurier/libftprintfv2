@@ -58,11 +58,6 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 	short int 	hash;
 
 	*(ctx->format) += 1;
-	if (**(ctx->format) == '%')
-	{
-		*(ctx->format) += 1;
-		return (g_printf_ids[37]);
-	}
 	i = 0;
 	//if ((**(ctx->format)) == '%')
 	//	return (g_printf_ids[37]);
@@ -79,6 +74,5 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 		*(ctx->format) += i;
 		return (g_printf_ids[hash]);
 	}
-	label[i] = 0;
 	return (ft_vsnprintf_fmt);
 }
