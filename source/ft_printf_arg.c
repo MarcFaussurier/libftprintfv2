@@ -40,7 +40,7 @@ void			ft_printf_id_add (t_printf_fn callable, ...)
 			printf("error: printf identifier [id=%s, h=%i]", id, h);
 			printf(" already exists as %s, use a different label!\n", g_printf_labels[h]);
 			g_i += 1;
-		} 
+		}
 		else
 		{
 			g_printf_ids[ft_printf_hash(id)] = callable;
@@ -78,5 +78,5 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 //	*(ctx->format) += i;
 	label[i] = 0;
 //	printf("NOT FOUND %%%s\n", label);
-	return (ft_vsnprintf_fmt);
+	return (&ft_vsnprintf_fmt);
 }
