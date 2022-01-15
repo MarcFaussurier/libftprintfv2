@@ -87,6 +87,8 @@ void	ft_printf_default()
 {
 	static int	initialised;
 
+
+
 	if (!initialised)
 	{
 		ft_phase_a();

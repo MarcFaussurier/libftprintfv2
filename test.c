@@ -83,6 +83,8 @@ int main()
 	//
 	test(_, "is '%s' '(null) ?", 0);
 	//
+	test(_, "is '%x' is that'f' ?\n", 15);
+	//
 	test(0, 0);
 	printf("----------------------------------------\n--- bonus tests\n");
 	printf("----------------------------------------\n--- personal tests\n");
@@ -94,9 +96,7 @@ int main()
 	ft_snprintf(buffer2, 5, "-%i", 12345);
 	printf("YOU: %s\n", buffer2);
 	if (!strcmp(buffer, buffer2))
-	{
 		printf ("OK\n");
-	}
 	else
 		printf ("KO\n");
 

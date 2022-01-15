@@ -18,7 +18,8 @@ short int 		ft_printf_hash (char *str)
         return (127 * 8 - 42);
     while (str[i])
         hash = 31 * hash + str[i++];
-    return (hash % (127 * 8));
+    i = (hash % (127 * 8));
+	return (i);
 }
 
 
@@ -33,7 +34,7 @@ void			ft_printf_id_add (t_printf_fn callable, ...)
 	{
 		id = va_arg (ap, char *);
 		if (!id[0])
-			break;
+			break ;
 		h = ft_printf_hash (id);
 		if (g_printf_ids[h])
 		{
@@ -57,26 +58,27 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 	short int 	hash;
 
 	*(ctx->format) += 1;
+	if (**(ctx->format) == '%')
+	{
+		*(ctx->format) += 1;
+		return (g_printf_ids[37]);
+	}
 	i = 0;
+	//if ((**(ctx->format)) == '%')
+	//	return (g_printf_ids[37]);
 	while ((*(ctx->format))[i])
 	{
 		label[i] = (*(ctx->format))[i];
 		if (!**(ctx->format))
-		{
 			break ;
-		}
 		i += 1;
 		label[i] = 0;
 		hash = ft_printf_hash(label);
-		if (g_printf_ids[hash])
-		{
-			*(ctx->format) += i;
-			//printf("FOUND %%%s with %s\n", g_printf_labels[hash], label);
-			return (g_printf_ids[hash]);
-		}
+		if (!g_printf_ids[hash])
+			continue ;
+		*(ctx->format) += i;
+		return (g_printf_ids[hash]);
 	}
-//	*(ctx->format) += i;
 	label[i] = 0;
-//	printf("NOT FOUND %%%s\n", label);
-	return (&ft_vsnprintf_fmt);
+	return (ft_vsnprintf_fmt);
 }
