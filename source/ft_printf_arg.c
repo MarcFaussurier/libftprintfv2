@@ -56,11 +56,31 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 	char		label[11];
 	size_t		i;
 	short int 	hash;
+	char		c;
 
 	*(ctx->format) += 1;
 	i = 0;
-	//if ((**(ctx->format)) == '%')
-	//	return (g_printf_ids[37]);
+	while (1)
+	{
+		c = (*(ctx->format))[i];
+		if (c == '-')
+			ctx->minus = 1;
+		else if (c == '0')
+			ctx->zero = 1;
+		else if (c == '.')
+			ctx->dot = 1;
+		else if (c == '#')
+			ctx->sharp = 1;
+		else if (c == ' ')
+			ctx->space = 1;
+		else if (c == '+')
+			ctx->plus = 1;
+		else 
+			break ;
+		i += 1;
+	}
+	*(ctx->format) += i;
+	i = 0;
 	while ((*(ctx->format))[i])
 	{
 		label[i] = (*(ctx->format))[i];

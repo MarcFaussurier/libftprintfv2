@@ -77,8 +77,38 @@ int main()
 	test(_, "octal %o! ", 42);
 	test(_, "octal %u! ", 42);
 	test(_, "is '%x' is that'f' ?\n", 15);
-	test(_, "is '%X' is that'f' ?\n", 15);
+	test(_, "is '%X' is that'F' ?\n", 15);
 	test(_, "is '%%' a percent ?");
+	//
+ 	test(_, "un%#Jnow");
+	test(_, " %#i", 42);
+
+	test(_, " %#x", 42);
+
+	test(_, " %#X", 42);
+
+	test(_, " %#p", 42);
+
+	test(_, " %#o", 42);
+	/*
+
+	test(_, "%#c is that a L?", 'L');
+	test(_, "%#c is that \xff ? ", '\xff');
+	test(_, "is '%#s' '(null) ?", 0);
+	test(_, "is '%#s' 'le 101' ?", "le 101");
+	test(_, "%#p ptr test!", 798797);
+	test(_, "%#p ptr test 2!", 0);
+	test(_, "%#d", 42);
+	test(_, "Bonjour, %#i! %", 42, 43);
+	test(_, "%i + %d= %i!", -40, -2, -42);
+	test(_, "INT_MAX = %i :]", INT_MAX);
+	test(_, " INT_MIN = %i :)",  INT_MIN);
+	test(_, " ZERO = %i ;)", 0);
+	test(_, "octal %#o! ", 42);
+	test(_, "octal %#u! ", 42);
+	test(_, "is '%#x' is that'f' ?\n", 15);
+	test(_, "is '%#X' is that'f' ?\n", 15);
+	test(_, "is '%#%' a percent ?"); */
 	//
 	test(0, 0);
 	printf("----------------------------------------\n--- bonus tests\n");

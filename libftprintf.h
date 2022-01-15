@@ -31,9 +31,10 @@ typedef struct	s_printf_ctx
 {
 	char		minus:	1;
 	char		zero:	1;
-    char		plus:	1;
-	char		space:  1;
-	char		sharp:	1;
+    char		dot:	1;
+	char		sharp:  1;
+	char		space:	1;
+	char		plus:	1;
 	int			width;
 	int			precision;
 	char		label[8];

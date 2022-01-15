@@ -10,6 +10,13 @@ int 					ft_snprintf_ullong_base(t_printf_ctx *ctx, char **str, size_t *size, un
 
 	r = 0;
 	k = 65;
+	if (ctx->sharp)
+	{
+		if (bl == 16 || bl == 8)
+			ft_nstr_append(&r, str, size, b[0]);
+		if 	(bl == 16)
+			ft_nstr_append(&r, str, size, b[16]);
+	}
 	while (1)
 	{
 		k -= 1;
