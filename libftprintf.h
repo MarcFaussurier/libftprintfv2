@@ -46,11 +46,11 @@ short int		ft_printf_hash(char *str);
 void			ft_printf_id_add(t_printf_fn callable, ...);
 void			ft_printf_default();
 /**/
-int 		ft_vsnprintf_fmt(t_printf_ctx *ctx, char **str, size_t *size, va_list ap);
-int		ft_nstr_append(int *i, char **str, size_t *size, char c);
+int				ft_vsnprintf_fmt(t_printf_ctx *ctx, char **str, size_t *size, va_list ap);
+int				ft_nstr_append(int *i, char **str, size_t *size, char c);
 /**/
-int 			ft_snprintf_llong_base(t_printf_ctx *ctx, char **str, size_t *size, long long n, const char *b);
-int 			ft_snprintf_ullong_base(t_printf_ctx *ctx, char **str, size_t *size, unsigned long long n, const char *b);
+int 			ft_snprintf_llong_base(t_printf_ctx *ctx, char **str, size_t *size, long long n, const char *b, int bl);
+int 			ft_snprintf_ullong_base(t_printf_ctx *ctx, char **str, size_t *size, unsigned long long n, const char *b, int bl);
 /**/
 int 			ft_vsnprintf_sshrt(t_printf_ctx *ctx, char **str, size_t *size, va_list ap);
 int 			ft_vsnprintf_shrt(t_printf_ctx *ctx, char **str, size_t *size, va_list ap);

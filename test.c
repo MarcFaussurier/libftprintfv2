@@ -76,6 +76,10 @@ int main()
 	test(_, "is '%%' a percent ?");
 	//
 	test(_, "is '%s' 'le 101' ?", "le 101");
+
+	test(_, "%p ptr test!", 798797);
+
+	test(_, "%p ptr test 2!", 0);
 	//
 	test(_, "is '%s' '(null) ?", 0);
 	//

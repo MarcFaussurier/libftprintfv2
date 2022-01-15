@@ -2,9 +2,13 @@
 
 int 			ft_vsnprintf_ptr(t_printf_ctx *ctx, char **str, size_t *size, va_list ap)
 {
-	(void) str;
-	(void) ctx;
-	(void) size;
-	(void) ap;
-	return (0);
+	void		*arg;
+	int			r;
+
+	r = 0;
+	arg = va_arg(ap, void*);
+	ft_nstr_append(&r, str, size, '0');
+	ft_nstr_append(&r, str, size, b16[16]);
+	r += ft_snprintf_ullong_base(ctx, str, size, (unsigned long long) arg, b16, 16);
+	return (r);
 }
