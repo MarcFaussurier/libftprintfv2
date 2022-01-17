@@ -103,7 +103,10 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 			ctx->dot = 1;
 			*(ctx->format) += 1;
 			if (**(ctx->format) >= '0' && **(ctx->format) <= '9')
+			{
 				ctx->precision = ft_read_num(ctx->format, ap);
+				continue ;
+			}
 		}
 		else if (c == '#')
 			ctx->sharp = 1;
@@ -113,12 +116,12 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 			ctx->plus = 1;
 		else if (c < '0' || c > '9')
 			break ;
-		 if (c >= '0' && c <= '9')
+		if (c >= '0' && c <= '9')
 			ctx->width = ft_read_num(ctx->format, ap);
-		else 
+		else
 			*(ctx->format) += 1;
 	}
-	printf("[precision=%i pdding=%i]\n", ctx->precision, ctx->width);
+//	printf("[precision=%i pdding=%i]\n", ctx->precision, ctx->width);
 	i = 0;
 	while ((*(ctx->format))[i])
 	{

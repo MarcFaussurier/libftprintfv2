@@ -1,100 +1,36 @@
 ----------------------------------------
 --- boot time
 [0 ft_printf hashmap collisions.]
-[speed: -0.000044%] success at line 61 (test no 1): boot time test
+[speed: -0.000030%] success at line 61 (test no 1): boot time test
 ----------------------------------------
 --- madatory tests
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
 [speed: -0.000003%] success at line 64 (test no 2): unkJnow
-[precision=0 pdding=0]
-[precision=0 pdding=0]
 [speed: -0.000001%] success at line 65 (test no 3): L is that a L?
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000002%] success at line 66 (test no 4): ÿ is that ÿ ? 
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000003%] success at line 67 (test no 5): is '(null)' '(null) ?
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000002%] success at line 68 (test no 6): is 'le 101' 'le 101' ?
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000003%] success at line 69 (test no 7): 0xc304d ptr test!
-[precision=0 pdding=0]
-[precision=0 pdding=0]
+[speed: +0.000001%] success at line 66 (test no 4): ÿ is that ÿ ? 
+[speed: -0.000005%] success at line 67 (test no 5): is '(null)' '(null) ?
+[speed: +0.000000%] success at line 68 (test no 6): is 'le 101' 'le 101' ?
+[speed: -0.000001%] success at line 69 (test no 7): 0xc304d ptr test!
 [speed: -0.000001%] success at line 70 (test no 8): 0x0 ptr test 2!
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000002%] success at line 71 (test no 9): 42
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000007%] success at line 72 (test no 10): Bonjour, 42! 
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000003%] success at line 73 (test no 11): -40 + -2= -42!
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000005%] success at line 74 (test no 12): INT_MAX = 2147483647 :]
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000003%] success at line 75 (test no 13):  INT_MIN = -2147483648 :)
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000002%] success at line 76 (test no 14):  ZERO = 0 ;)
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000005%] success at line 77 (test no 15): octal 52! 
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: +0.000000%] success at line 78 (test no 16): octal 42! 
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000002%] success at line 79 (test no 17): is 'f' is that'f' ?
+[speed: +0.000000%] success at line 71 (test no 9): 42
+[speed: -0.000004%] success at line 72 (test no 10): Bonjour, 42! 
+[speed: -0.000001%] success at line 73 (test no 11): -40 + -2= -42!
+[speed: -0.000002%] success at line 74 (test no 12): INT_MAX = 2147483647 :]
+[speed: -0.000002%] success at line 75 (test no 13):  INT_MIN = -2147483648 :)
+[speed: -0.000001%] success at line 76 (test no 14):  ZERO = 0 ;)
+[speed: +0.000000%] success at line 77 (test no 15): octal 52! 
+[speed: -0.000001%] success at line 78 (test no 16): octal 42! 
+[speed: +0.000000%] success at line 79 (test no 17): is 'f' is that'f' ?
 
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000002%] success at line 80 (test no 18): is 'F' is that'F' ?
+[speed: +0.000000%] success at line 80 (test no 18): is 'F' is that'F' ?
 
-[precision=0 pdding=0]
-[precision=0 pdding=0]
 [speed: -0.000001%] success at line 81 (test no 19): is '%' a percent ?
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000002%] success at line 83 (test no 20): unJnow
-[precision=0 pdding=0]
-[precision=0 pdding=0]
+[speed: +0.000000%] success at line 83 (test no 20): unJnow
 [speed: -0.000001%] success at line 84 (test no 21):  42
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000001%] success at line 86 (test no 22):  0x2a
-[precision=0 pdding=4]
-[precision=0 pdding=4]
+[speed: +0.000000%] success at line 86 (test no 22):  0x2a
 [speed: -0.000001%] success at line 88 (test no 23):  0X2A
-[precision=0 pdding=0]
-[precision=0 pdding=0]
-[speed: -0.000002%] success at line 90 (test no 24):  0x2a
-[precision=1 pdding=2]
-[precision=1 pdding=2]
-error at line 92 (test no 25):
-	 - expected:	 52
-	 - got:		 
-24 / 25 test succeed.
+[speed: +0.000000%] success at line 90 (test no 24):  0x2a
+[speed: -0.000003%] success at line 92 (test no 25):  052
+25 / 25 test succeed.
 ----------------------------------------
 --- bonus tests
 ----------------------------------------
@@ -102,6 +38,5 @@ error at line 92 (test no 25):
 ----------------------------------------
 --- testing if vsnpf trims correctly
 GCC: -123
-[precision=0 pdding=0]
 YOU: -123
 OK
