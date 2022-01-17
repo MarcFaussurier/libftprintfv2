@@ -55,13 +55,16 @@ static int		ft_read_num(char const **fmt, va_list ap)
 	int			o;
 
 	o = 0;
-	if (**fmt == '*' && ++(*fmt))
-		return (va_arg(ap, int));
-	while ((((**fmt) >= '0') && (**fmt <= '9')) || **fmt == '-')
+	if (**fmt == '*')
 	{
-		o += **fmt;
-		*fmt += 1;
+		(*fmt) += 1;
+		return (va_arg(ap, int));
+	}
+	while ((((**fmt) >= '0') && (**fmt <= '9')))
+	{
 		o *= 10;
+		o += **fmt - '0';
+		*fmt += 1;
 	}
 	return (o);
 }
@@ -87,11 +90,10 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 		.format = ctx->format,
 	};
 	*(ctx->format) += 1;
-	i = 0;
 	while (1)
 	{
 
-		c = (*(ctx->format))[i];
+		c = *(*(ctx->format));
 		if (c == '-')
 			ctx->minus = 1;
 		else if (c == '0')
@@ -99,7 +101,9 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 		else if (c == '.')
 		{
 			ctx->dot = 1;
-	//		ctx->precision = ft_read_num(ctx->format + i + 1, ap);
+			*(ctx->format) += 1;
+			if (**(ctx->format) >= '0' && **(ctx->format) <= '9')
+				ctx->precision = ft_read_num(ctx->format, ap);
 		}
 		else if (c == '#')
 			ctx->sharp = 1;
@@ -109,11 +113,12 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 			ctx->plus = 1;
 		else if (c < '0' || c > '9')
 			break ;
-		i += 1;
-	//	ctx->width = ft_read_num(ctx->format + i, ap);
+		 if (c >= '0' && c <= '9')
+			ctx->width = ft_read_num(ctx->format, ap);
+		else 
+			*(ctx->format) += 1;
 	}
-	printf("-precision: %i\n-pdding: %i\n", ctx->precision, ctx->width);
-	*(ctx->format) += i;
+	printf("[precision=%i pdding=%i]\n", ctx->precision, ctx->width);
 	i = 0;
 	while ((*(ctx->format))[i])
 	{

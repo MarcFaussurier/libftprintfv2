@@ -89,7 +89,7 @@ int main()
 
 	test(_, " %#p", 42);
 
-	test(_, " %#.1o", 42);
+	test(_, " %2.1o", 42);
 	/*
 
 	test(_, "%#c is that a L?", 'L');
