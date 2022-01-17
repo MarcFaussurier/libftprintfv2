@@ -79,17 +79,14 @@ int main()
 	test(_, "is '%x' is that'f' ?\n", 15);
 	test(_, "is '%X' is that'F' ?\n", 15);
 	test(_, "is '%%' a percent ?");
-	//
  	test(_, "un%#Jnow");
 	test(_, " %#i", 42);
-
 	test(_, " %#x", 42);
-
 	test(_, " %#4X", 42);
-
 	test(_, " %#p", 42);
-
-	test(_, " %#2.1o", 42);
+	test(_, " %#2.3i", 42);
+	test(_, " %#2.3o", 42);
+	test(_, " %#2.3x", 42);
 	/*
 
 	test(_, "%#c is that a L?", 'L');

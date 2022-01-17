@@ -49,7 +49,7 @@ int	ft_vasprintf(char **ret, const char *format, va_list ap)
 	va_list	apc;
 
 	va_copy(apc, ap);
-	i = ft_vsnprintf(0, 0, format, apc) + 1;
+	i = 42;//ft_vsnprintf(0, 0, format, apc) + 1;
 	va_end(apc);
 	*ret = malloc(i * sizeof(char));
 	if (!*ret)
