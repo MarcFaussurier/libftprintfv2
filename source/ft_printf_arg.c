@@ -1,6 +1,7 @@
 #include "../libftprintf.h"
 #include "stdio.h"
 #include "string.h"
+
 t_printf_fn		g_printf_ids[127 * 8];
 
 char*			g_printf_labels[127 * 8];

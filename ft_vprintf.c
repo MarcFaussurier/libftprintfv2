@@ -26,15 +26,41 @@ int	ft_vsnprintf(char *str, size_t size, const char *format, va_list ap)
 {
 	t_printf_ctx 	ctx;
 	int				i;
+	size_t			y;
+	va_list			apc;
+	char			*str2;
+	const char		*fmt2;
 
 	ctx.format = &format;
-	ft_printf_default();	
+	// TODO : replace default init by global arrays 
+	ft_printf_default();
 	i = 0;
 	while (*format)
 		if (*format == '%')
+		{
+			if (ctx.width)
+			{
+				// TODO: more clear 
+				// TODO: arg width 
+				// TODO: better prototypes
+				y = 0;
+				va_copy (apc, ap);
+				str2 = str;
+				fmt2 = format;
+				y= ft_printf_arg(&ctx, ap)(&ctx, &str2, &y, apc);
+				format = fmt2;
+				while (ctx.width > y)
+				{
+					ft_nstr_append(&i, &str, &size, ' ');
+					ctx.width -= 1;
+				}
+				va_end(apc);
+			}
 			i += ft_printf_arg(&ctx, ap)(&ctx, &str, &size, ap);
+		}
 		else
 			i += ft_vsnprintf_fmt(&ctx, &str, &size, ap);
+	// TODO : check bellow
 	if (i < size) 
 		str[i] = 0;
 	if (size)

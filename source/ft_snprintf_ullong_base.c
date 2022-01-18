@@ -3,27 +3,14 @@
 int 					ft_snprintf_ullong_base(t_printf_ctx *ctx, char **str, size_t *size, unsigned long long n, const char *b, int bl)
 {
 	int 				r;
-	int 				y;
 	int 				k;
+	int					m;
 	char				c;
 	char				buffer[65];
 
 	r = 0;
 	k = 65;
-	if (ctx->sharp)
-	{
-		if (bl == 8)
-		{
-			ft_nstr_append(&r, str, size, '0');
-			if (bl == 8 && ctx->precision)
-				ctx->precision -= 1;
-		}
-		else if (bl == 16 || bl == 8)
-		{
-			ft_nstr_append(&r, str, size, '0');
-			ft_nstr_append(&r, str, size, b[16]);
-		}
-	}
+
 	while (1)
 	{
 		k -= 1;
@@ -32,11 +19,19 @@ int 					ft_snprintf_ullong_base(t_printf_ctx *ctx, char **str, size_t *size, un
 		if (!n)
 			break ;
 	}
-	y = ctx->precision - 65 + k;
-	while (y > 0)
+	if (ctx->sharp && bl == 8 && ctx->precision)
+		ctx->precision -= 1;
+	if (ctx->sharp)
 	{
-		ft_nstr_append(&r, str, size, '0');
-		y -= 1;
+		if (bl == 8)
+		{
+			ft_nstr_append(&r, str, size, '0');
+		}
+		else if (bl == 16 || bl == 8)
+		{
+			ft_nstr_append(&r, str, size, '0');
+			ft_nstr_append(&r, str, size, b[16]);
+		}
 	}
 	while (k < 65)
 	{
