@@ -2,11 +2,19 @@
 #include "stdio.h"
 #include "string.h"
 
-__auto_type g_printf_functions[FT_PRINTF_HASHMAP_SIZE] = {
-	[100] = {"str", ^void(){}},
-}
 
 int 			g_printf_collisions = 0;
+auto 			g_printf_functions[FT_PRINTF_HASHMAP_SIZE] = {
+	[100] = {{"str", _}, ^void(){}},
+	[0] = [1] = {{"a", "g", _}, ^ (t_printf_ctx ctx, t_putchar putchar, int i, va_list ap){
+        	(void) ctx;
+        	(void) putchar;
+			(void) i;
+			(void) ap;
+			return (0);
+		}
+	},
+};
 
 short int 		ft_printf_hash (char *str)
 {
@@ -74,7 +82,9 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, const char **format, va_list ap)
 {
 	char		label[11];
 	short int 	hash;
+	short int	i;
 	char		c;
+	
 
 	*ctx = (t_printf_ctx)
 	{
