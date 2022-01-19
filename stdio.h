@@ -16,6 +16,10 @@
 # ifndef FT_PRINTF_BUFFER_SIZE
 #  define FT_PRINTF_BUFFER_SIZE 4096
 # endif
+# define LLONG_MIN_A "9223372036854775807"
+# if LLONG_MIN != 9223372036854775807LL
+#  error "edit header according your platform for LLONG_MIN LLONG_MIN_A"
+# endif
 # define b10 "0123456789"
 # define b8 "01234567x"
 # define b16 "0123456789abcdefx"
