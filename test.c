@@ -12,8 +12,8 @@ static void 	test(int line, const char *format, ...)
 	static int 	i;
 	static int	s;
 
-	char 		*expected;
-	char 		*given;
+	char 		expected[2048];
+	char 		given[2048];
 	va_list		ap;
 	va_list		apc;
 	struct timeval begin, end;
@@ -30,13 +30,13 @@ static void 	test(int line, const char *format, ...)
 	va_start(ap, format);
 	va_copy(apc, ap);
     gettimeofday(&begin, 0);
-	vasprintf(&expected, format, apc);
+	vsprintf(expected, format, apc);
     gettimeofday(&end, 0);
     seconds = end.tv_sec - begin.tv_sec;
     microseconds = end.tv_usec - begin.tv_usec;
     elapsed = seconds + microseconds*1e-6;
 	gettimeofday(&begin, 0);
-	ft_vasprintf(&given, format, ap);
+	ft_vsprintf(given, format, ap);
 	gettimeofday(&end, 0);
     seconds = end.tv_sec - begin.tv_sec;
     microseconds = end.tv_usec - begin.tv_usec;
@@ -57,8 +57,11 @@ static void 	test(int line, const char *format, ...)
 
 int main()
 {
+	char b[10];
+	ft_sprintf(b, "Hello!'n");
 	printf("----------------------------------------\n--- boot time\n");
-	test(_, "boot time test");
+//	test(_, "boot time test");
+	ft_printf_default();
 	printf("----------------------------------------\n--- madatory tests\n");
 
 	test(_, "un%k%Jnow");;

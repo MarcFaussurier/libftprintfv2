@@ -2,11 +2,11 @@
 #include "stdio.h"
 #include "string.h"
 
-t_printf_fn		g_printf_ids[127 * 8];
+__auto_type g_printf_functions[FT_PRINTF_HASHMAP_SIZE] = {
+	[100] = {"str", ^void(){}},
+}
 
-char*			g_printf_labels[127 * 8];
-
-int 			g_i = 0;
+int 			g_printf_collisions = 0;
 
 short int 		ft_printf_hash (char *str)
 {
@@ -16,10 +16,10 @@ short int 		ft_printf_hash (char *str)
     hash = 0;
     i = 0;
     if (str[0] == 'l' && str[1] == 'g')
-        return (127 * 8 - 42);
+        return (FT_PRINTF_HASHMAP_SIZE - 42);
     while (str[i])
         hash = 31 * hash + str[i++];
-    i = (hash % (127 * 8));
+    i = (hash % (FT_PRINTF_HASHMAP_SIZE));
 	return (i);
 }
 
@@ -70,31 +70,22 @@ static int		ft_read_num(char const **fmt, va_list ap)
 	return (o);
 }
 
-t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
+t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, const char **format, va_list ap)
 {
 	char		label[11];
-	size_t		i;
 	short int 	hash;
 	char		c;
 
 	*ctx = (t_printf_ctx)
 	{
-		.minus = 0,
-		.zero = 0,
-		.dot = 0,
-		.sharp = 0,
-		.space = 0,
-		.plus = 0,
-		.width = 0,
+		.falgs = 0,
+		.width = 0, // init with a negative value ?
 		.precision = 0,
-		.label = {0},
-		.format = ctx->format,
 	};
-	*(ctx->format) += 1;
 	while (1)
 	{
 
-		c = *(*(ctx->format));
+		c = **format;
 		if (c == '-')
 			ctx->minus = 1;
 		else if (c == '0')
@@ -102,10 +93,10 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 		else if (c == '.')
 		{
 			ctx->dot = 1;
-			*(ctx->format) += 1;
-			if (**(ctx->format) >= '0' && **(ctx->format) <= '9')
+			*format += 1;
+			if (**format >= '0' && **format <= '9')
 			{
-				ctx->precision = ft_read_num(ctx->format, ap);
+				ctx->precision = ft_read_num(format, ap);
 				continue ;
 			}
 		}
@@ -118,26 +109,27 @@ t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, va_list ap)
 		else if (c < '0' || c > '9')
 			break ;
 		if (c >= '0' && c <= '9')
-			ctx->width = ft_read_num(ctx->format, ap);
+			ctx->width = ft_read_num(format, ap);
 		else
-			*(ctx->format) += 1;
+			*format += 1;
 	}
-//	printf("[precision=%i pdding=%i]\n", ctx->precision, ctx->width);
 	i = 0;
-	while ((*(ctx->format))[i])
+	while (**format)
 	{
-		label[i] = (*(ctx->format))[i];
-		if (!**(ctx->format))
+		label[i] = *format[i];
+		if (!**format)
 			break ;
-		i += 1;
+		*format += 1;
 		label[i] = 0;
 		hash = ft_printf_hash(label);
 		if (!g_printf_ids[hash])
 			continue ;
 		if (strcmp (label, g_printf_labels[hash]))
 			continue ;
-		*(ctx->format) += i;
 		return (g_printf_ids[hash]);
 	}
-	return (ft_vsnprintf_fmt);
+	i = 0;
+	while (label[i])
+		i += putchar(i, label[i]);
+	return (i);
 }

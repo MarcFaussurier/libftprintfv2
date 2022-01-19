@@ -4,41 +4,61 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <limits.h>
-
+/**/
 # include <stdio.h>
-
-# ifndef PRINTF_BUFFER_SIZE
-#  define PRINTF_BUFFER_SIZE 4096
+/**/
+# ifndef FT_PRINTF_HASHMAP_SIZE 
+#  define FT_PRINTF_HASHMAP_SIZE 127 * 8
+# endif
+# ifndef FT_PRINTF_LABEL_SIZE
+#  define FT_PRINTF_LABEL_SIZE 11
+# endif
+# ifndef
+# ifndef FT_ASPRINTF_BUFFER_MIN 
+#  define FT_ASPRINTF_BUFFER_MIN 128
+# endif
+# ifndef FT_PRINTF_BUFFER_SIZE
+#  define FT_PRINTF_BUFFER_SIZE 4096
 # endif
 # define b10 "0123456789"
 # define b8 "01234567x"
 # define b16 "0123456789abcdefx"
 # define B16 "0123456789ABCDEFX"
 # define _ ""
-# define __ void
-int				ft_printf(const char *  format, ...);
-int				ft_sprintf(char *  str, const char *  format, ...);
-int				ft_snprintf(char *  str, size_t size, const char *  format, ...);
-int				ft_asprintf(char **ret, const char *format, ...);
-int				ft_dprintf(int fd, const char *  format, ...);
-int				ft_vprintf(const char *  format, va_list ap);
-int				ft_vsprintf(char *  str, const char *  format, va_list ap);
+# define block __block
+/**/
+typedef void (*t_putchar)(char c, void *data);
+int 			ft_vcprintf(t_putchar putchar, void *data, const char *format, va_list ap);
+int 			ft_cprintf(t_putchar putchar, void *data, const char *format, ...);
+/**/
 int				ft_vsnprintf(char *  str, size_t size, const char *  format, va_list ap);
-int				ft_vasprintf(char **ret, const char *format, va_list ap);
+int				ft_vsprintf(char *  str, const char *  format, va_list ap);
 int				ft_vdprintf(int fd, const char *  format, va_list ap);
+int				ft_vprintf(const char *  format, va_list ap);
+int				ft_vasprintf(char **ret, const char *format, va_list ap);
+/**/
+int				ft_snprintf(char *  str, size_t size, const char *  format, ...);
+int				ft_sprintf(char *  str, const char *  format, ...);
+int				ft_dprintf(int fd, const char *  format, ...);
+int				ft_printf(const char *  format, ...);
+int				ft_asprintf(char **ret, const char *format, ...);
+/**/
 extern int g_i;
+/**/
+
 typedef struct	s_printf_ctx
 {
-	char		minus:	1;
-	char		zero:	1;
-    char		dot:	1;
-	char		sharp:  1;
-	char		space:	1;
-	char		plus:	1;
+	struct 		s_flags
+	{
+		char		minus:	1;
+		char		zero:	1;
+    	char		dot:	1;
+		char		sharp:  1;
+		char		space:	1;
+		char		plus:	1;
+	}			flags;
 	int			width;
 	int			precision;
-	char		label[8];
-	const char 	**format;
 }				t_printf_ctx;
 typedef			int (*t_printf_fn)(t_printf_ctx *ctx, char **str, size_t *size, va_list ap);
 t_printf_fn 	ft_printf_arg(t_printf_ctx *ctx, va_list ap);
