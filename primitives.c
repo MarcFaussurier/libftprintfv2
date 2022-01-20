@@ -1,5 +1,15 @@
 #include "./stdio.h"
 
+int	ft_putstr(t_putchar put, char *str)
+{
+	int		r;
+
+	r = 0;
+	while (*str)
+		r += put(*str++);
+	return (r);
+}
+
 int	ft_putullong_base(t_putchar put, const char *b, int l, unsigned long long n)
 {
 	int 		r;

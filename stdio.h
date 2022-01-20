@@ -35,8 +35,8 @@ int				ft_vsprintf(char *  str, const char *  format, va_list ap);
 int				ft_vdprintf(int fd, const char *  format, va_list ap);
 int				ft_vprintf(const char *  format, va_list ap);
 int				ft_vasprintf(char **ret, const char *format, va_list ap);
-int				ft_snprintf(char *  str, size_t size, const char *  format, ...);
-int				ft_sprintf(char *  str, const char *  format, ...);
+int				ft_snprintf(char *str, size_t size, const char *  format, ...);
+int				ft_sprintf(char *str, const char *  format, ...);
 int				ft_dprintf(int fd, const char *  format, ...);
 int				ft_printf(const char *  format, ...);
 int				ft_asprintf(char **ret, const char *format, ...);
@@ -54,13 +54,11 @@ typedef struct	s_printf_ctx
 	int			width;
 	int			precision;
 }				t_printf_ctx;
-extern int 		g_printf_collisions;
-typedef	int 	(*t_specifier)(t_printf_ctx *ctx, t_putchar putchar, int i, va_list ap);
-extern struct {char **, t_printf_specifier} g_printf_hashmap[FT_PRINTF_HASHMAP_SIZE];
+typedef	int (*t_printf_specifier)(t_putchar p, int i, va_list a);
+extern struct {char **, t_printf_ext} g_printf_hashmap[FT_PRINTF_HASHMAP_SIZE];
 short int		ft_printf_hash(char *str);
-void			ft_printf_add_specifier(t_printf_fn callable, ...);
-void			ft_printf_check_hashmap();
-t_specifier 	ft_printf_find_specifier(t_printf_ctx *ctx, char **format, int i, va_list ap);
+int 			ft_printf_check_hashmap();
+t_specifier 	ft_printf_find_ext(t_printf_ctx *ctx, char **format, int i, va_list ap);
 int 			ft_putullong_base(t_putchar putchar, long long n, const char *b, int bl);
 int 			ft_putllong_base(t_putchar putchar, long long n, const char *b, int bl);
 #endif
