@@ -1,6 +1,5 @@
 #include "./stdio.h"
 #include <unistd.h>
-#include "./stdio.h"
 
 static int ft_putchar(char c)
 {

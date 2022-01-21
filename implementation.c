@@ -1,65 +1,112 @@
-#include "../libftprintf.h"
-#include "stdio.h"
-#include "string.h"
+#include "print.h"
 
-
-int 			g_printf_collisions = 0;
-auto 			g_printf_functions[FT_PRINTF_HASHMAP_SIZE] = {
-	[100] = {{"str", _}, ^void(){}},
-	[0] = [1] = {{"a", "g", _}, ^ (t_printf_ctx ctx, t_putchar putchar, int i, va_list ap){
-        	(void) ctx;
-        	(void) putchar;
-			(void) i;
-			(void) ap;
-			return (0);
-		}
-	},
-};
-
-short int 		ft_printf_hash (char *str)
+int	ft_cprintf(t_printchar printchar, const char *format, ...)
 {
-    unsigned 	hash;
-    unsigned 	i;
+	va_list	ap;
+	int		i;
 
-    hash = 0;
-    i = 0;
-    if (str[0] == 'l' && str[1] == 'g')
-        return (FT_PRINTF_HASHMAP_SIZE - 42);
-    while (str[i])
-        hash = 31 * hash + str[i++];
-    i = (hash % (FT_PRINTF_HASHMAP_SIZE));
+	va_start(ap, format);
+	i = ft_vcprintf(printchar, format, ap);
+	va_end(ap);
 	return (i);
 }
 
-void			ft_printf_id_add (t_printf_fn callable, ...)
+t_printf_hashmap	g_printf_functions = {
+[100] = {{"str", _},
+	lambda int (t_printf_ctx ctx, t_printchar printchar, int i, va_list ap)
 {
-	va_list		ap;
-	char		*id;
-	int	 	h;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ap;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ap;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ap;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ap;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ap;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ap;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ap;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ap;
+	return (0);
+}
+},
+[0] = {{"a", "g", _},
+	lambda int (t_printf_ctx ctx, t_printchar printchar, int i, va_list ap)
+{
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	(void) ctx;
+	(void) printchar;
+	(void) i;
+	return (0);
+}
+}
+};
 
-	va_start (ap, callable);
-	while (1)
-	{
-		id = va_arg (ap, char *);
-		if (!id[0])
-			break ;
-		h = ft_printf_hash (id);
-		if (g_printf_ids[h])
-		{
-			printf("error: printf identifier [id=%s, h=%i]", id, h);
-			printf(" already exists as %s, use a different label!\n", g_printf_labels[h]);
-			g_i += 1;
-		}
-		else
-		{
-			g_printf_ids[ft_printf_hash(id)] = callable;
-			g_printf_labels[ft_printf_hash(id)] = id;
-		}
-	}
-	va_end(ap);
+short int	ft_printf_hash(char *str)
+{
+	unsigned int	hash;
+	unsigned int	i;
+
+	hash = 0;
+	i = 0;
+	if (str[0] == 'l' && str[1] == 'g')
+		return (FT_PRINTF_HASHMAP_SIZE - 42);
+	while (str[i])
+		hash = 31 * hash + str[i++];
+	i = (hash % (FT_PRINTF_HASHMAP_SIZE));
+	return (i);
 }
 
-static int		ft_read_num(char const **fmt, va_list ap)
+static int	ft_read_num(char const **fmt, va_list ap)
 {
 	int			o;
 
@@ -78,68 +125,17 @@ static int		ft_read_num(char const **fmt, va_list ap)
 	return (o);
 }
 
-t_printf_fn		ft_printf_arg (t_printf_ctx *ctx, const char **format, va_list ap)
+int	ft_vcprintf(t_printchar print, const char *format, va_list ap)
 {
-	char		label[11];
-	short int 	hash;
-	short int	i;
-	char		c;
-	
+	t_printf_ctx	ctx;
+	int				i;
 
-	*ctx = (t_printf_ctx)
-	{
-		.falgs = 0,
-		.width = 0, // init with a negative value ?
-		.precision = 0,
-	};
-	while (1)
-	{
-
-		c = **format;
-		if (c == '-')
-			ctx->minus = 1;
-		else if (c == '0')
-			ctx->zero = 1;
-		else if (c == '.')
-		{
-			ctx->dot = 1;
-			*format += 1;
-			if (**format >= '0' && **format <= '9')
-			{
-				ctx->precision = ft_read_num(format, ap);
-				continue ;
-			}
-		}
-		else if (c == '#')
-			ctx->sharp = 1;
-		else if (c == ' ')
-			ctx->space = 1;
-		else if (c == '+')
-			ctx->plus = 1;
-		else if (c < '0' || c > '9')
-			break ;
-		if (c >= '0' && c <= '9')
-			ctx->width = ft_read_num(format, ap);
-		else
-			*format += 1;
-	}
 	i = 0;
-	while (**format)
-	{
-		label[i] = *format[i];
-		if (!**format)
-			break ;
-		*format += 1;
-		label[i] = 0;
-		hash = ft_printf_hash(label);
-		if (!g_printf_ids[hash])
-			continue ;
-		if (strcmp (label, g_printf_labels[hash]))
-			continue ;
-		return (g_printf_ids[hash]);
-	}
-	i = 0;
-	while (label[i])
-		i += putchar(i, label[i]);
+	while (*format)
+		if (*format == '%')
+	i += 0;
+	else
+		i += p(*format++);
+	p(0);
 	return (i);
 }
