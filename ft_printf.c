@@ -1,4 +1,4 @@
-#include "./stdio.h"
+#include "libftprintf.h"
 
 int	ft_printf(const char *format, ...)
 {
@@ -54,4 +54,4 @@ int	ft_asprintf(char **ret, const char *format, ...)
 	i = ft_asprintf(ret, format, ap);
 	va_end(ap);
 	return (i);
-}v
+}
