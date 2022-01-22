@@ -1,13 +1,19 @@
 #include <stdio.h>
 #include "libftprintf.h"
 
-static int	print(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
+#if 1 == 1
 
-#if DYNAMIC_PRINTF == 0
+static const
+# define G(X) X
+#endif
+
+t_printchar print = ^ int (char c)
+{
+write(1, &c, 1);
+G(return (1);)
+};
+
+# if DYNAMIC_PRINTF == 0
 
 static const
 #endif 

@@ -19,7 +19,7 @@
  *	ft_cprint.c 
  *****************
  */
-typedef int		(*t_printchar)(char c);
+typedef int		(^t_printchar)(char c);
 int				ft_cprintstr(t_printchar print, const char *s);
 int				ft_cprintullong_base(t_printchar print, const char *b, int bl,
 					unsigned long long n);
