@@ -1,4 +1,4 @@
-#include "ftprint.h"
+#include "libftprintf.h"
 
 static int	ft_read_num(char const **fmt, va_list ap)
 {
@@ -39,8 +39,8 @@ int	ft_vcprintf(t_printchar print, const char *format, va_list ap)
 	while (*format)
 		if (*format == '%')
 			i += 0;
-	_ _ else
-		_ _ i += print(*format++);
+	T T else
+		T T i += print(*format++);
 	print(0);
 	return (i);
 }
@@ -68,14 +68,14 @@ t_printf_hashmap g_printf_functions = {
 [95] = {{"x", 0},
 	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
 {
-	return (ft_cprintullong_base(print, b16, 16, va_arg(ap, int)));
+	return (ft_cprintullong_base(print, B16, 16, va_arg(ap, int)));
 }
 }
 ,
 [100] = {{"i", "d", 0},
 	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
 {
-	return (ft_cprintllong_base(print, b10, 10, va_arg(ap, int)));
+	return (ft_cprintllong_base(print, B10, 10, va_arg(ap, int)));
 }
 }
 ,
