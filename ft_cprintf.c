@@ -38,9 +38,7 @@ int	ft_vcprintf(t_printchar print, const char *format, va_list ap)
 	i = 0;
 	while (*format)
 		if (*format == '%')
-		{
 			i += 0;
-		}
 	_ _ else
 		_ _ i += print(*format++);
 	print(0);
@@ -63,23 +61,30 @@ short int	ft_printf_hash(const char *str)
 }
 
 #if DYNAMIC_PRINTF == 0
+
 static const
 #endif
-t_printf_hashmap	g_printf_functions = {
-#define G(X) X
-[95] = {{"x", 0}, 
+t_printf_hashmap g_printf_functions = {
+[95] = {{"x", 0},
 	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
 {
 	return (ft_cprintullong_base(print, b16, 16, va_arg(ap, int)));
-}},
+}
+}
+,
 [100] = {{"i", "d", 0},
 	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
 {
 	return (ft_cprintllong_base(print, b10, 10, va_arg(ap, int)));
-}},
+}
+}
+,
 [0] = {{"s", 0},
 	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
 {
 	return (ft_cprintstr(print, va_arg(ap, char*)));
-}},
-};
+}
+}
+}
+;
+//

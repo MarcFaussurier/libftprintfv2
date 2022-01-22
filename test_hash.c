@@ -7,7 +7,11 @@ static int	print(char c)
 	return (1);
 }
 
-static const char	*g_av[] = {
+#if DYNAMIC_PRINTF == 0
+
+static const
+#endif 
+char *g_av[] = {
 	"hhi",
 	"hi",
 	"i",
@@ -46,8 +50,8 @@ static const char	*g_av[] = {
 
 int	main(void)
 {
-	int					ac;
-	short int 			hash;
+	short int			ac;
+	short int			hash;
 	static const char	*passed[FT_PRINTF_HASHMAP_SIZE];
 
 	ac = sizeof(g_av) / sizeof(const char *);
@@ -60,7 +64,7 @@ int	main(void)
 		ft_cprintstr(print, "\n");
 		if (passed[hash])
 		{
-			ft_cprintstr(print, "hash collision with \"");	
+			ft_cprintstr(print, "hash collision with \"");
 			ft_cprintstr(print, passed[hash]);
 			ft_cprintstr(print, "\" and \"");
 			ft_cprintstr(print, g_av[ac]);
@@ -68,8 +72,7 @@ int	main(void)
 			ft_cprintullong_base(print, b10, 10, hash);
 			ft_cprintstr(print, "]\n");
 		}
-		else
-			passed[hash] = g_av[ac];
+		passed[hash] = g_av[ac];
 	}
 	return (0);
 }

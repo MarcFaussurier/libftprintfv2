@@ -5,4 +5,5 @@ test_printf:
 	clang ft_*.c test_printf.c -o test_printf && ./test_printf > test_printf.txt && cat test_printf.txt
 clean:
 	rm -rf a.out a.out.dSYM test_printf test_printf.dSYM test_hash test_hash.dSYM
+.PHONY: test_printf test_hash
 

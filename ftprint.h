@@ -4,6 +4,14 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <limits.h>
+# define b10 "0123456789"
+# define b8 "01234567x"
+# define b16 "0123456789abcdefx"
+# define B16 "0123456789ABCDEFX"
+# define block __block
+# ifndef DYNAMIC_PRINTF
+#  define DYNAMIC_PRINTF 0
+# endif
 # ifndef FT_PRINTF_HASHMAP_SIZE 
 #  define FT_PRINTF_HASHMAP_SIZE 127 * 8
 # endif
@@ -22,17 +30,7 @@
 # else
 #  error "edit header according your platform for LLONG_MIN LLONG_MIN_A"
 # endif
-# define b10 "0123456789"
-# define b8 "01234567x"
-# define b16 "0123456789abcdefx"
-# define B16 "0123456789ABCDEFX"
-# define _ 
-# define __ ""
-# define block __block
-# define auto __auto_type
-# ifndef DYNAMIC_PRINTF
-#  define DYNAMIC_PRINTF 0
-# endif
+
 /*
  *****************
  *	ft_cprint.c 

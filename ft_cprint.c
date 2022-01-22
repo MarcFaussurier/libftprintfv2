@@ -10,10 +10,11 @@ int	ft_cprintstr(t_printchar print, const char *str)
 	return (r);
 }
 
-int	ft_cprintullong_base(t_printchar print, const char *b, int l, unsigned long long n)
+int	ft_cprintullong_base(t_printchar print, const char *b, int l,
+		unsigned long long n)
 {
-	int 		r;
-	int 		k;
+	int			r;
+	int			k;
 	char		a[65];
 
 	k = 65;
@@ -31,10 +32,11 @@ int	ft_cprintullong_base(t_printchar print, const char *b, int l, unsigned long 
 	return (r);
 }
 
-int ft_cprintllong_base(t_printchar print, const char *b, int l, long long n)
+int	ft_cprintllong_base(t_printchar print, const char *b, int l,
+		long long n)
 {
-	int 				r;
-	int					i;
+	int	r;
+	int	i;
 
 	r = 0;
 	if (n < 0)
@@ -51,7 +53,8 @@ int ft_cprintllong_base(t_printchar print, const char *b, int l, long long n)
 	return (ft_cprintullong_base(print, b, l, n));
 }
 
-int ft_cprintldbl(t_printchar print, const char *b, int l, long double f)
+int	ft_cprintldbl(t_printchar print, const char *b, int l,
+		long double f)
 {
 	return (ft_cprintullong_base(print, b, l, l));
 }
