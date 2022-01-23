@@ -1,5 +1,34 @@
 #include "libftprintf.h"
 
+#if DYNAMIC_PRINTF == 0
+
+static const
+#endif
+t_printf_hashmap g_printf_hashmap = {
+[95] = {{"x", 0},
+	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
+{
+	return (ft_cprintullong_base(print, B16, 16, va_arg(ap, int)));
+}
+}
+,
+[100] = {{"i", "d", 0},
+	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
+{
+	return (ft_cprintllong_base(print, B10, 10, va_arg(ap, int)));
+}
+}
+,
+[0] = {{"s", 0},
+	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
+{
+	return (ft_cprintstr(print, va_arg(ap, char*)));
+}
+}
+}
+;
+//
+
 static int	ft_read_num(char const **fmt, va_list ap)
 {
 	int			o;
@@ -34,11 +63,40 @@ int	ft_vcprintf(t_printchar print, const char *format, va_list ap)
 {
 	t_printf_context	ctx;
 	int					i;
+	int					y;
+	int					z;
+	int					n;
+	char                label[FT_PRINTF_LABEL_SIZE];
 
 	i = 0;
 	while (*format)
 		if (*format == '%')
-			i += 0;
+		{
+			i += 1;
+			continue;
+			format += 1;
+			y = 0;
+			while (*format)
+			{
+				label[y++] = *format;
+				label[y] = 0;
+				z = 0;
+				while (z < FT_PRINTF_HASHMAP_SIZE)
+				{
+					n = 0;
+					while (g_printf_hashmap[z].s[n])
+					{
+						if (!ft_strcmp(label, g_printf_hashmap[z].s[n]))
+						{
+							g_printf_hashmap[z].f(ctx, print, i, ap);
+						}
+						n += 1;
+					}
+					z += 1;
+				}
+
+			}
+		}
 	T T else
 		T T i += print(*format++);
 	print(0);
@@ -60,31 +118,4 @@ short int	ft_printf_hash(const char *str)
 	return (i);
 }
 
-#if DYNAMIC_PRINTF == 0
 
-static const
-#endif
-t_printf_hashmap g_printf_functions = {
-[95] = {{"x", 0},
-	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
-{
-	return (ft_cprintullong_base(print, B16, 16, va_arg(ap, int)));
-}
-}
-,
-[100] = {{"i", "d", 0},
-	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
-{
-	return (ft_cprintllong_base(print, B10, 10, va_arg(ap, int)));
-}
-}
-,
-[0] = {{"s", 0},
-	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
-{
-	return (ft_cprintstr(print, va_arg(ap, char*)));
-}
-}
-}
-;
-//

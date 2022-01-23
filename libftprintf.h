@@ -8,6 +8,7 @@
 # define FT_PRINTF_LABEL_SIZE 11
 # define FT_ASPRINTF_BUFFER_MIN 128
 # define FT_PRINTF_BUFFER_SIZE 4096
+# define FT_PRINTF_HASHMAP_SYNONYMES 5
 # define LLONG_MIN_A "-9223372036854775808"
 # define B10 "0123456789"
 # define B8 "01234567x"
@@ -52,7 +53,7 @@ typedef	int		(^t_printf_specifier)(t_printf_context ctx, t_printchar print,
 short int		ft_printf_hash(const char *s);
 typedef struct s_printf_hashmap
 {
-	char				*s[5];
+	char				*s[FT_PRINTF_HASHMAP_SYNONYMES];
 	t_printf_specifier	f;
 }						t_printf_hashmap[FT_PRINTF_HASHMAP_SIZE];
 # if DYNAMIC_PRINTF == 1
@@ -81,4 +82,11 @@ int				ft_sprintf(char *str, const char *format, ...);
 int				ft_dprintf(int fd, const char *format, ...);
 int				ft_printf(const char *format, ...);
 int				ft_asprintf(char **ret, const char *format, ...);
+
+/*
+ *****************
+ *	ft_strcmp.c
+ *****************
+ */
+int				ft_strcmp(char *a, char *b);
 #endif
