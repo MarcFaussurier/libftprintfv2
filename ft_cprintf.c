@@ -1,28 +1,35 @@
 #include "libftprintf.h"
 
+#include "stdio.h"
+
 #if DYNAMIC_PRINTF == 0
 
 static const
 #endif
 t_printf_hashmap g_printf_hashmap = {
-[95] = {{"x", 0},
+[120] = {{"x", 0},
 	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
 {
 	return (ft_cprintullong_base(print, B16, 16, va_arg(ap, int)));
 }
 }
 ,
-[100] = {{"i", "d", 0},
+[105] = {{"i", "d", 0},
 	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
 {
 	return (ft_cprintllong_base(print, B10, 10, va_arg(ap, int)));
 }
 }
 ,
-[0] = {{"s", 0},
+[115] = {{"s", 0},
 	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
 {
-	return (ft_cprintstr(print, va_arg(ap, char*)));
+	char	*str;
+
+	str = va_arg(ap, char *);
+	if (!str)
+		str = "(null)";
+	return (ft_cprintstr(print, str));
 }
 }
 }
@@ -74,30 +81,33 @@ int	ft_vcprintf(t_printchar print, const char *format, va_list ap)
 		if (*format == '%')
 		{
 			format += 1;
-			while (*format)
+			printf("-format:%s\n", format);
+			y = 0;
+			z = 0;
+			while (format[y] && y < FT_PRINTF_LABEL_SIZE)
 			{
-				y = 0;
-				while (format[y] && y < FT_PRINTF_LABEL_SIZE)
+				label[y] = format[y];
+				label[y + 1] = 0;
+				hash = ft_printf_hash(label);
+			z = 0;
+				while (g_printf_hashmap[hash].s[z])
 				{
-					label[y] = format[y];
-					label[y + 1] = 0;
-					hash = ft_printf_hash(label);
-					z = 0;
-					while (g_printf_hashmap[hash].s[z])
+					if (!ft_strcmp(label, g_printf_hashmap[hash].s[z]))
 					{
-						if (!ft_strcmp(label, g_printf_hashmap[hash].s[z]))
-						{
-							i += g_printf_hashmap[hash].f(ctx, print, i, ap);
-							z = -1;
-							break ;
-						}
-						z += 1;
+						i += g_printf_hashmap[hash].f(ctx, print, i, ap);
+						z = -1;
+						format += y;
+						break ;
 					}
-					if (z == -1)
-						i += print(*format);
-					y += 1;
+					z += 1;
 				}
-				format += 1;
+				if (z == -1)
+					break;
+				y += 1;
+			}
+			if (z != -1)
+			{
+				i += print(*format++);
 			}
 		}
 	T T else

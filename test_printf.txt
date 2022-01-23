@@ -1,95 +1,130 @@
 ----------------------------------------
 --- madatory tests
-error at line 61 (test no 1):
-	 - expected:	unkJnow
-	 - got:		un
+-format:k%Jnow
+-format:Jnow
+[speed: -7ms] success at line 61 (test no 1): unkJnow
+-format:c is that a L?
 error at line 62 (test no 2):
 	 - expected:	L is that a L?
-	 - got:		
+	 - got:		c is that a L?
+-format:c is that ÿ ? 
 error at line 63 (test no 3):
 	 - expected:	ÿ is that ÿ ? 
-	 - got:		
+	 - got:		c is that ÿ ? 
+-format:s' '(null) ?
 error at line 64 (test no 4):
 	 - expected:	is '(null)' '(null) ?
-	 - got:		is '
+	 - got:		is '(null)s' '(null) ?
+-format:s' 'le 101' ?
 error at line 65 (test no 5):
 	 - expected:	is 'le 101' 'le 101' ?
-	 - got:		is '
+	 - got:		is 'le 101s' 'le 101' ?
+-format:p ptr test!
 error at line 66 (test no 6):
 	 - expected:	0xc304d ptr test!
-	 - got:		
+	 - got:		p ptr test!
+-format:p ptr test 2!
 error at line 67 (test no 7):
 	 - expected:	0x0 ptr test 2!
-	 - got:		
+	 - got:		p ptr test 2!
+-format:d
 error at line 68 (test no 8):
 	 - expected:	42
-	 - got:		42d
+	 - got:		d
+-format:i! %
+-format:
+-format:i + %d= %i!
+-format:d= %i!
+-format:i!
 error at line 69 (test no 9):
 	 - expected:	Bonjour, 42! 
-	 - got:		Bonjour, 
+	 - got:		Bonjour, 42i! 
+-format:i + %d= %i!
+-format:d= %i!
+-format:i!
 error at line 70 (test no 10):
 	 - expected:	-40 + -2= -42!
-	 - got:		-40d
+	 - got:		-40i + d= -2i!
+-format:i :]
 error at line 71 (test no 11):
 	 - expected:	INT_MAX = 2147483647 :]
-	 - got:		INT_MAX = 
+	 - got:		INT_MAX = 2147483647i :]
+-format:i :)
 error at line 72 (test no 12):
 	 - expected:	 INT_MIN = -2147483648 :)
-	 - got:		 INT_MIN = 
+	 - got:		 INT_MIN = -2147483648i :)
+-format:i ;)
 error at line 73 (test no 13):
 	 - expected:	 ZERO = 0 ;)
-	 - got:		 ZERO = 
+	 - got:		 ZERO = 0i ;)
+-format:o! 
 error at line 74 (test no 14):
 	 - expected:	octal 52! 
-	 - got:		octal 
+	 - got:		octal o! 
+-format:u! 
 error at line 75 (test no 15):
 	 - expected:	octal 42! 
-	 - got:		octal 
+	 - got:		octal u! 
+-format:x' is that'f' ?
+
 error at line 76 (test no 16):
 	 - expected:	is 'f' is that'f' ?
 
-	 - got:		is '
+	 - got:		is 'fx' is that'f' ?
+
+-format:X' is that'F' ?
+
 error at line 77 (test no 17):
 	 - expected:	is 'F' is that'F' ?
 
-	 - got:		is '
-error at line 78 (test no 18):
-	 - expected:	is '%' a percent ?
-	 - got:		is '
+	 - got:		is 'X' is that'F' ?
+
+-format:%' a percent ?
+[speed: -3ms] success at line 78 (test no 18): is '%' a percent ?
+-format:#Jnow
 error at line 79 (test no 19):
 	 - expected:	unJnow
-	 - got:		un
+	 - got:		un#Jnow
+-format:#i
 error at line 80 (test no 20):
 	 - expected:	 42
-	 - got:		 
+	 - got:		 #i
+-format:#x
 error at line 81 (test no 21):
 	 - expected:	 0x2a
-	 - got:		 
+	 - got:		 #x
+-format:#4X
 error at line 82 (test no 22):
 	 - expected:	 0X2A
-	 - got:		 
+	 - got:		 #4X
+-format:#p
 error at line 83 (test no 23):
 	 - expected:	 0x2a
-	 - got:		 
+	 - got:		 #p
+-format:04s
 error at line 84 (test no 24):
 	 - expected:	000d
-	 - got:		
+	 - got:		04s
+-format:#2.3i
 error at line 85 (test no 25):
 	 - expected:	 042
-	 - got:		 
+	 - got:		 #2.3i
+-format:#6.3o
 error at line 86 (test no 26):
 	 - expected:	    052
-	 - got:		 
+	 - got:		 #6.3o
+-format:#2.3x
 error at line 87 (test no 27):
 	 - expected:	 0x02a
-	 - got:		 
+	 - got:		 #2.3x
 ----------------------------------------
 --- bonus tests
 ----------------------------------------
 --- personal tests
-0 / 27 test succeed.
+2 / 27 test succeed.
 ----------------------------------------
 --- testing if vsnpf trims correctly
 GCC: -123
-YOU: -
-KO
+-format:i
+YOU: -123
+OK
