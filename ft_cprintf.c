@@ -96,7 +96,7 @@ int	ft_vcprintf(t_printchar print, const char *format, va_list ap)
 					{
 						i += g_printf_hashmap[hash].f(ctx, print, i, ap);
 						z = -1;
-						format += y;
+						format += y + 1;
 						break ;
 					}
 					z += 1;

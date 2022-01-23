@@ -12,13 +12,9 @@ error at line 63 (test no 3):
 	 - expected:	ÿ is that ÿ ? 
 	 - got:		c is that ÿ ? 
 -format:s' '(null) ?
-error at line 64 (test no 4):
-	 - expected:	is '(null)' '(null) ?
-	 - got:		is '(null)s' '(null) ?
+[speed: -5ms] success at line 64 (test no 4): is '(null)' '(null) ?
 -format:s' 'le 101' ?
-error at line 65 (test no 5):
-	 - expected:	is 'le 101' 'le 101' ?
-	 - got:		is 'le 101s' 'le 101' ?
+[speed: +0ms] success at line 65 (test no 5): is 'le 101' 'le 101' ?
 -format:p ptr test!
 error at line 66 (test no 6):
 	 - expected:	0xc304d ptr test!
@@ -36,27 +32,19 @@ error at line 68 (test no 8):
 -format:i + %d= %i!
 -format:d= %i!
 -format:i!
-error at line 69 (test no 9):
-	 - expected:	Bonjour, 42! 
-	 - got:		Bonjour, 42i! 
+[speed: -3ms] success at line 69 (test no 9): Bonjour, 42! 
 -format:i + %d= %i!
 -format:d= %i!
 -format:i!
 error at line 70 (test no 10):
 	 - expected:	-40 + -2= -42!
-	 - got:		-40i + d= -2i!
+	 - got:		-40 + d= -2!
 -format:i :]
-error at line 71 (test no 11):
-	 - expected:	INT_MAX = 2147483647 :]
-	 - got:		INT_MAX = 2147483647i :]
+[speed: -1ms] success at line 71 (test no 11): INT_MAX = 2147483647 :]
 -format:i :)
-error at line 72 (test no 12):
-	 - expected:	 INT_MIN = -2147483648 :)
-	 - got:		 INT_MIN = -2147483648i :)
+[speed: +0ms] success at line 72 (test no 12):  INT_MIN = -2147483648 :)
 -format:i ;)
-error at line 73 (test no 13):
-	 - expected:	 ZERO = 0 ;)
-	 - got:		 ZERO = 0i ;)
+[speed: +0ms] success at line 73 (test no 13):  ZERO = 0 ;)
 -format:o! 
 error at line 74 (test no 14):
 	 - expected:	octal 52! 
@@ -67,10 +55,7 @@ error at line 75 (test no 15):
 	 - got:		octal u! 
 -format:x' is that'f' ?
 
-error at line 76 (test no 16):
-	 - expected:	is 'f' is that'f' ?
-
-	 - got:		is 'fx' is that'f' ?
+[speed: +0ms] success at line 76 (test no 16): is 'f' is that'f' ?
 
 -format:X' is that'F' ?
 
@@ -80,7 +65,7 @@ error at line 77 (test no 17):
 	 - got:		is 'X' is that'F' ?
 
 -format:%' a percent ?
-[speed: -3ms] success at line 78 (test no 18): is '%' a percent ?
+[speed: -2ms] success at line 78 (test no 18): is '%' a percent ?
 -format:#Jnow
 error at line 79 (test no 19):
 	 - expected:	unJnow
@@ -121,7 +106,7 @@ error at line 87 (test no 27):
 --- bonus tests
 ----------------------------------------
 --- personal tests
-2 / 27 test succeed.
+9 / 27 test succeed.
 ----------------------------------------
 --- testing if vsnpf trims correctly
 GCC: -123
