@@ -66,35 +66,38 @@ int	ft_vcprintf(t_printchar print, const char *format, va_list ap)
 	int					y;
 	int					z;
 	int					n;
-	char                label[FT_PRINTF_LABEL_SIZE];
+	int					hash;
+	char                label[FT_PRINTF_LABEL_SIZE + 1];
 
 	i = 0;
 	while (*format)
 		if (*format == '%')
 		{
-			i += 1;
-			continue;
 			format += 1;
-			y = 0;
 			while (*format)
 			{
-				label[y++] = *format;
-				label[y] = 0;
-				z = 0;
-				while (z < FT_PRINTF_HASHMAP_SIZE)
+				y = 0;
+				while (format[y] && y < FT_PRINTF_LABEL_SIZE)
 				{
-					n = 0;
-					while (g_printf_hashmap[z].s[n])
+					label[y] = format[y];
+					label[y + 1] = 0;
+					hash = ft_printf_hash(label);
+					z = 0;
+					while (g_printf_hashmap[hash].s[z])
 					{
-						if (!ft_strcmp(label, g_printf_hashmap[z].s[n]))
+						if (!ft_strcmp(label, g_printf_hashmap[hash].s[z]))
 						{
-							g_printf_hashmap[z].f(ctx, print, i, ap);
+							i += g_printf_hashmap[hash].f(ctx, print, i, ap);
+							z = -1;
+							break ;
 						}
-						n += 1;
+						z += 1;
 					}
-					z += 1;
+					if (z == -1)
+						i += print(*format);
+					y += 1;
 				}
-
+				format += 1;
 			}
 		}
 	T T else
