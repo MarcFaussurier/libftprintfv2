@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 10:43:22 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 17:14:38 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 17:16:57 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 		else if (**fmt == '#' && ++*fmt)
 			p->sharp = 1;
 		else if (**fmt == '.' && ++*fmt && **fmt != '*')
+		{
 			p->precision = read_num(fmt);
+			break ;
+		}
 		else if (**fmt == '.' && ++*fmt)
 		{
 			p->precision = va_arg(ap, int);
