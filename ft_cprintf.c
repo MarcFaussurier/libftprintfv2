@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 10:43:22 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 17:08:05 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 17:14:38 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int	read_num(const char **fmt)
 static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 {
 	while (1)
-	{
 		if (**fmt == '+' && ++*fmt)
 			p->plus = 1;
 		else if (**fmt == '-' && ++*fmt)
@@ -58,14 +57,16 @@ static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 		else if (**fmt == '.' && ++*fmt && **fmt != '*')
 			p->precision = read_num(fmt);
 		else if (**fmt == '.' && ++*fmt)
+		{
 			p->precision = va_arg(ap, int);
+			break ;
+		}
 		else if (**fmt >= '0' && **fmt <= '9')
 			p->padding = read_num(fmt);
 		else if (**fmt == '*' && ++fmt)
 			p->padding = va_arg(ap, int);
 		else
 			break ;
-	}
 }
 
 static void	parse_modifiers(const char **fmt, t_fmt_params *p)

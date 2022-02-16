@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:38:33 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 17:07:39 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 17:15:32 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ int	main(int ac, char **av)
 	printf("-----\n");
 	ft_printf("%#O\n", 42);
 	printf("%#O\n", 42);
+	
+
+	printf("-----\n");
+	ft_printf("%+-#2.4s\n", "bonjour");
+	printf("%2.4s\n", "bonjour");
+
 	while (ac)
 	{
 		ft_printf(av[--ac]);
