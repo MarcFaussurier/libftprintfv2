@@ -6,22 +6,23 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 10:52:34 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 11:16:07 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 13:43:24 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_printf.h"
 
-static void	put(char c, void *data)
+static int	put(char c, void *data)
 {
 	(void) data;
 	write(1, &c, 1);
+	return (1);
 }
 
 int	ft_vprintf(const char *fmt, va_list ap)
 {
-	return (ft_vcprintf(&put, 0, fmt, ap));
+	return (ft_vcprintf((t_lambda){&put, 0}, fmt, ap));
 }
 
 int	ft_printf(const char *fmt, ...)
