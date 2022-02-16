@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 10:43:22 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 11:54:02 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 11:56:32 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ int	ft_vcprintf(void(*c)(char c, void *data), void *data,
 				modifiers[i++] = *fmt++;
 			modifiers[i] = 0;
 			if (g_specifiers[*fmt])
-				g_specifiers[*fmt++](c, data, modifiers, ap);
+				g_specifiers[*fmt](c, data, modifiers, ap);
 			else
 				ft_vcprintf(c, data, modifiers, ap);
 		}
-		c(*fmt, data);
+		else
+			c(*fmt, data);
 		fmt += 1;
 	}
 	return (0);
