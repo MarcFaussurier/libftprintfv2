@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/16 10:52:34 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 11:16:07 by mafaussu         ###   ########lyon.fr   */
+/*   Created: 2022/02/16 10:54:42 by mafaussu          #+#    #+#             */
+/*   Updated: 2022/02/16 10:57:41 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include <stdarg.h>
 
-static void	put(char c, void *data)
-{
-	(void) data;
-	write(1, &c, 1);
-}
-
-int	ft_vprintf(const char *fmt, va_list ap)
-{
-	return (ft_vcprintf(&put, 0, fmt, ap));
-}
-
-int	ft_printf(const char *fmt, ...)
-{
-	va_list	ap;
-	int		r;
-
-	va_start(ap, fmt);
-	r = ft_vprintf(fmt, ap);
-	va_end(ap);
-	return (r);
-}
+int	ft_vprintf(const char *fmt, va_list ap);
+int	ft_printf(const char *fmt, ...);
+int	ft_vcprintf(void(*c)(char c, void *data), void *data, const char *fmt, va_list ap);
+int	ft_cprintf(void(*c)(char c, void *data), void *data, const char *fmt, ...);
+#endif

@@ -1,134 +1,86 @@
-#include "libftprintf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cprintf.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/16 10:43:22 by mafaussu          #+#    #+#             */
+/*   Updated: 2022/02/16 11:54:02 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "stdio.h"
+#include <unistd.h>
+#include "ft_printf.h"
 
-#if DYNAMIC_PRINTF == 0
-
-static const
-#endif
-t_printf_hashmap g_printf_hashmap = {
-[120] = {{"x", 0},
-	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
+const int fmt_i(void(*c)(char, void*), void *data, const char modifiers[3], va_list ap)
 {
-	return (ft_cprintullong_base(print, B16, 16, va_arg(ap, int)));
-}
-}
-,
-[105] = {{"i", "d", 0},
-	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
-{
-	return (ft_cprintllong_base(print, B10, 10, va_arg(ap, int)));
-}
-}
-,
-[115] = {{"s", 0},
-	^ int (t_printf_context ctx, t_printchar print, int i, va_list ap)
-{
-	char	*str;
+	long long	i;
+	char 		*s;
 
-	str = va_arg(ap, char *);
-	if (!str)
-		str = "(null)";
-	return (ft_cprintstr(print, str));
-}
-}
-}
-;
-//
-
-static int	ft_read_num(char const **fmt, va_list ap)
-{
-	int			o;
-
-	o = 0;
-	if (**fmt == '*')
+	i = va_arg(ap, long long);
+	asprintf(&s, "%i", i);
+	while (*s)
 	{
-		(*fmt) += 1;
-		return (va_arg(ap, int));
+		c(*s, data);
+		s += 1;
 	}
-	while ((((**fmt) >= '0') && (**fmt <= '9')))
-	{
-		o *= 10;
-		o += **fmt - '0';
-		*fmt += 1;
-	}
-	return (o);
+	return (0);
 }
 
-int	ft_cprintf(t_printchar print, const char *format, ...)
+
+static const 
+int (*g_specifiers[255])(
+		void(*c)(char, void*), void * data, const char modifiers[3], va_list ap) = {
+	['i'] = fmt_i
+};
+
+int	ft_vcprintf(void(*c)(char c, void *data), void *data,
+		const char *fmt, va_list ap)
 {
-	va_list	ap;
+	char	modifiers[3];
 	int		i;
 
-	va_start(ap, format);
-	i = ft_vcprintf(print, format, ap);
-	va_end(ap);
-	return (i);
-}
-
-int	ft_vcprintf(t_printchar print, const char *format, va_list ap)
-{
-	t_printf_context	ctx;
-	int					i;
-	int					y;
-	int					z;
-	int					n;
-	int					hash;
-	char                label[FT_PRINTF_LABEL_SIZE + 1];
-
-	i = 0;
-	while (*format)
-		if (*format == '%')
+	while (*fmt)
+	{
+		if (*fmt == '%')
 		{
-			format += 1;
-			printf("-format:%s\n", format);
-			y = 0;
-			z = 0;
-			while (format[y] && y < FT_PRINTF_LABEL_SIZE)
-			{
-				label[y] = format[y];
-				label[y + 1] = 0;
-				hash = ft_printf_hash(label);
-			z = 0;
-				while (g_printf_hashmap[hash].s[z])
-				{
-					if (!ft_strcmp(label, g_printf_hashmap[hash].s[z]))
-					{
-						i += g_printf_hashmap[hash].f(ctx, print, i, ap);
-						z = -1;
-						format += y + 1;
-						break ;
-					}
-					z += 1;
-				}
-				if (z == -1)
-					break;
-				y += 1;
-			}
-			if (z != -1)
-			{
-				i += print(*format++);
-			}
+			fmt += 1;
+			i = 0;
+			while ((*fmt == 'h' || *fmt == 'l' || *fmt == 'L' || *fmt == 'z')
+					&& i < 2)
+				modifiers[i++] = *fmt++;
+			modifiers[i] = 0;
+			if (g_specifiers[*fmt])
+				g_specifiers[*fmt++](c, data, modifiers, ap);
+			else
+				ft_vcprintf(c, data, modifiers, ap);
 		}
-	T T else
-		T T i += print(*format++);
-	print(0);
-	return (i);
+		c(*fmt, data);
+		fmt += 1;
+	}
+	return (0);
 }
 
-short int	ft_printf_hash(const char *str)
+int	ft_cprintf(void(*c)(char c, void *data), void *data, const char *fmt, ...)
 {
-	unsigned int	hash;
-	unsigned int	i;
+	va_list	ap;
+	int		r;
 
-	hash = 0;
-	i = 0;
-	if (str[0] == 'l' && str[1] == 'g')
-		return (FT_PRINTF_HASHMAP_SIZE - 42);
-	while (str[i])
-		hash = 31 * hash + str[i++];
-	i = (hash % (FT_PRINTF_HASHMAP_SIZE));
-	return (i);
+	va_start(ap, fmt);
+	r = ft_vcprintf(c, data, fmt, ap);
+	va_end(ap);
+	return (0);
 }
 
-
+int	main(int ac, char **av)
+{
+	ft_printf("args:\n");
+	ft_printf("%hhi %p\n", 42);
+	while (ac)
+	{
+		ft_printf(av[--ac]);
+		ft_printf("\n");
+	}
+	return (0);
+}
