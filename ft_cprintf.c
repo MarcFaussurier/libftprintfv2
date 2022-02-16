@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 10:43:22 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 15:57:12 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 17:08:05 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static	int (*const g_specifiers[255])
 ['c'] = fmt_c,
 ['i'] = fmt_i,
 ['d'] = fmt_i,
+['u'] = fmt_u,
 ['o'] = fmt_o,
+['O'] = fmt_o,
 ['x'] = fmt_x,
 ['X'] = fmt_x_up,
 ['s'] = fmt_s,
@@ -94,7 +96,7 @@ int	ft_vcprintf(t_lambda f, const char *fmt, va_list ap)
 			parse_flags(&fmt, &p, ap);
 			parse_modifiers(&fmt, &p);
 			if (*fmt == 'n')
-				r += ft_cprintf(f, "%i", r);
+				*((va_arg(ap, int*))) = r;
 			else if (g_specifiers[*fmt])
 				r += g_specifiers[*fmt](f, p, ap);
 			else
@@ -105,7 +107,7 @@ int	ft_vcprintf(t_lambda f, const char *fmt, va_list ap)
 			r += ((t_putchar) f.ptr)(*fmt, f.data);
 		fmt += 1;
 	}
-	return (0);
+	return (r);
 }
 
 int	ft_cprintf(t_lambda f, const char *fmt, ...)
@@ -116,5 +118,5 @@ int	ft_cprintf(t_lambda f, const char *fmt, ...)
 	va_start(ap, fmt);
 	r = ft_vcprintf(f, fmt, ap);
 	va_end(ap);
-	return (0);
+	return (r);
 }

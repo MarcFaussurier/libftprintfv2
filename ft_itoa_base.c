@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:47:33 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 15:45:33 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 16:26:43 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	ft_utoa_base(t_lambda f, unsigned long long u, const char *b, int l)
 		i += 1;
 		u /= l;
 	}
+	if (i)
+		i -= 1;
 	while (i >= 0)
 		r += (((t_putchar)f.ptr)(buffer[i--], f.data));
 	return (r);
