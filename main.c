@@ -41,8 +41,20 @@ int	main(int ac, char **av)
 	printf("%0-8.1s\n", "bonjour");
 
 	printf("-----\n");
-	ft_printf("%024.12i\n", "bonjour");
-	printf("%024.12i\n", "bonjour");
+	ft_printf("%0+24.12i\n", "bonjour");
+	printf("%0+24.12i\n", "bonjour");
+
+	printf("-----\n");
+	ft_printf("%0+-24.12i\n", "bonjour");
+	printf("%0+-24.12i\n", "bonjour");
+
+	printf("-----\n");
+	ft_printf("%0-+24.12i\n", "bonjour");
+	printf("%0-+24.12i\n", "bonjour");
+
+	printf("-----\n");
+	ft_printf("%010i\n", "bonjour");
+	printf("%010i\n", "bonjour");
 
 	while (ac)
 	{

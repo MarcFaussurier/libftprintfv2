@@ -27,6 +27,7 @@ int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 	char		*s;
 	int			el;
 	int			z;
+	char		c;
 
 	r = 0;
 	i = va_arg(ap, long long);
@@ -46,9 +47,12 @@ int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 	z = p.precision - el + p.plus;
 	if (p.padding > z)
 		p.padding -= z;
+	c = ' ';
+	if (p.zero && z <= 0)
+		c = '0';
 	if (!p.minus)
 	while (p.padding-- > el)
-		r += ((t_putchar) f.ptr)(' ', f.data);
+		r += ((t_putchar) f.ptr)(c, f.data);
 	if (p.plus && i >= 0)
 		r += ((t_putchar) f.ptr)('+', f.data);
 	while (z--)
