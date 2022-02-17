@@ -36,6 +36,10 @@ int	main(int ac, char **av)
 	printf("%#O\n", 42);
 	
 
+	printf("%s \n", "7");
+	ft_printf("%s \n", "7");
+
+
 	printf("-----\n");
 	ft_printf("%0-8.1s\n", "bonjour");
 	printf("%0-8.1s\n", "bonjour");
@@ -56,6 +60,32 @@ int	main(int ac, char **av)
 	ft_printf("%010i\n", "bonjour");
 	printf("%010i\n", "bonjour");
 
+
+	printf("-----\n");
+	int x = 0, y =0;
+	x = printf(		"pf: %-3d| \n", 1);
+	y = ft_printf(	"me: %-3d| \n", 1);
+	printf("[%i %i] -----\n", x, y);
+
+
+	y = ft_printf("me: %0+4d \n", 14);
+	x = printf("pf: %0+4d \n", 14);
+
+	printf("[%i %i] -----\n", x, y);
+	
+	x = printf("%1s", "");
+	y = ft_printf("%1s", "");
+	printf("[%i %i] -----\n", x, y);
+
+
+	x = printf("%s", "");
+	y = ft_printf("%s", "");
+	printf("[%i %i] -----\n", x, y);
+
+
+	x = printf("%0s", "");
+	y = ft_printf("%0s", "");
+	printf("[%i %i] -----\n", x, y);
 	while (ac)
 	{
 		ft_printf(av[--ac]);

@@ -30,8 +30,8 @@ typedef struct s_fmt_params
 	t_ull	minus:		1;
 	t_ull	blank:		1;
 	t_ull	sharp:		1;
-	t_ull	precision:	32;
-	t_ull	padding:	32;
+	int		precision:	32;
+	int		padding:	32;
 }	t_fmt_params;
 int	ft_vprintf(const char *fmt, va_list ap);
 int	ft_printf(const char *fmt, ...);

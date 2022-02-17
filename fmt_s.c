@@ -37,7 +37,7 @@ int	fmt_s(t_lambda f, t_fmt_params p, va_list ap)
 		p.precision = ft_strlen(s);
 	r = 0;
 	if (!p.minus)
-		while (p.padding-- > p.precision)
+		while (p.padding && p.padding-- > p.precision)
 		{
 			r += (((t_putchar)f.ptr)(' ', f.data));
 		}

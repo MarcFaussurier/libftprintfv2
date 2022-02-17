@@ -21,10 +21,7 @@ int	ft_itoa_base(t_lambda f, long long i, const char *b, int l)
 	if (i == LLONG_MIN)
 		return (ft_cprintf(f, "%s", IMIN));
 	else if (i < 0)
-	{
-		r += (((t_putchar)f.ptr)('-', f.data));
 		i *= -1;
-	}
 	return (r + ft_utoa_base(f, i, b, l));
 }
 

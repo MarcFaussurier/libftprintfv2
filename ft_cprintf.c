@@ -44,7 +44,7 @@ static int	read_num(const char **fmt)
 
 static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 {
-	*p = (t_fmt_params) {{0,0,0},0,0,0,0,0,0,0};
+	*p = (t_fmt_params) {{0,0,0},0,0,0,0,0,-1,-1};
 	while (1)
 		if (**fmt == '+' && ++*fmt)
 			p->plus = 1;
