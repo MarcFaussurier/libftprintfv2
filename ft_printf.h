@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # define IMIN "-9223372036854775808"
 
+
 typedef unsigned long long	t_ull;
 typedef int					(*t_putchar)(char c, void *data);
 typedef struct s_lambda
@@ -58,4 +59,6 @@ int	fmt_a_up(t_lambda f, t_fmt_params p, va_list ap);
 int	fmt_b(t_lambda f, t_fmt_params p, va_list ap);
 int	ft_strlen(char *s);
 int ft_countc(char c, void *data);
+long long	parse_i(t_fmt_params p, va_list ap);
+unsigned long long	parse_u(t_fmt_params p, va_list ap);
 #endif

@@ -22,15 +22,7 @@ int	fmt_x_up(t_lambda f, t_fmt_params p, va_list ap)
 	char		c;
 	char 		sign;
 
-	i = va_arg(ap, unsigned long long);
-	if (p.modifiers[0] == 'h' && p.modifiers[1] == 'h' && !p.modifiers[2])
-		i = (unsigned char) i;
-	else if (p.modifiers[0] == 'h' && !p.modifiers[1])
-		i = (unsigned short int) i;
-	else if (!p.modifiers[0])
-		i = (unsigned int) i;
-	else if (p.modifiers[0] == 'l' && !p.modifiers[1])
-		i = (unsigned long) i;
+	i = parse_u(p, ap);
 	el = ft_utoa_base((t_lambda){&ft_countc, 0}, i, "0123456789ABCDEF", 16);
 	if  ((p.plus && p.precision != -1 ) || p.minus)
 		p.zero = 0;

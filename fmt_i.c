@@ -25,15 +25,7 @@ int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 	char		c;
 	char 		sign;
 
-	i = va_arg(ap, long long);
-	if (p.modifiers[0] == 'h' && p.modifiers[1] == 'h' && !p.modifiers[2])
-		i = (char) i;
-	else if (p.modifiers[0] == 'h' && !p.modifiers[1])
-		i = (short int) i;
-	else if (!p.modifiers[0])
-		i = (int) i;
-	else if (p.modifiers[0] == 'l' && !p.modifiers[1])
-		i = (long) i;
+	i = parse_i(p, ap);
 	el = ft_itoa_base((t_lambda){&ft_countc, 0}, i, "0123456789", 10);
 	if  ((p.plus && p.precision != -1 ) || p.minus)
 		p.zero = 0;
