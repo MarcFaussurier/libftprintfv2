@@ -93,6 +93,15 @@ int	main(int ac, char **av)
 	printf("[%i %i] -----\n", x, y);
 
 
+	x = printf(" %#o ", 1);
+	y = ft_printf(" %#o ", 1);
+	printf("[%i %i] -----\n", x, y);
+
+
+	x = printf(" %#o ", 0);
+	y = ft_printf(" %#o ", 0);
+	printf("[%i %i] -----\n", x, y);
+
 	while (ac)
 	{
 		ft_printf(av[--ac]);

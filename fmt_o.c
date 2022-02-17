@@ -14,11 +14,14 @@
 
 int	fmt_o(t_lambda f, t_fmt_params p, va_list ap)
 {
-	int					r;
+	int			r;
 	unsigned long long	i;
-	char				*s;
+	char		*s;
+	int			el;
+	int			z;
+	char		c;
+	char 		sign;
 
-	r = 0;
 	i = va_arg(ap, unsigned long long);
 	if (p.modifiers[0] == 'h' && p.modifiers[1] == 'h' && !p.modifiers[2])
 		i = (unsigned char) i;
@@ -28,7 +31,44 @@ int	fmt_o(t_lambda f, t_fmt_params p, va_list ap)
 		i = (unsigned int) i;
 	else if (p.modifiers[0] == 'l' && !p.modifiers[1])
 		i = (unsigned long) i;
-	if (p.sharp)
-		r += ((t_putchar) f.ptr)('0', f.data);
-	return (r + ft_utoa_base(f, i, "01234567", 8));
+	el = ft_utoa_base((t_lambda){&ft_countc, 0}, i, "01234567", 8);
+	if  ((p.plus && p.precision != -1 ) || p.minus)
+		p.zero = 0;
+	if (p.padding < p.precision)
+		p.padding = p.precision;
+	c = p.zero ? '0' : ' ';
+	sign = 0;
+	if (p.plus)
+	{
+		sign = '+';
+		p.padding -= 1;
+	}
+	else if (p.blank) 
+	{
+		sign = ' ';
+		p.padding -= 1;
+	}
+	if (p.sharp && i)
+		p.padding -= 1;
+	if (el > p.precision)
+		p.precision = el;
+	p.padding -= p.precision;
+	r = 0;
+	if (!(p.zero || p.minus))
+		while (p.padding-- > 0)
+			r += (((t_putchar)f.ptr)(' ', f.data));
+
+	if (p.sharp && i)
+		r += ((t_putchar) f.ptr)('0', f.data); 
+	if (sign)
+		r += (((t_putchar)f.ptr)(sign, f.data));
+	if (!p.minus)
+		while (p.padding-- > 0)
+			r += (((t_putchar)f.ptr)(c, f.data));
+	while (el < p.precision--)
+		r += (((t_putchar)f.ptr)('0', f.data));
+	r += ft_utoa_base(f, i, "01234567", 8);
+	while (p.padding-- > 0)
+		r += (((t_putchar)f.ptr)(' ', f.data));
+	return (r);
 }
