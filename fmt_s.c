@@ -21,7 +21,7 @@ int	fmt_s(t_lambda f, t_fmt_params p, va_list ap)
 	s = va_arg(ap, char *);
 	if (!s)
 		return (ft_cprintf(f, "(null)"));
-	if (p.precision == INT_MAX)
+	if (p.precision == -1)
 		p.precision = ft_strlen(s);
 	r = 0;
 	if (!p.minus)

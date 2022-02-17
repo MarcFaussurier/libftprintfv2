@@ -20,7 +20,7 @@ int	fmt_c(t_lambda f, t_fmt_params p, va_list ap)
 
 	s[0] = (char)va_arg(ap, int);
 	s[1] = 0;
-	if (p.precision == INT_MAX)
+	if (p.precision == -1)
 		p.precision = ft_strlen(s);
 	r = 0;
 	if (!p.minus)
