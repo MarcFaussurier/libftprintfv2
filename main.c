@@ -37,8 +37,8 @@ int	main(int ac, char **av)
 	
 
 	printf("-----\n");
-	ft_printf("%+-#2.4s\n", "bonjour");
-	printf("%2.4s\n", "bonjour");
+	ft_printf("%0-8.3s\n", "bonjour");
+	printf("%0-8.3s\n", "bonjour");
 
 	while (ac)
 	{
