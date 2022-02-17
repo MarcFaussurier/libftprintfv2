@@ -13,20 +13,8 @@
 #include "ft_printf.h"
 #include "limits.h"
 
-int	ft_strlen(char *s)
-{
-	int	r;
-
-	r = 0;
-	while (*s++)
-		r += 1;
-	return (r);
-}
-
 int	fmt_s(t_lambda f, t_fmt_params p, va_list ap)
 {
-	int			right_padding;
-	int			left_padding;
 	int			r;
 	char		*s;
 

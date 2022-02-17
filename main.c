@@ -86,6 +86,13 @@ int	main(int ac, char **av)
 	x = printf("%0s", "");
 	y = ft_printf("%0s", "");
 	printf("[%i %i] -----\n", x, y);
+	
+
+	x = printf(" %#x ", 0);
+	y = ft_printf(" %#x ", 0);
+	printf("[%i %i] -----\n", x, y);
+
+
 	while (ac)
 	{
 		ft_printf(av[--ac]);

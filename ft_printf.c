@@ -13,6 +13,23 @@
 #include <unistd.h>
 #include "ft_printf.h"
 
+int	ft_strlen(char *s)
+{
+	int	r;
+
+	r = 0;
+	while (*s++)
+		r += 1;
+	return (r);
+}
+
+int ft_countc(char c, void *data)
+{
+	(void) c;
+	(void) data;
+	return (1);
+}
+
 static int	put(char c, void *data)
 {
 	(void) data;

@@ -56,4 +56,6 @@ int	fmt_e_ip(t_lambda f, t_fmt_params p, va_list ap);
 int	fmt_a(t_lambda f, t_fmt_params p, va_list ap);
 int	fmt_a_up(t_lambda f, t_fmt_params p, va_list ap);
 int	fmt_b(t_lambda f, t_fmt_params p, va_list ap);
+int	ft_strlen(char *s);
+int ft_countc(char c, void *data);
 #endif

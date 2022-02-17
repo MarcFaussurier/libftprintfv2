@@ -13,12 +13,7 @@
 #include "ft_printf.h"
 #include <limits.h>
 
-static int ft_countc(char c, void *data)
-{
-	(void) c;
-	(void) data;
-	return (1);
-}
+
 
 int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 {
