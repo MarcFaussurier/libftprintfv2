@@ -20,7 +20,7 @@ typedef struct s_pad
 	t_pcstr	b;
 }	t_pad;
 
-static inline int pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
+static inline int	pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
 {
 	int		r;
 
@@ -31,7 +31,7 @@ static inline int pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
 			r += (((t_putchar)f.ptr)(' ', f.data));
 	if (p.sharp && s.i)
 	{
- 		p.padding -= 2;
+		p.padding -= 2;
 		r += (((t_putchar)f.ptr)('0', f.data));
 		if (s.up)
 			r += (((t_putchar)f.ptr)('X', f.data));
@@ -49,19 +49,19 @@ static inline int pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
 	return (r);
 }
 
-static inline int generic_fmt_x(t_lambda f, t_fmt_params p,
+static inline int	generic_fmt_x(t_lambda f, t_fmt_params p,
 		va_list ap, int up)
 {
 	int			a;
 	t_pad		s;
 
 	if (up)
-		s.b = (t_pcstr) {16, "0123456789ABCDEF"};
+		s.b = (t_pcstr){16, "0123456789ABCDEF"};
 	else
-		s.b = (t_pcstr) {16, "0123456789abcdef"};
-	s.i = va_arg64(ft_modifiers_to_type(p.modifiers), ap); 
+		s.b = (t_pcstr){16, "0123456789abcdef"};
+	s.i = va_arg64(ft_modifiers_to_type(p.modifiers), ap);
 	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i, s.b);
-	if  ((p.plus && p.precision != -1 ) || p.minus)
+	if ((p.plus && p.precision != -1) || p.minus)
 		p.zero = 0;
 	if (p.padding < p.precision)
 		p.padding = p.precision;
@@ -72,9 +72,8 @@ static inline int generic_fmt_x(t_lambda f, t_fmt_params p,
 	else
 		s.space = ' ';
 	s.up = up;
-	return (pad_x(a, f, p, s));	
+	return (pad_x(a, f, p, s));
 }
-
 
 int	fmt_x(t_lambda f, t_fmt_params p, va_list ap)
 {

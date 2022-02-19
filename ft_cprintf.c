@@ -28,11 +28,13 @@ static	int (*const g_specifiers[255])
 ['%'] = fmt_percent
 };
 
-static int	read_num(const char **fmt)
+static int	read_num(const char **fmt, va_list ap)
 {
 	int	i;
 
 	i = 0;
+	if (**fmt == '*')
+		return (va_arg(ap, int));
 	while (**fmt >= '0' && **fmt <= '9')
 	{
 		i *= 10;
@@ -44,34 +46,26 @@ static int	read_num(const char **fmt)
 
 static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 {
-	*p = (t_fmt_params) {{0,0,0},0,0,0,0,0,-1,-1};
+	*p = (t_fmt_params){{0, 0, 0}, 0, 0, 0, 0, 0, -1, -1};
 	while (1)
 		if (**fmt == '+' && ++*fmt)
 			p->plus = 1;
-		else if (**fmt == '-' && ++*fmt)
-			p->minus = 1;
-		else if (**fmt == '0' && ++*fmt)
-			p->zero = 1;
-		else if (**fmt == ' ' && ++*fmt)
-			p->blank = 1;
-		else if (**fmt == '#' && ++*fmt)
-			p->sharp = 1;
-		else if (**fmt == '.' && ++*fmt && **fmt != '*')
-		{
-			p->precision = read_num(fmt);
-			break ;
-		}
-		else if (**fmt == '.' && ++*fmt)
-		{
-			p->precision = va_arg(ap, int);
-			break ;
-		}
-		else if (**fmt >= '0' && **fmt <= '9')
-			p->padding = read_num(fmt);
-		else if (**fmt == '*' && ++fmt)
-			p->padding = va_arg(ap, int);
-		else
-			break ;
+	else if (**fmt == '-' && ++*fmt)
+		p->minus = 1;
+	else if (**fmt == '0' && ++*fmt)
+		p->zero = 1;
+	else if (**fmt == ' ' && ++*fmt)
+		p->blank = 1;
+	else if (**fmt == '#' && ++*fmt)
+		p->sharp = 1;
+	else if (**fmt >= '0' && **fmt <= '9')
+		p->padding = read_num(fmt, ap);
+	else if (**fmt == '*' && ++fmt)
+		p->padding = va_arg(ap, int);
+	else if (**fmt == '.' && ++*fmt)
+		p->precision = read_num(fmt, ap);
+	else
+		break ;
 }
 
 static void	parse_modifiers(const char **fmt, t_fmt_params *p)

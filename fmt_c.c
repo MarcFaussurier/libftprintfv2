@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int pad_c(t_lambda f, t_fmt_params p, char c)
+static int	pad_c(t_lambda f, t_fmt_params p, char c)
 {
 	int		r;
 	char	space;
@@ -28,7 +28,7 @@ static int pad_c(t_lambda f, t_fmt_params p, char c)
 		while (p.padding && p.padding-- > p.precision)
 			r += (((t_putchar)f.ptr)(space, f.data));
 	r += (((t_putchar)f.ptr)(c, f.data));
-	p.precision -= 1;	
+	p.precision -= 1;
 	p.padding -= 1;
 	while (((int)p.padding--) > 0)
 		r += (((t_putchar)f.ptr)(' ', f.data));

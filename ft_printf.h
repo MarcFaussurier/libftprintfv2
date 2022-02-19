@@ -14,14 +14,15 @@
 # define FT_PRINTF_H
 # include <stdarg.h>
 # define IMIN "-9223372036854775808"
-typedef	unsigned long long 	t_64;
+
+typedef unsigned long long	t_64;
 typedef unsigned long long	t_ull;
 typedef long long			t_ll;
 typedef int					(*t_putchar)(char c, void *data);
 typedef struct s_pcstr
 {
 	int			l:			32;
-	const char *s;
+	const char	*s;
 }	t_pcstr;
 typedef struct s_lambda
 {
@@ -44,7 +45,7 @@ typedef enum e_type
 	UC	= -1,
 	US	= -2,
 	U	= -4,
-	UL 	= -8,
+	UL	= -8,
 	ULL	= UL,
 	C	= 1,
 	SI	= 2,
@@ -55,12 +56,14 @@ typedef enum e_type
 /**/
 int		ft_printf(const char *fmt, ...);
 int		ft_vprintf(const char *fmt, va_list ap);
+int		ft_asprintf(char **s, const char *fmt, ...);
+int		ft_vasprintf(char **s, const char *fmt, va_list ap);
 /**/
 int		ft_vcprintf(t_lambda f, const char *fmt, va_list ap);
 int		ft_cprintf(t_lambda f, const char *fmt, ...);
 /**/
 int		ft_strlen(char *s);
-int 	ft_one(char c, void *data);
+int		ft_one(char c, void *data);
 /**/
 int		ft_citoa_base(t_lambda f, long long i, t_pcstr b);
 int		ft_cutoa_base(t_lambda f, unsigned long long u, t_pcstr b);
@@ -68,6 +71,7 @@ int		ft_cutoa_base(t_lambda f, unsigned long long u, t_pcstr b);
 t_type	ft_modifiers_to_type(char modifiers[2]);
 t_type	ft_sign_type(t_type u);
 t_64	va_arg64(t_type t, va_list ap);
+
 /**/
 int		fmt_i(t_lambda f, t_fmt_params p, va_list ap);
 int		fmt_u(t_lambda f, t_fmt_params p, va_list ap);
@@ -87,5 +91,5 @@ int		fmt_a(t_lambda f, t_fmt_params p, va_list ap);
 int		fmt_a_up(t_lambda f, t_fmt_params p, va_list ap);
 int		fmt_b(t_lambda f, t_fmt_params p, va_list ap);
 /**/
-int 	pad_s(int a, t_lambda f, t_fmt_params p, char *s);
+int		pad_s(int a, t_lambda f, t_fmt_params p, char *s);
 #endif

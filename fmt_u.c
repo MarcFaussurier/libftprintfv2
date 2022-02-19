@@ -18,7 +18,7 @@ typedef struct s_pad
 	char	space;
 }	t_pad;
 
-static inline int pad_u(int a, t_lambda f, t_fmt_params p, t_pad s)
+static inline int	pad_u(int a, t_lambda f, t_fmt_params p, t_pad s)
 {
 	int		r;
 
@@ -43,10 +43,10 @@ int	fmt_u(t_lambda f, t_fmt_params p, va_list ap)
 	int			a;
 	t_pad		s;
 
-	s.i = va_arg64(ft_modifiers_to_type(p.modifiers), ap); 
+	s.i = va_arg64(ft_modifiers_to_type(p.modifiers), ap);
 	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i,
 			(t_pcstr){10, "0123456789"});
-	if  ((p.plus && p.precision != -1 ) || p.minus)
+	if ((p.plus && p.precision != -1) || p.minus)
 		p.zero = 0;
 	if (p.padding < p.precision)
 		p.padding = p.precision;
@@ -56,5 +56,5 @@ int	fmt_u(t_lambda f, t_fmt_params p, va_list ap)
 		s.space = '0';
 	else
 		s.space = ' ';
-	return (pad_u(a, f, p, s));	
+	return (pad_u(a, f, p, s));
 }

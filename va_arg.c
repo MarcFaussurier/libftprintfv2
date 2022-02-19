@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fmt_u.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/19 10:27:46 by mafaussu          #+#    #+#             */
+/*   Updated: 2022/02/19 16:55:51 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 t_type	ft_modifiers_to_type(char modifiers[2])
@@ -9,7 +21,7 @@ t_type	ft_modifiers_to_type(char modifiers[2])
 	if (!modifiers[0])
 		return (U);
 	if ((modifiers[0] == 'l' && !modifiers[1])
-			|| modifiers[0] == 'z')
+		|| modifiers[0] == 'z')
 		return (UL);
 	if (modifiers[0] == 'l' && modifiers[1] == 'l')
 		return (ULL);

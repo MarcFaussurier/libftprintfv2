@@ -19,7 +19,7 @@ typedef struct s_pad
 	char	space;
 }	t_pad;
 
-static inline int pad_i(int a, t_lambda f, t_fmt_params p, t_pad s)
+static inline int	pad_i(int a, t_lambda f, t_fmt_params p, t_pad s)
 {
 	int		r;
 
@@ -47,10 +47,10 @@ int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 	t_pad		s;
 
 	s.sign = 0;
-	s.i = va_arg64(ft_sign_type(ft_modifiers_to_type(p.modifiers)), ap); 
+	s.i = va_arg64(ft_sign_type(ft_modifiers_to_type(p.modifiers)), ap);
 	a = ft_citoa_base((t_lambda){&ft_one, 0}, s.i,
 			(t_pcstr){10, "0123456789"});
-	if  ((p.plus && p.precision != -1 ) || p.minus)
+	if ((p.plus && p.precision != -1) || p.minus)
 		p.zero = 0;
 	if (p.padding < p.precision)
 		p.padding = p.precision;
@@ -60,20 +60,11 @@ int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 		s.space = '0';
 	else
 		s.space = ' ';
-	if (s.i < 0)
-	{
-		p.padding -= 1;
+	if (s.i < 0 && (p.padding-- || 1))
 		s.sign = '-';
-	}
-	else if (p.plus)
-	{
-		p.padding -= 1;
+	else if (p.plus && (p.padding-- || 1))
 		s.sign = '+';
-	}
-	else if (p.blank) 
-	{
-		p.padding -= 1;
+	else if (p.blank && (p.padding-- || 1))
 		s.sign = ' ';
-	}
-	return (pad_i(a, f, p, s));	
+	return (pad_i(a, f, p, s));
 }

@@ -12,18 +12,18 @@
 
 #include "ft_printf.h"
 
-int pad_s(int a, t_lambda f, t_fmt_params p, char *s)
+int	pad_s(int a, t_lambda f, t_fmt_params p, char *s)
 {
 	int		r;
 	char	space;
 
+	r = 0;
 	if (p.zero)
 		space = '0';
 	else
 		space = ' ';
 	if (p.precision == -1)
 		p.precision = a;
-	r = 0;
 	if (!p.minus)
 		while (p.padding && p.padding-- > p.precision)
 			r += (((t_putchar)f.ptr)(space, f.data));
