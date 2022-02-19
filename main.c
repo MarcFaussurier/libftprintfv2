@@ -17,10 +17,10 @@ int	main(int ac, char **av)
 {
 	int	*i;
 	ft_printf("args:\n");
-//	ft_printf(	
-//			"%p | %+c%+n %+i %+i %+d %+s %+p %% %+c %+n %+x %+X %+u \n", ULLONG_MAX, '0', &i, 42, 0, -42, "World", &ac, 'c', &i, 64, 64, 64);
+	ft_printf(	
+			"%p | %+c%+n %+i %+i %+d %+s %+p %% %+c %+n %+x %+X %+u \n", ULLONG_MAX, '0', &i, 42, 0, -42, "World", &ac, 'c', &i, 64, 64, 64);
 
-//	printf(	"%p | %+c%+n %+i %+i %+d %+s %+p %% %+c %+n %+x %+X %+u \n", ULLONG_MAX, '0', &i, 42, 0, -42, "World", &ac, 'c', &i, 64, 64, 64);
+	printf(	"%p | %+c%+n %+i %+i %+d %+s %+p %% %+c %+n %+x %+X %+u \n", ULLONG_MAX, '0', &i, 42, 0, -42, "World", &ac, 'c', &i, 64, 64, 64);
 
 
 	printf("-----\n");
