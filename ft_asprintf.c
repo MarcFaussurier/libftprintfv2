@@ -39,9 +39,7 @@ int	ft_vasprintf(char **s, const char *fmt, va_list ap)
 	str.l = 4096;
 	str.i = 0;
 	va_copy(lap, ap);
-//	printf("c==%i\n", va_arg(ap, int));
 	str.l = (ft_vcprintf((t_lambda){.ptr=&f, .data=&str}, fmt, ap));
-	
 	if (str.l > 4096)
 	{
 		free(str.s);
@@ -49,7 +47,6 @@ int	ft_vasprintf(char **s, const char *fmt, va_list ap)
 		str.l = (ft_vcprintf((t_lambda){.ptr=&f, .data=&str}, fmt, lap));
 	}
 	va_end(lap);
-	
 	str.s[str.l] = 0;
 	*s = str.s;
 	return (str.l);
