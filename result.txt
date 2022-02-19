@@ -190,7 +190,7 @@ cc -g main.c libftprintf.a && ./a.out
 [main.c:227] FAILURE [expected=2 got=9 '-1' 'hhhhhhhhi']
 [main.c:228] FAILURE [expected=4 got=6 'wwwi' 'zzwwwi']
 [main.c:229] FAILURE [expected=4 got=6 'wwwi' 'zzwwwi']
-[main.c:230] FAILURE [expected=100 got=9 '                                                                                        040301516424' 'hhh100#zo']
+[main.c:230] FAILURE [expected=100 got=9 '                                                                                        041550736424' 'hhh100#zo']
 [main.c:231] FAILURE [expected=-1 got=10 '(null)' 'lhhlllllls']
 [main.c:232] FAILURE [expected=5 got=8 'hello' 'hhhhll#s']
 [main.c:233] FAILURE [expected=5 got=6 'hello' 'hhhh#s']
