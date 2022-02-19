@@ -64,10 +64,10 @@ int 	ft_one(char c, void *data);
 /**/
 int		ft_citoa_base(t_lambda f, long long i, t_pcstr b);
 int		ft_cutoa_base(t_lambda f, unsigned long long u, t_pcstr b);
-t_type	ft_modifiers_to_signed_type(char modifiers[2]);
-t_type	ft_modifiers_to_unsigned_type(char modifiers[2]);
+/**/
+t_type	ft_modifiers_to_type(char modifiers[2]);
+t_type	ft_sign_type(t_type u);
 t_64	va_arg64(t_type t, va_list ap);
-int 	pad_s(int a, t_lambda f, t_fmt_params p, char *s);
 /**/
 int		fmt_i(t_lambda f, t_fmt_params p, va_list ap);
 int		fmt_u(t_lambda f, t_fmt_params p, va_list ap);
@@ -86,4 +86,6 @@ int		fmt_e_ip(t_lambda f, t_fmt_params p, va_list ap);
 int		fmt_a(t_lambda f, t_fmt_params p, va_list ap);
 int		fmt_a_up(t_lambda f, t_fmt_params p, va_list ap);
 int		fmt_b(t_lambda f, t_fmt_params p, va_list ap);
+/**/
+int 	pad_s(int a, t_lambda f, t_fmt_params p, char *s);
 #endif

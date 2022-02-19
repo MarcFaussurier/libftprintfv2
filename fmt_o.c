@@ -45,7 +45,7 @@ int	fmt_o(t_lambda f, t_fmt_params p, va_list ap)
 	int			a;
 	t_pad		s;
 
-	s.i = va_arg64(ft_modifiers_to_unsigned_type(p.modifiers), ap); 
+	s.i = va_arg64(ft_modifiers_to_type(p.modifiers), ap); 
 	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i,
 			(t_pcstr){8, "01234567"});
 	if  ((p.plus && p.precision != -1 ) || p.minus)

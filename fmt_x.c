@@ -59,7 +59,7 @@ static inline int generic_fmt_x(t_lambda f, t_fmt_params p,
 		s.b = (t_pcstr) {16, "0123456789ABCDEF"};
 	else
 		s.b = (t_pcstr) {16, "0123456789abcdef"};
-	s.i = va_arg64(ft_modifiers_to_unsigned_type(p.modifiers), ap); 
+	s.i = va_arg64(ft_modifiers_to_type(p.modifiers), ap); 
 	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i, s.b);
 	if  ((p.plus && p.precision != -1 ) || p.minus)
 		p.zero = 0;

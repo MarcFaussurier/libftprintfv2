@@ -1,22 +1,6 @@
 #include "ft_printf.h"
 
-t_type	ft_modifiers_to_signed_type(char modifiers[2])
-{
-	if (modifiers[0] == 'h' && modifiers[1] == 'h')
-		return (C);
-	if (modifiers[0] == 'h' && !modifiers[1])
-		return (SI);
-	if (!modifiers[0])
-		return (I);
-	if ((modifiers[0] == 'l' && !modifiers[1])
-			|| modifiers[0] == 'z')
-		return (LI);
-	if (modifiers[0] == 'l' && modifiers[1] == 'l')
-		return (LLI);
-	return (I);
-}
-
-t_type	ft_modifiers_to_unsigned_type(char modifiers[2])
+t_type	ft_modifiers_to_type(char modifiers[2])
 {
 	if (modifiers[0] == 'h' && modifiers[1] == 'h')
 		return (UC);
@@ -30,6 +14,13 @@ t_type	ft_modifiers_to_unsigned_type(char modifiers[2])
 	if (modifiers[0] == 'l' && modifiers[1] == 'l')
 		return (ULL);
 	return (U);
+}
+
+t_type	ft_sign_type(t_type u)
+{
+	if (u < 0)
+		return (u * -1);
+	return (u);
 }
 
 t_64	va_arg64(t_type t, va_list ap)

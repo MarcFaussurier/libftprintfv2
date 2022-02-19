@@ -47,7 +47,7 @@ int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 	t_pad		s;
 
 	s.sign = 0;
-	s.i = va_arg64(ft_modifiers_to_signed_type(p.modifiers), ap); 
+	s.i = va_arg64(ft_sign_type(ft_modifiers_to_type(p.modifiers)), ap); 
 	a = ft_citoa_base((t_lambda){&ft_one, 0}, s.i,
 			(t_pcstr){10, "0123456789"});
 	if  ((p.plus && p.precision != -1 ) || p.minus)
