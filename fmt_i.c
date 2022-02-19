@@ -11,58 +11,69 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <limits.h>
 
+typedef struct s_pad
+{
+	t_ll	i;
+	char	sign;
+	char	space;
+}	t_pad;
 
+static inline int pad_i(int a, t_lambda f, t_fmt_params p, t_pad s)
+{
+	int		r;
+
+	r = 0;
+	p.padding -= p.precision;
+	if (!(p.zero || p.minus))
+		while (p.padding-- > 0)
+			r += (((t_putchar)f.ptr)(' ', f.data));
+	if (s.sign)
+		r += (((t_putchar)f.ptr)(s.sign, f.data));
+	if (!p.minus)
+		while (p.padding-- > 0)
+			r += (((t_putchar)f.ptr)(s.space, f.data));
+	while (a < p.precision--)
+		r += (((t_putchar)f.ptr)('0', f.data));
+	r += ft_citoa_base(f, s.i, (t_pcstr){10, "0123456789"});
+	while (p.padding-- > 0)
+		r += (((t_putchar)f.ptr)(' ', f.data));
+	return (r);
+}
 
 int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 {
-	int			r;
-	long long	i;
-	char		*s;
-	int			el;
-	int			z;
-	char		c;
-	char 		sign;
+	int			a;
+	t_pad		s;
 
-	i = parse_i(p, ap);
-	el = ft_itoa_base((t_lambda){&ft_countc, 0}, i, "0123456789", 10);
+	s.sign = 0;
+	s.i = va_arg64(ft_modifiers_to_signed_type(p.modifiers), ap); 
+	a = ft_citoa_base((t_lambda){&ft_one, 0}, s.i,
+			(t_pcstr){10, "0123456789"});
 	if  ((p.plus && p.precision != -1 ) || p.minus)
 		p.zero = 0;
 	if (p.padding < p.precision)
 		p.padding = p.precision;
-	c = p.zero ? '0' : ' ';
-	sign = 0;
-	if (i < 0) 
+	if (a > p.precision)
+		p.precision = a;
+	if (p.zero)
+		s.space = '0';
+	else
+		s.space = ' ';
+	if (s.i < 0)
 	{
-		sign = '-';
 		p.padding -= 1;
+		s.sign = '-';
 	}
-	else if (p.plus) {
-		sign = '+';
+	else if (p.plus)
+	{
 		p.padding -= 1;
+		s.sign = '+';
 	}
 	else if (p.blank) 
 	{
-		sign = ' ';
 		p.padding -= 1;
+		s.sign = ' ';
 	}
-	if (el > p.precision)
-		p.precision = el;
-	p.padding -= p.precision;
-	r = 0;
-	if (!(p.zero || p.minus))
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(' ', f.data));
-	if (sign)
-		r += (((t_putchar)f.ptr)(sign, f.data));
-	if (!p.minus)
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(c, f.data));
-	while (el < p.precision--)
-		r += (((t_putchar)f.ptr)('0', f.data));
-	r += ft_itoa_base(f, i, "0123456789", 10);
-	while (p.padding-- > 0)
-		r += (((t_putchar)f.ptr)(' ', f.data));
-	return (r);
+	return (pad_i(a, f, p, s));	
 }

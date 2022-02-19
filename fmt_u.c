@@ -12,58 +12,49 @@
 
 #include "ft_printf.h"
 
+typedef struct s_pad
+{
+	t_ull	i;
+	char	space;
+}	t_pad;
+
+static inline int pad_u(int a, t_lambda f, t_fmt_params p, t_pad s)
+{
+	int		r;
+
+	r = 0;
+	p.padding -= p.precision;
+	if (!(p.zero || p.minus))
+		while (p.padding-- > 0)
+			r += (((t_putchar)f.ptr)(' ', f.data));
+	if (!p.minus)
+		while (p.padding-- > 0)
+			r += (((t_putchar)f.ptr)(s.space, f.data));
+	while (a < p.precision--)
+		r += (((t_putchar)f.ptr)('0', f.data));
+	r += ft_cutoa_base(f, s.i, (t_pcstr){10, "0123456789"});
+	while (p.padding-- > 0)
+		r += (((t_putchar)f.ptr)(' ', f.data));
+	return (r);
+}
+
 int	fmt_u(t_lambda f, t_fmt_params p, va_list ap)
 {
-	int			r;
-	unsigned long long	i;
-	char		*s;
-	int			el;
-	int			z;
-	char		c;
-	char 		sign;
+	int			a;
+	t_pad		s;
 
-	i = va_arg(ap, unsigned long long);
-	if (p.modifiers[0] == 'h' && p.modifiers[1] == 'h' && !p.modifiers[2])
-		i = (unsigned char) i;
-	else if (p.modifiers[0] == 'h' && !p.modifiers[1])
-		i = (unsigned short int) i;
-	else if (!p.modifiers[0])
-		i = (unsigned int) i;
-	else if (p.modifiers[0] == 'l' && !p.modifiers[1])
-		i = (unsigned long) i;
-	el = ft_utoa_base((t_lambda){&ft_countc, 0}, i, "0123456789", 10);
+	s.i = va_arg64(ft_modifiers_to_unsigned_type(p.modifiers), ap); 
+	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i,
+			(t_pcstr){10, "0123456789"});
 	if  ((p.plus && p.precision != -1 ) || p.minus)
 		p.zero = 0;
 	if (p.padding < p.precision)
 		p.padding = p.precision;
-	c = p.zero ? '0' : ' ';
-	sign = 0;
-	if (p.plus)
-	{
-		sign = '+';
-		p.padding -= 1;
-	}
-	else if (p.blank) 
-	{
-		sign = ' ';
-		p.padding -= 1;
-	}
-	if (el > p.precision)
-		p.precision = el;
-	p.padding -= p.precision;
-	r = 0;
-	if (!(p.zero || p.minus))
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(' ', f.data));
-	if (sign)
-		r += (((t_putchar)f.ptr)(sign, f.data));
-	if (!p.minus)
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(c, f.data));
-	while (el < p.precision--)
-		r += (((t_putchar)f.ptr)('0', f.data));
-	r += ft_utoa_base(f, i, "0123456789", 10);
-	while (p.padding-- > 0)
-		r += (((t_putchar)f.ptr)(' ', f.data));
-	return (r);
+	if (a > p.precision)
+		p.precision = a;
+	if (p.zero)
+		s.space = '0';
+	else
+		s.space = ' ';
+	return (pad_u(a, f, p, s));	
 }

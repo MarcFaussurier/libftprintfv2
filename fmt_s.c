@@ -11,34 +11,41 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "limits.h"
 
-int	fmt_s(t_lambda f, t_fmt_params p, va_list ap)
+int pad_s(int a, t_lambda f, t_fmt_params p, char *s)
 {
-	int			r;
-	char		*s;
+	int		r;
+	char	space;
 
-	s = va_arg(ap, char *);
-	if (!s)
-		return (ft_cprintf(f, "(null)"));
+	if (p.zero)
+		space = '0';
+	else
+		space = ' ';
 	if (p.precision == -1)
-		p.precision = ft_strlen(s);
+		p.precision = a;
 	r = 0;
 	if (!p.minus)
 		while (p.padding && p.padding-- > p.precision)
-		{
-			r += (((t_putchar)f.ptr)(' ', f.data));
-		}
+			r += (((t_putchar)f.ptr)(space, f.data));
 	while (*s && (p.precision--))
 	{
 		r += (((t_putchar)f.ptr)(*s, f.data));
 		s += 1;
 		p.padding -= 1;
 	}
-	if (p.minus)
-		while (((int)p.padding--) > 0)
-		{
-			r += (((t_putchar)f.ptr)(' ', f.data));
-		}
+	while (((int)p.padding--) > 0)
+		r += (((t_putchar)f.ptr)(' ', f.data));
 	return (r);
+}
+
+int	fmt_s(t_lambda f, t_fmt_params p, va_list ap)
+{
+	char		*s;
+	int			a;
+
+	s = va_arg(ap, char *);
+	if (!s)
+		s = "(null)";
+	a = ft_strlen(s);
+	return (pad_s(a, f, p, s));
 }

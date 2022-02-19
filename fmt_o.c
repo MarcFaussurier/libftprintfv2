@@ -12,57 +12,51 @@
 
 #include "ft_printf.h"
 
-int	fmt_o(t_lambda f, t_fmt_params p, va_list ap)
+typedef struct s_pad
 {
-	int					r;
-	unsigned long long	i;
-	char				*s;
-	int					el;
-	int					z;
-	char				c;
-	char				sign;
+	t_ull	i;
+	char	space;
+}	t_pad;
 
-	i = parse_u(p, ap);
-	el = ft_utoa_base((t_lambda){&ft_countc, 0}, i, "01234567", 8);
-	if ((p.plus && p.precision != -1) || p.minus)
-		p.zero = 0;
-	if (p.padding < p.precision)
-		p.padding = p.precision;
-	if (p.zero)
-		c = '0';
-	else
-		c = ' ';
-	sign = 0;
-	if (p.plus)
-	{
-		sign = '+';
-		p.padding -= 1;
-	}
-	else if (p.blank)
-	{
-		sign = ' ';
-		p.padding -= 1;
-	}
-	if (p.sharp && i)
-		p.padding -= 1;
-	if (el > p.precision)
-		p.precision = el;
-	p.padding -= p.precision;
+static inline int pad_o(int a, t_lambda f, t_fmt_params p, t_pad s)
+{
+	int		r;
+
 	r = 0;
+	p.padding -= p.precision;
 	if (!(p.zero || p.minus))
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(' ', f.data));
-	if (p.sharp && i)
-		r += ((t_putchar) f.ptr)('0', f.data);
-	if (sign)
-		r += (((t_putchar)f.ptr)(sign, f.data));
+	if (p.sharp && s.i && p.padding--)
+		r += (((t_putchar)f.ptr)('0', f.data));
 	if (!p.minus)
 		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(c, f.data));
-	while (el < p.precision--)
+			r += (((t_putchar)f.ptr)(s.space, f.data));
+	while (a < p.precision--)
 		r += (((t_putchar)f.ptr)('0', f.data));
-	r += ft_utoa_base(f, i, "01234567", 8);
+	r += ft_cutoa_base(f, s.i, (t_pcstr){8, "01234567"});
 	while (p.padding-- > 0)
 		r += (((t_putchar)f.ptr)(' ', f.data));
 	return (r);
+}
+
+int	fmt_o(t_lambda f, t_fmt_params p, va_list ap)
+{
+	int			a;
+	t_pad		s;
+
+	s.i = va_arg64(ft_modifiers_to_unsigned_type(p.modifiers), ap); 
+	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i,
+			(t_pcstr){8, "01234567"});
+	if  ((p.plus && p.precision != -1 ) || p.minus)
+		p.zero = 0;
+	if (p.padding < p.precision)
+		p.padding = p.precision;
+	if (a > p.precision)
+		p.precision = a;
+	if (p.zero)
+		s.space = '0';
+	else
+		s.space = ' ';
+	return (pad_o(a, f, p, s));	
 }

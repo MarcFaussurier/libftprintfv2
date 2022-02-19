@@ -17,10 +17,30 @@ int	main(int ac, char **av)
 {
 	int	*i;
 	ft_printf("args:\n");
-	ft_printf(	
-			"%p | %+c%+n %+i %+i %+d %+s %+p %% %+c %+n %+x %+X %+u \n", ULLONG_MAX, '0', &i, 42, 0, -42, "World", &ac, 'c', &i, 64, 64, 64);
+//	ft_printf(	
+//			"%p | %+c%+n %+i %+i %+d %+s %+p %% %+c %+n %+x %+X %+u \n", ULLONG_MAX, '0', &i, 42, 0, -42, "World", &ac, 'c', &i, 64, 64, 64);
 
-	printf(	"%p | %+c%+n %+i %+i %+d %+s %+p %% %+c %+n %+x %+X %+u \n", ULLONG_MAX, '0', &i, 42, 0, -42, "World", &ac, 'c', &i, 64, 64, 64);
+//	printf(	"%p | %+c%+n %+i %+i %+d %+s %+p %% %+c %+n %+x %+X %+u \n", ULLONG_MAX, '0', &i, 42, 0, -42, "World", &ac, 'c', &i, 64, 64, 64);
+
+
+	printf("-----\n");
+	int ll= 0;
+	ll = printf(		"	%c  %c \xff \n", '0',  '1', -1, '\xff');
+	int ly = ft_printf(	"	%c  %c \xff \n", 	'0',  '1', -1, '\xff');
+
+	printf("%i %i-----\n", ll, ly);
+
+	printf("-----\n");
+	ft_printf("%#u\n", ULONG_MAX);
+	printf("%#u\n", ULONG_MAX);
+
+	printf("-----\n");
+	ft_printf("%#.9s\n", "a");
+	printf("%#.9s\n", "a");
+
+	printf("-----\n");
+	ft_printf("%#p\n", -1);
+	printf("%#p\n", -1);
 
 	printf("-----\n");
 	ft_printf("%#x\n", 42);
@@ -39,6 +59,17 @@ int	main(int ac, char **av)
 	printf("%s \n", "7");
 	ft_printf("%s \n", "7");
 
+	printf("-----\n");
+	ft_printf("%08.1s\n", "bonjour");
+	printf("%08.1s\n", "bonjour");
+
+	printf("-----\n");
+	ft_printf("%+08.1s\n", "bonjour");
+	printf("%+08.1s\n", "bonjour");
+
+	printf("-----\n");
+	ft_printf("%0+8.1s\n", "bonjour");
+	printf("%0+8.1s\n", "bonjour");
 
 	printf("-----\n");
 	ft_printf("%0-8.1s\n", "bonjour");
@@ -50,7 +81,7 @@ int	main(int ac, char **av)
 
 	printf("-----\n");
 	ft_printf("%0+-24.12i\n", "bonjour");
-	printf("%0+-24.12i\n", "bonjour");
+ 	printf("%0+-24.12i\n", "bonjour");
 
 	printf("-----\n");
 	ft_printf("%0-+24.12i\n", "bonjour");

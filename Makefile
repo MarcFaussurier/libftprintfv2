@@ -1,8 +1,8 @@
 all:
-	cc -g -c ft*.c fmt*.c
+	cc -g -c ft*.c fmt*.c va*.c
 	ar -rcs libftprintf.a *.o
 main: all
-	cc main.c libftprintf.a && ./a.out
+	cc -g main.c libftprintf.a && ./a.out
 bonus: all
 clean:
 	rm -rf a.out a.out.dSYM *.o

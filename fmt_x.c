@@ -12,56 +12,76 @@
 
 #include "ft_printf.h"
 
-int	fmt_x(t_lambda f, t_fmt_params p, va_list ap)
+typedef struct s_pad
 {
-	int			r;
-	unsigned long long	i;
-	char		*s;
-	int			el;
-	int			z;
-	char		c;
-	char 		sign;
+	t_ull	i;
+	char	space;
+	int		up;
+	t_pcstr	b;
+}	t_pad;
 
-	i = parse_u(p, ap);
-	el = ft_utoa_base((t_lambda){&ft_countc, 0}, i, "0123456789abcdef", 16);
+static inline int pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
+{
+	int		r;
+
+	r = 0;
+	p.padding -= p.precision;
+	if (!(p.zero || p.minus))
+		while (p.padding-- > 0)
+			r += (((t_putchar)f.ptr)(' ', f.data));
+	if (p.sharp && s.i)
+	{
+ 		p.padding -= 2;
+		r += (((t_putchar)f.ptr)('0', f.data));
+		if (s.up)
+			r += (((t_putchar)f.ptr)('X', f.data));
+		else
+			r += (((t_putchar)f.ptr)('x', f.data));
+	}
+	if (!p.minus)
+		while (p.padding-- > 0)
+			r += (((t_putchar)f.ptr)(s.space, f.data));
+	while (a < p.precision--)
+		r += (((t_putchar)f.ptr)('0', f.data));
+	r += ft_cutoa_base(f, s.i, s.b);
+	while (p.padding-- > 0)
+		r += (((t_putchar)f.ptr)(' ', f.data));
+	return (r);
+}
+
+static inline int generic_fmt_x(t_lambda f, t_fmt_params p,
+		va_list ap, int up)
+{
+	int			a;
+	t_pad		s;
+
+	if (up)
+		s.b = (t_pcstr) {16, "0123456789ABCDEF"};
+	else
+		s.b = (t_pcstr) {16, "0123456789abcdef"};
+	s.i = va_arg64(ft_modifiers_to_unsigned_type(p.modifiers), ap); 
+	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i, s.b);
 	if  ((p.plus && p.precision != -1 ) || p.minus)
 		p.zero = 0;
 	if (p.padding < p.precision)
 		p.padding = p.precision;
-	c = p.zero ? '0' : ' ';
-	sign = 0;
-	if (p.plus)
-	{
-		sign = '+';
-		p.padding -= 1;
-	}
-	else if (p.blank) 
-	{
-		sign = ' ';
-		p.padding -= 1;
-	}
-	if (p.sharp && i)
-		p.padding -= 2;
-	if (el > p.precision)
-		p.precision = el;
-	p.padding -= p.precision;
-	r = 0;
-	if (!(p.zero || p.minus))
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(' ', f.data));
+	if (a > p.precision)
+		p.precision = a;
+	if (p.zero)
+		s.space = '0';
+	else
+		s.space = ' ';
+	s.up = up;
+	return (pad_x(a, f, p, s));	
+}
 
-	if (p.sharp && i)
-		r += ((t_putchar) f.ptr)('0', f.data) + 
-			((t_putchar) f.ptr)('x', f.data);
-	if (sign)
-		r += (((t_putchar)f.ptr)(sign, f.data));
-	if (!p.minus)
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(c, f.data));
-	while (el < p.precision--)
-		r += (((t_putchar)f.ptr)('0', f.data));
-	r += ft_utoa_base(f, i, "0123456789abcdef", 16);
-	while (p.padding-- > 0)
-		r += (((t_putchar)f.ptr)(' ', f.data));
-	return (r);
+
+int	fmt_x(t_lambda f, t_fmt_params p, va_list ap)
+{
+	return (generic_fmt_x(f, p, ap, 0));
+}
+
+int	fmt_x_up(t_lambda f, t_fmt_params p, va_list ap)
+{
+	return (generic_fmt_x(f, p, ap, 1));
 }

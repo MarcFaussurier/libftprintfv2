@@ -23,7 +23,7 @@ int	ft_strlen(char *s)
 	return (r);
 }
 
-int ft_countc(char c, void *data)
+int ft_one(char c, void *data)
 {
 	(void) c;
 	(void) data;

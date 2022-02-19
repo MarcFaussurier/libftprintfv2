@@ -45,7 +45,7 @@ unsigned long long	parse_u(t_fmt_params p, va_list ap)
 	return (i);
 }
 
-int	ft_itoa_base(t_lambda f, long long i, const char *b, int l)
+int	ft_citoa_base(t_lambda f, t_ll i, t_pcstr b)
 {
 	int	r;
 
@@ -54,24 +54,24 @@ int	ft_itoa_base(t_lambda f, long long i, const char *b, int l)
 		return (ft_cprintf(f, "%s", IMIN));
 	else if (i < 0)
 		i *= -1;
-	return (r + ft_utoa_base(f, i, b, l));
+	return (r + ft_cutoa_base(f, i, b));
 }
 
-int	ft_utoa_base(t_lambda f, unsigned long long u, const char *b, int l)
+int	ft_cutoa_base(t_lambda f, t_ull u, t_pcstr b)
 {
 	int		r;
 	char	buffer[65];
 	int		i;
 
 	if (!u)
-		return (((t_putchar)f.ptr)(b[0], f.data));
+		return (((t_putchar)f.ptr)(b.s[0], f.data));
 	r = 0;
 	i = 0;
 	while (u)
 	{
-		buffer[i] = b[u % l];
+		buffer[i] = b.s[u % b.l];
 		i += 1;
-		u /= l;
+		u /= b.l;
 	}
 	if (i)
 		i -= 1;
