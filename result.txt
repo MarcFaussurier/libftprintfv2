@@ -52,7 +52,7 @@ cc -g main.c libftprintf.a && ./a.out
 [main.c:224] FAILURE [expected=2 got=9 '-1' 'hhhhhhhhi']
 [main.c:225] FAILURE [expected=4 got=6 'wwwi' 'zzwwwi']
 [main.c:226] FAILURE [expected=4 got=6 'wwwi' 'zzwwwi']
-[main.c:227] FAILURE [expected=100 got=9 '                                                                                        040730256444' 'hhh100#zo']
+[main.c:227] FAILURE [expected=100 got=9 '                                                                                        040206016444' 'hhh100#zo']
 [main.c:228] FAILURE [expected=-1 got=10 '(null)' 'lhhlllllls']
 [main.c:229] FAILURE [expected=5 got=8 'hello' 'hhhhll#s']
 [main.c:230] FAILURE [expected=5 got=6 'hello' 'hhhh#s']
@@ -264,4 +264,4 @@ cc -g main.c libftprintf.a && ./a.out
 [main.c:1415] [main.c:1416] FAILURE [expected=-1 got=7 '(null)' '     ‹ ']
 [main.c:1417] FAILURE [expected=-1 got=7 '(null)' '      ']
 [main.c:1418] [main.c:1419] FAILURE [expected=-1 got=7 '(null)' '‹      ']
-0 errors / 1358 tests
+247 errors / 1358 tests
