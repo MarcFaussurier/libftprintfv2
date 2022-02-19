@@ -47,8 +47,13 @@ int	ft_vasprintf(char **s, const char *fmt, va_list ap)
 		str.l = (ft_vcprintf((t_lambda){.ptr=&f, .data=&str}, fmt, lap));
 	}
 	va_end(lap);
-	str.s[str.l] = 0;
-	*s = str.s;
+	if (str.l >= 0)
+	{
+		str.s[str.l] = 0;
+		*s = str.s;
+	}
+	else
+		*s = 0;
 	return (str.l);
 }
 

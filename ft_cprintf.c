@@ -87,6 +87,7 @@ int	ft_vcprintf(t_lambda f, const char *fmt, va_list ap)
 	t_fmt_params	p;
 	int				r;
 	int				*ptr;
+	int				t;
 
 	r = 0;
 	while (*fmt)
@@ -103,8 +104,16 @@ int	ft_vcprintf(t_lambda f, const char *fmt, va_list ap)
 					*ptr = r;
 			}
 			else if (g_specifiers[*fmt])
-				r += g_specifiers[*fmt](f, p, ap);
-			else
+			{	
+				t = g_specifiers[*fmt](f, p, ap);
+
+				if (t < 0)
+				{
+					printf("r=-1!\n");
+					return (t);
+				}
+				r += t;
+			}else
 				r += ft_vcprintf(f, p.modifiers, ap)
 					+ ((t_putchar) f.ptr)(*fmt, f.data);
 		}

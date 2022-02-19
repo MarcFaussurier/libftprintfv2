@@ -40,7 +40,9 @@ static int	test(int line, const char *fmt, ...)
 	va_end(std.ap);
 	ft.r = ft_vasprintf(&ft.s, fmt, ft.ap);
 	va_end(ft.ap);
-	success = (ft.r == std.r) && !strcmp(ft.s, std.s);
+	success = !((!ft.s &&  std.s) || (ft.s && !std.s)) 
+		&& (ft.r == std.r) 
+		&& ((!ft.s && !std.s) || !strcmp(ft.s, std.s));
 	if (!success && ++r)
 	{	
 		printf("[%s:%i] ", __FILE__, line);
@@ -1419,7 +1421,6 @@ int	main(void)
 	test(__LINE__, "%6lc ", 128519);
 	test(__LINE__, "%-6lc ", 176);
 	test(__LINE__, "%-6lc ", 35211);
-	return (test(0,0));
 	test(__LINE__, "%-6lc ", 312859);
 	test(__LINE__, "%-6lc ", 18518);
 	test(__LINE__, "%-6lc ", -18518);
