@@ -42,11 +42,8 @@ static int	test(int line, const char *fmt, ...)
 	va_end(ft.ap);
 	printf("[%s:%i] ", __FILE__, line);
 	success = (ft.r == std.r) && !strcmp(ft.s, std.s);
-	if (success)
-		printf("SUCCESS");
-	else if (++r)
-		printf("FAILURE");
-	printf(" [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
+	if (!success && ++r)
+		printf("FAILURE [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
 	free(std.s);
 	free(ft.s);
 	return (!!success);
