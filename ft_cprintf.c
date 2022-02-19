@@ -86,6 +86,7 @@ int	ft_vcprintf(t_lambda f, const char *fmt, va_list ap)
 {
 	t_fmt_params	p;
 	int				r;
+	int				*ptr;
 
 	r = 0;
 	while (*fmt)
@@ -96,7 +97,11 @@ int	ft_vcprintf(t_lambda f, const char *fmt, va_list ap)
 			parse_flags(&fmt, &p, ap);
 			parse_modifiers(&fmt, &p);
 			if (*fmt == 'n')
-				*((va_arg(ap, int*))) = r;
+			{
+				ptr = (int*)(va_arg(ap, t_ull));
+				if (ptr)
+					*ptr = r;
+			}
 			else if (g_specifiers[*fmt])
 				r += g_specifiers[*fmt](f, p, ap);
 			else

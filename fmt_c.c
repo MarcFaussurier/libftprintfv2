@@ -37,9 +37,5 @@ static int	pad_c(t_lambda f, t_fmt_params p, char c)
 
 int	fmt_c(t_lambda f, t_fmt_params p, va_list ap)
 {
-	char		c;
-	int			a;
-
-	c = (char)va_arg(ap, int);
-	return (pad_c(f, p, c));
+	return (pad_c(f, p, va_arg(ap, int)));
 }
