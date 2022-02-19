@@ -40,10 +40,12 @@ static int	test(int line, const char *fmt, ...)
 	va_end(std.ap);
 	ft.r = ft_vasprintf(&ft.s, fmt, ft.ap);
 	va_end(ft.ap);
-	printf("[%s:%i] ", __FILE__, line);
 	success = (ft.r == std.r) && !strcmp(ft.s, std.s);
 	if (!success && ++r)
+	{	
+		printf("[%s:%i] ", __FILE__, line);
 		printf("FAILURE [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
+	}
 	free(std.s);
 	free(ft.s);
 	return (!!success);
