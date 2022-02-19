@@ -34,7 +34,10 @@ static int	read_num(const char **fmt, va_list ap)
 
 	i = 0;
 	if (**fmt == '*')
+	{
+		*fmt += 1;
 		return (va_arg(ap, int));
+	}
 	while (**fmt >= '0' && **fmt <= '9')
 	{
 		i *= 10;
@@ -60,8 +63,11 @@ static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 		p->sharp = 1;
 	else if (**fmt >= '0' && **fmt <= '9')
 		p->padding = read_num(fmt, ap);
-	else if (**fmt == '*' && ++fmt)
+	else if (**fmt == '*')
+	{
+		*fmt += 1;
 		p->padding = va_arg(ap, int);
+	}
 	else if (**fmt == '.' && ++*fmt)
 		p->precision = read_num(fmt, ap);
 	else
@@ -106,10 +112,8 @@ int	ft_vcprintf(t_lambda f, const char *fmt, va_list ap)
 			else if (g_specifiers[*fmt])
 			{	
 				t = g_specifiers[*fmt](f, p, ap);
-
 				if (t < 0)
 				{
-					printf("r=-1!\n");
 					return (t);
 				}
 				r += t;

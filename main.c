@@ -43,8 +43,9 @@ static int	test(int line, const char *fmt, ...)
 	success = !((!ft.s &&  std.s) || (ft.s && !std.s)) 
 		&& (ft.r == std.r) 
 		&& ((!ft.s && !std.s) || !strcmp(ft.s, std.s));
-	if (!success && ++r)
+	if (!success)
 	{	
+		r += 1;
 		printf("[%s:%i] ", __FILE__, line);
 		printf("FAILURE [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
 	}
@@ -1601,6 +1602,7 @@ int	main(void)
 	test(__LINE__, "neg10 %*.*d\n", -15586, 15, 150);                    
 	test(__LINE__, "neg11 %*.*d\n", -15586, 15, 0);                      
 	test(__LINE__, "***************%*s%*d**************%*u*************\n", 10, "coucou", 10, 10, -50, 20);
+	test(__LINE__, "******%*s%*d**************%*u*****\n", 10, "coucou", 10, 10, -50, 20);
 	test(__LINE__, "taaa %100s\n", "hello");
 	test(0, 0);
 	return (0);
