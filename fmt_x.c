@@ -30,15 +30,18 @@ static inline int	pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
 	d = 0;
 	if (p.padding > 0)
 		d = 1;
-	if (p.padding >= 2 && p.sharp && s.i)
+
+	if (p.sharp && s.i)
+	{
 		p.padding -= 2;
+	}
+	
 	p.padding -= p.precision;
-	if (!p.minus)
+	if (!p.minus && !p.zero)
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(' ', f.data));
 	if (p.sharp && s.i)
 	{
-		p.padding -= 2;
 		r += (((t_putchar)f.ptr)('0', f.data));
 		if (s.up)
 			r += (((t_putchar)f.ptr)('X', f.data));
@@ -51,7 +54,7 @@ static inline int	pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
 //	if (p.zero)
 		while (a < p.precision--)
 			r += (((t_putchar)f.ptr)('0', f.data));
-	if (!(!s.i && s.no_precision) || p.sharp)
+	if (!(!s.i && s.no_precision) /*|| p.sharp*/)
 		r += ft_cutoa_base(f, s.i, s.b);
 	else if (d)
 		r += (((t_putchar)f.ptr)(' ', f.data));
@@ -73,7 +76,10 @@ static inline int	generic_fmt_x(t_lambda f, t_fmt_params p,
 	s.i = va_arg64(ft_modifiers_to_type(p.modifiers), ap);
 	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i, s.b);
 	if (p.precision == 0)
+	{
+		p.zero = 0;
 		s.no_precision = 1;
+	}
 	else
 		s.no_precision = 0;
 //	if ((p.plus && p.precision != -1) || p.minus)

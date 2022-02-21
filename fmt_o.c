@@ -28,20 +28,26 @@ static inline int	pad_o(int a, t_lambda f, t_fmt_params p, t_pad s)
 	d = 0;
 	if (p.padding > 0)
 		d = 1;
-	if (p.padding >= 1 && p.sharp && s.i)
+	if (p.sharp && s.i)
+	{
 		p.padding -= 1;
+	//	p.precision -= 1;
+	}
 	p.padding -= p.precision;
-	if (!p.minus)
+	if (!p.minus && !p.zero)
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(' ', f.data));
 	if (p.sharp && s.i)
+	{
 		r += (((t_putchar)f.ptr)('0', f.data));
+	}
 	if (!p.minus)
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(s.space, f.data));
+	
 //	if (p.zero)
-		while (a < p.precision--)
-			r += (((t_putchar)f.ptr)('0', f.data));
+	while (a < p.precision--)
+		r += (((t_putchar)f.ptr)('0', f.data));
 	if (!(!s.i && s.no_precision) || p.sharp )// || (p.zero && d))
 		r += ft_cutoa_base(f, s.i, (t_pcstr){8, "01234567"});
 	else if (d )
@@ -60,7 +66,10 @@ int	fmt_o(t_lambda f, t_fmt_params p, va_list ap)
 	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i,
 			(t_pcstr){8, "01234567"});
 	if (p.precision == 0)
+	{
+		p.zero = 0;
 		s.no_precision = 1;
+	}
 	else
 		s.no_precision = 0;
 //	if ((p.plus && p.precision != -1) || p.minus)

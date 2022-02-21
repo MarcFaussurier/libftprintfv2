@@ -31,7 +31,7 @@ static inline int	pad_i(int a, t_lambda f, t_fmt_params p, t_pad s)
 	if (p.padding > 0)
 		d = 1;
 	p.padding -= p.precision;
-	if (!p.minus)
+	if (!p.minus && !p.zero)
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(' ', f.data));
 	if (s.sign)
@@ -65,7 +65,10 @@ int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 		p.zero = 0;
 
 	if (p.precision == 0)
+	{
+		p.zero = 0;
 		s.no_precision = 1;
+	}
 	else
 		s.no_precision = 0;
 //	if ((p.plus && p.precision != -1) || p.minus)

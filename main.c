@@ -16,7 +16,7 @@
 #include "stdio.h"
 #include "string.h"
 
-#define SHOW_SUCCESS 1
+#define SHOW_SUCCESS 0
 
 typedef struct s_text
 {
@@ -51,7 +51,7 @@ static int	test(int line, const char *fmt, ...)
 		printf("[%s:%i] ", __FILE__, line);
 		printf("FAILURE [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
 	}
-#if SHOW_SUCCESS == 0
+#if SHOW_SUCCESS == 1
 	else
 	{
 		printf("[%s:%i] ", __FILE__, line);
@@ -1579,6 +1579,8 @@ int	main(void)
 	test(__LINE__, "%-10.3o", 456789);
 	test(__LINE__, "%#-10o", 042);
 	test(__LINE__, "%#010o", 042);
+	test(__LINE__, "%0#10o", 042);
+	test(__LINE__, "%010o", 042);
 	test(__LINE__, "%'o", 123456789);
 	test(__LINE__, "%#.3x", 0);
 	test(__LINE__, "%#.0x", 0);
@@ -1610,17 +1612,25 @@ int	main(void)
 	test(__LINE__, "%#.o", 10);
 	test(__LINE__, "%#100.2o", 100000);
 	test(__LINE__, "%#.0o", 10);
+	test(__LINE__, "%#.10x", 10);
 	test(__LINE__, "%#.10o", 10);
 	test(__LINE__, "%#x", 0);
 	test(__LINE__, "%+x", 125);
 	test(__LINE__, "% x", 125);
 	test(__LINE__, "%#0+10.x", 0);
-	test(__LINE__, "%#o", 0);
+	test(__LINE__, "%#0+.x", 0);
 	test(__LINE__, "%#+o", 0);
 	test(__LINE__, "%+o", 125);
 	test(__LINE__, "% o", 125);
 	test(__LINE__, "%#0+10.o", 0);
+	test(__LINE__, "%0#.o", 0);
 	test(__LINE__, "%#0.o", 0);
+	test(__LINE__, "%0.o", 0);
+	test(__LINE__, "%#.o", 0);
+	test(__LINE__, "%0#.x", 0);
+	test(__LINE__, "%#0.x", 0);
+	test(__LINE__, "%0.x", 0);
+	test(__LINE__, "%#.x", 0);
 	test(__LINE__, "st1 %*.*d\n", 10, 10, 50);
 	test(__LINE__, "st2 %*.*d\n", 1, 50, 50);
 	test(__LINE__, "st3 %*.*d\n", 0, 0, 50);

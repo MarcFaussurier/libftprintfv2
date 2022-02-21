@@ -67,6 +67,8 @@ static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 		p->blank = 1;
 	else if (**fmt == '#' && ++*fmt)
 		p->sharp = 1;
+	else if (**fmt == '\'' && ++*fmt)
+		(void)0;		
 	else if (**fmt >= '0' && **fmt <= '9')
 		p->padding = read_num(fmt, ap);
 	else if (**fmt == '*')
