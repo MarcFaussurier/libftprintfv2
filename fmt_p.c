@@ -24,10 +24,11 @@ static inline int	pad_p(int a, t_lambda f, t_fmt_params p, t_pad s)
 
 	r = 0;
 	p.padding -= p.precision;
-	if (!(p.zero || p.minus))
+	if (p.padding >= 2)
+		p.padding -= 2;
+	if (!p.minus)
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(' ', f.data));
-	p.padding -= 2;
 	r += (((t_putchar)f.ptr)('0', f.data));
 	r += (((t_putchar)f.ptr)('x', f.data));
 	if (!p.minus)

@@ -30,6 +30,8 @@ static inline int	pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
 	d = 0;
 	if (p.padding > 0)
 		d = 1;
+	if (p.padding >= 2 && p.sharp && s.i)
+		p.padding -= 2;
 	p.padding -= p.precision;
 	if (!p.minus)
 		while (p.padding-- > 0)
@@ -49,7 +51,7 @@ static inline int	pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
 //	if (p.zero)
 		while (a < p.precision--)
 			r += (((t_putchar)f.ptr)('0', f.data));
-	if (!(!s.i && s.no_precision))
+	if (!(!s.i && s.no_precision) || p.sharp)
 		r += ft_cutoa_base(f, s.i, s.b);
 	else if (d)
 		r += (((t_putchar)f.ptr)(' ', f.data));

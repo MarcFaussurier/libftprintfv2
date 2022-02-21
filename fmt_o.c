@@ -28,11 +28,13 @@ static inline int	pad_o(int a, t_lambda f, t_fmt_params p, t_pad s)
 	d = 0;
 	if (p.padding > 0)
 		d = 1;
+	if (p.padding >= 1 && p.sharp && s.i)
+		p.padding -= 1;
 	p.padding -= p.precision;
 	if (!p.minus)
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(' ', f.data));
-	if (p.sharp && s.i && p.padding--)
+	if (p.sharp && s.i)
 		r += (((t_putchar)f.ptr)('0', f.data));
 	if (!p.minus)
 		while (p.padding-- > 0)
@@ -40,7 +42,7 @@ static inline int	pad_o(int a, t_lambda f, t_fmt_params p, t_pad s)
 //	if (p.zero)
 		while (a < p.precision--)
 			r += (((t_putchar)f.ptr)('0', f.data));
-	if (!(!s.i && s.no_precision))// || (p.zero && d))
+	if (!(!s.i && s.no_precision) || p.sharp )// || (p.zero && d))
 		r += ft_cutoa_base(f, s.i, (t_pcstr){8, "01234567"});
 	else if (d )
 		r += (((t_putchar)f.ptr)(' ', f.data));
