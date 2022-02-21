@@ -24,7 +24,9 @@ int	pad_s(int a, t_lambda f, t_fmt_params p, char *s)
 		space = ' ';
 	if (p.precision == -1)
 		p.precision = a;
-	if (!p.minus)
+	if (p.precision > a)
+		p.precision = a;
+	if (!p.minus || p.zero)
 		while (p.padding && p.padding-- > p.precision)
 			r += (((t_putchar)f.ptr)(space, f.data));
 	while (*s && (p.precision--))

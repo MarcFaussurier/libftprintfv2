@@ -16,6 +16,8 @@
 #include "stdio.h"
 #include "string.h"
 
+#define SHOW_SUCCESS 1
+
 typedef struct s_text
 {
 	va_list	ap;
@@ -49,8 +51,13 @@ static int	test(int line, const char *fmt, ...)
 		printf("[%s:%i] ", __FILE__, line);
 		printf("FAILURE [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
 	}
-//	else
-//		printf("SUCCESS [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
+#if SHOW_SUCCESS == 0
+	else
+	{
+		printf("[%s:%i] ", __FILE__, line);
+		printf("SUCCESS [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
+	}
+# endif
 	free(std.s);
 	free(ft.s);
 	return (!!success);
@@ -67,28 +74,55 @@ int	main(void)
 	s = "yay";
 	t = s;
 	test(__LINE__, "%c", 42);
+	test(__LINE__, "%10.i",  0);
+	test(__LINE__, "%*.0i", 1, 0);
+	test(__LINE__, "%*.1i", 1, 0);
+	test(__LINE__, "%1.i", 0);
+	test(__LINE__, "%0+-*.i", 10, 10);
+	test(__LINE__, "%-*.i", 0, 0);
+	test(__LINE__, "%*.i", 0, 0);
+	test(__LINE__, "%.i", 0);
+	test(__LINE__, "%0.i", 0);
+	test(__LINE__, "%10.i", 0);
+	test(__LINE__, "%10.*i",0, 0);
+	test(__LINE__, "%10.0i", 0);
+	test(__LINE__, "%.i", 1);
+	test(__LINE__, "%.*i",0, 1);
+	test(__LINE__, "%.0i", 1);
 	test(__LINE__, "%+0.54c", 42);
 	test(__LINE__, "%+0 .5c", 42);
 	test(__LINE__, "%5.4c", 42);
 	test(__LINE__, "%4.5c", 42);
-	test(__LINE__, "st17 %0.*x\n", 0, 0);	//
-	test(__LINE__, "st17 %0.*c\n", 0, 0);	//
+	test(__LINE__, "st17 %10.*x\n", 0, 0);	
+	test(__LINE__, "st17 %0.*x\n", 0, 0);	
+	test(__LINE__, "st17 %0.*c\n", 0, 0);	
 	test(__LINE__, "st17 %0.*d\n", 0, 0);	
 	test(__LINE__, "st17 %0.*d\n", 0, 10);	
-	test(__LINE__, "st17 %0.0d\n", 0, 0);	//
-	test(__LINE__, "st17 %0.0d\n", 0, 10);	//
+	test(__LINE__, "st17 %0.0d\n", 0, 0);	
+	test(__LINE__, "st17 %0.0d\n", 0, 10);	
 	test(__LINE__, "st17 %0.*d\n", 10, 10);
 	test(__LINE__, "st17 %0.*d\n", 10, 0);	
 	test(__LINE__, "st17 %0.0d\n", 10, 10);	
-	test(__LINE__, "st17 %0.0d\n", 10, 0);
-
-	return (test(0,0));
-
-	test(__LINE__, "st17 %.*x\n", 0, 0);	//
+	test(__LINE__, "st17 %0.0d\n", 10, 0);	
+	test(__LINE__, "%5.3X", 1);		// no zero pad	
+	test(__LINE__, "%5.3X", 1);		// no zero pad	
+	test(__LINE__, "%5.2X", 1);		// no zero pad	
+	test(__LINE__, "%05.2X", 1);		// no zero pad	
+	test(__LINE__, "%02.0X", 0);		// no zero pad	
+	test(__LINE__, "%02.0i", 0);		//
+	test(__LINE__, "%2.0i", 0);			
+	test(__LINE__, "%02.0X", 1);		//	
+	test(__LINE__, "%02.0i", 1);		//	
+	test(__LINE__, "%2.0i", 1);			
+	test(__LINE__, "%02.1X", 1);		//	
+	test(__LINE__, "%02.1i", 1);		//	
+	test(__LINE__, "%2.1i", 1);			
+//	return (test(0,0));
+	test(__LINE__, "st17 %.*x\n", 0, 0);	
 	test(__LINE__, "st17 %.*c\n", 0, 0);	
-	test(__LINE__, "st17 %.*d\n", 0, 0);	//
+	test(__LINE__, "st17 %.*d\n", 0, 0);	
 	test(__LINE__, "st17 %.*d\n", 0, 10);	
-	test(__LINE__, "st17 %.0d\n", 0, 0);	//
+	test(__LINE__, "st17 %.0d\n", 0, 0);	
 	test(__LINE__, "st17 %.0d\n", 0, 10);	
 	test(__LINE__, "st17 %.*d\n", 10, 10);	
 	test(__LINE__, "st17 %.*d\n", 10, 0);	

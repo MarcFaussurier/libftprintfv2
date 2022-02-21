@@ -58,8 +58,10 @@ static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 		p->minus = 1;
 	else if (**fmt == '0' && ++*fmt)
 	{
-		p->minus = 0;
-		p->zero = 1;
+		if (!p->minus)
+			p->zero = 1;
+	//	p->minus = 0;
+
 	}
 	else if (**fmt == ' ' && ++*fmt)
 		p->blank = 1;

@@ -25,6 +25,7 @@ int	fmt_c(t_lambda f, t_fmt_params p, va_list ap)
 		return (-1);
 	}
 	r = 0;
+	
 	if (!(p.minus))
 			while (--p.padding > 0)
 				r += (((t_putchar)f.ptr)(' ', f.data));
