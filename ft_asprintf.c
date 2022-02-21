@@ -43,7 +43,8 @@ int	ft_vasprintf(char **s, const char *fmt, va_list ap)
 	if (str.l > 4096)
 	{
 		free(str.s);
-		str.s = malloc(str.l);
+		str.i = 0;
+		str.s = malloc(str.l + 1);
 		str.l = (ft_vcprintf((t_lambda){.ptr=&f, .data=&str}, fmt, lap));
 	}
 	va_end(lap);

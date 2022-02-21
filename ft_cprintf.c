@@ -28,7 +28,7 @@ static	int (*const g_specifiers[255])
 ['%'] = fmt_percent
 };
 
-static int	read_num(const char **fmt, va_list ap)
+static int	read_num(const char **fmt,  va_list ap)
 {
 	int	i;
 
@@ -36,7 +36,8 @@ static int	read_num(const char **fmt, va_list ap)
 	if (**fmt == '*')
 	{
 		*fmt += 1;
-		return (va_arg(ap, int));
+		i = va_arg(ap, int);
+		return (i);
 	}
 	while (**fmt >= '0' && **fmt <= '9')
 	{
@@ -56,7 +57,10 @@ static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 	else if (**fmt == '-' && ++*fmt)
 		p->minus = 1;
 	else if (**fmt == '0' && ++*fmt)
+	{
+		p->minus = 0;
 		p->zero = 1;
+	}
 	else if (**fmt == ' ' && ++*fmt)
 		p->blank = 1;
 	else if (**fmt == '#' && ++*fmt)
@@ -67,6 +71,12 @@ static void	parse_flags(const char **fmt, t_fmt_params *p, va_list ap)
 	{
 		*fmt += 1;
 		p->padding = va_arg(ap, int);
+		if (p->padding < 0)
+		{
+			// test with pf("%-1* ..." , -1)
+			p->padding *= -1;
+			p->minus = 1;
+		}
 	}
 	else if (**fmt == '.' && ++*fmt)
 		p->precision = read_num(fmt, ap);

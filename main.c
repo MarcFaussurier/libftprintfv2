@@ -49,6 +49,8 @@ static int	test(int line, const char *fmt, ...)
 		printf("[%s:%i] ", __FILE__, line);
 		printf("FAILURE [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
 	}
+//	else
+//		printf("SUCCESS [expected=%i got=%i '%s' '%s']\n", std.r, ft.r, std.s, ft.s);
 	free(std.s);
 	free(ft.s);
 	return (!!success);
@@ -67,7 +69,43 @@ int	main(void)
 	test(__LINE__, "%c", 42);
 	test(__LINE__, "%+0.54c", 42);
 	test(__LINE__, "%+0 .5c", 42);
-	test(__LINE__, "%045.58c", 42);
+	test(__LINE__, "%5.4c", 42);
+	test(__LINE__, "%4.5c", 42);
+	test(__LINE__, "st17 %0.*x\n", 0, 0);	//
+	test(__LINE__, "st17 %0.*c\n", 0, 0);	//
+	test(__LINE__, "st17 %0.*d\n", 0, 0);	
+	test(__LINE__, "st17 %0.*d\n", 0, 10);	
+	test(__LINE__, "st17 %0.0d\n", 0, 0);	//
+	test(__LINE__, "st17 %0.0d\n", 0, 10);	//
+	test(__LINE__, "st17 %0.*d\n", 10, 10);
+	test(__LINE__, "st17 %0.*d\n", 10, 0);	
+	test(__LINE__, "st17 %0.0d\n", 10, 10);	
+	test(__LINE__, "st17 %0.0d\n", 10, 0);
+
+	return (test(0,0));
+
+	test(__LINE__, "st17 %.*x\n", 0, 0);	//
+	test(__LINE__, "st17 %.*c\n", 0, 0);	
+	test(__LINE__, "st17 %.*d\n", 0, 0);	//
+	test(__LINE__, "st17 %.*d\n", 0, 10);	
+	test(__LINE__, "st17 %.0d\n", 0, 0);	//
+	test(__LINE__, "st17 %.0d\n", 0, 10);	
+	test(__LINE__, "st17 %.*d\n", 10, 10);	
+	test(__LINE__, "st17 %.*d\n", 10, 0);	
+	test(__LINE__, "st17 %.0d\n", 10, 10);	
+	test(__LINE__, "st17 %.0d\n", 10, 0);	
+
+	test(__LINE__, "st17 %.*x\n", 0, 0);	
+	test(__LINE__, "st17 %.*c\n", 0, 0);	
+	test(__LINE__, "st17 %.*d\n", 0, 0);	
+	test(__LINE__, "st17 %.*d\n", 0, 10);	
+	test(__LINE__, "st17 %.0d\n", 0, 0);	
+	test(__LINE__, "st17 %.0d\n", 0, 10);	
+	test(__LINE__, "st17 %.*d\n", 10, 10);	
+	test(__LINE__, "st17 %.*d\n", 10, 0);	
+	test(__LINE__, "st17 %.0d\n", 10, 10);	
+	test(__LINE__, "st17 %.0d\n", 10, 0);		
+
 	test(__LINE__, "%---7.1 .8c", 42);
 	test(__LINE__, "%80+80+80c", 42);
 	test(__LINE__, "% 8 .5c", 42);
@@ -1599,10 +1637,10 @@ int	main(void)
 	test(__LINE__, "neg7 %*.*d\n", -1586, 15, 0);      
 	test(__LINE__, "neg8 %*.*d\n", -1586, 15, 300);    
 	test(__LINE__, "neg9 %*.*d\n", 15856, 155, -3000);                   
-	test(__LINE__, "neg10 %*.*d\n", -15586, 15, 150);                    
-	test(__LINE__, "neg11 %*.*d\n", -15586, 15, 0);                      
-	test(__LINE__, "***************%*s%*d**************%*u*************\n", 10, "coucou", 10, 10, -50, 20);
-	test(__LINE__, "******%*s%*d**************%*u*****\n", 10, "coucou", 10, 10, -50, 20);
+	test(__LINE__, "neg10   4 %*.*d\n", 4090, 15, 150);                    
+	test(__LINE__, "neg11   3 %*.*d\n", 4090, 15, 0);                      
+	test(__LINE__, "***************%*s%*d**************%*4u*************\n", 10, "coucou", 10, 10, -50, 20);
+	test(__LINE__, "******%*s%*d**************%*.*u*****\n", 10, "coucou", 10, 10, -50, -5 ,20);
 	test(__LINE__, "taaa %100s\n", "hello");
 	test(0, 0);
 	return (0);
