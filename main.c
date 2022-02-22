@@ -1651,7 +1651,7 @@ int	main(void)
 	test(__LINE__, "%#.0o", 10);
 	test(__LINE__, "%#.10x", 10);
 	test(__LINE__, "%#.10o", 10);
-	test(__LINE__, "%#x", 0);
+	test(__LINE__, "%#x", 0); 	//
 	test(__LINE__, "%+x", 125);
 	test(__LINE__, "% x", 125);
 	test(__LINE__, "%#0+10.x", 0);

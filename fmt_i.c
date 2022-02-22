@@ -31,6 +31,8 @@ int				pad_num( t_lambda f, t_fmt_params p, t_num_pad s)
 		//  if (!state.flags.zero)
 		p.minus = 1;
 	}
+	//if (/*s.bl == 10 &&*/ (!p.precision) && s.num.s[0] == '0')
+
 	if (/*s.bl == 10 &&*/ (!p.precision) && s.num.s[0] == '0')
 	{   s.num.s[0] = 0; s.num.l = 0; p.zero = 0; }
 	//  if (type == PREFIXED_NUMBER && input[1] == '0' && state.precision == NO_PRECISION)
@@ -54,9 +56,10 @@ int				pad_num( t_lambda f, t_fmt_params p, t_num_pad s)
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(' ', f.data));
 	if (s.sign)
-		r += (((t_putchar)f.ptr)(s.sign, f.data));
-	if (s.num.l)
+			r += (((t_putchar)f.ptr)(s.sign, f.data));
+	if (s.num.l && s.num.s[0] != '0')
 	{
+		//printf("s.num.l: %i\ns.num.s: %.*s\n", s.num.l, s.num.l, s.num.s);
 		if (s.prefix.l && p.sharp)
 		{
 			y = 0;
