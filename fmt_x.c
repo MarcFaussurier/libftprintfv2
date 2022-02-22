@@ -12,88 +12,36 @@
 
 #include "ft_printf.h"
 
-typedef struct s_pad
-{
-	t_ull	i;
-	char	space;
-	int		up;
-	int		no_precision;
-	t_pcstr	b;
-}	t_pad;
-
-static inline int	pad_x(int a, t_lambda f, t_fmt_params p, t_pad s)
-{
-	int		r;
-	int		d;
-
-	r = 0;
-	d = 0;
-	if (p.padding > 0)
-		d = 1;
-
-	if (p.sharp && s.i)
-	{
-		p.padding -= 2;
-	}
-	
-	p.padding -= p.precision;
-	if (!p.minus && !p.zero)
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(' ', f.data));
-	if (p.sharp && s.i)
-	{
-		r += (((t_putchar)f.ptr)('0', f.data));
-		if (s.up)
-			r += (((t_putchar)f.ptr)('X', f.data));
-		else
-			r += (((t_putchar)f.ptr)('x', f.data));
-	}
-	if (!p.minus)
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(s.space, f.data));
-//	if (p.zero)
-		while (a < p.precision--)
-			r += (((t_putchar)f.ptr)('0', f.data));
-	if (!(!s.i && s.no_precision) /*|| p.sharp*/)
-		r += ft_cutoa_base(f, s.i, s.b);
-	else if (d)
-		r += (((t_putchar)f.ptr)(' ', f.data));
-	while (p.padding-- > 0)
-		r += (((t_putchar)f.ptr)(' ', f.data));
-	return (r);
-}
-
 static inline int	generic_fmt_x(t_lambda f, t_fmt_params p,
 		va_list ap, int up)
 {
-	int			a;
-	t_pad		s;
+	char		sign;
+	char		b[64];
+	t_pstr		num;
+	t_ull		i;
+	t_pcstr		prefix;
 
+	i = va_arg64(ft_modifiers_to_type(p.modifiers), ap);
+	num = (t_pstr) {.l=0, .s=&b[0]};
 	if (up)
-		s.b = (t_pcstr){16, "0123456789ABCDEF"};
-	else
-		s.b = (t_pcstr){16, "0123456789abcdef"};
-	s.i = va_arg64(ft_modifiers_to_type(p.modifiers), ap);
-	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i, s.b);
-	if (p.precision == 0)
 	{
-		p.zero = 0;
-		s.no_precision = 1;
+		ft_cutoa_base((t_lambda){&pstr_write, &num}, i, (t_pcstr){16, "0123456789ABCDEF"});
+		prefix = (t_pcstr) {.l=2, .s="0X"};
 	}
 	else
-		s.no_precision = 0;
-//	if ((p.plus && p.precision != -1) || p.minus)
-//		p.zero = 0;
-	if (p.padding < p.precision)
-		p.padding = p.precision;
-	if (a > p.precision)
-		p.precision = a;
-	if (p.zero)
-		s.space = '0';
-	else
-		s.space = ' ';
-	s.up = up;
-	return (pad_x(a, f, p, s));
+	{
+		ft_cutoa_base((t_lambda){&pstr_write, &num}, i, (t_pcstr){16, "0123456789abcdef"});
+		prefix = (t_pcstr) {.l=2, .s="0x"};
+	}
+	sign = 0;
+//	p.zero = 0;
+//	p.minus = 0;
+	return (pad_num(f, p, (t_num_pad)
+	{
+		.num = (t_pstr) {.l=num.l, .s=num.s},
+		.prefix =  prefix,
+		.sign = 0
+	}));
 }
 
 int	fmt_x(t_lambda f, t_fmt_params p, va_list ap)

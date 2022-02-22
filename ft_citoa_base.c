@@ -13,38 +13,6 @@
 #include "ft_printf.h"
 #include <limits.h>
 
-long long	parse_i(t_fmt_params p, va_list ap)
-{
-	long long	i;
-
-	i = va_arg(ap, long long);
-	if (p.modifiers[0] == 'h' && p.modifiers[1] == 'h' && !p.modifiers[2])
-		i = (char) i;
-	else if (p.modifiers[0] == 'h' && !p.modifiers[1])
-		i = (short int) i;
-	else if (!p.modifiers[0])
-		i = (int) i;
-	else if (p.modifiers[0] == 'l' && !p.modifiers[1])
-		i = (long) i;
-	return (i);
-}
-
-unsigned long long	parse_u(t_fmt_params p, va_list ap)
-{
-	unsigned long long	i;
-
-	i = va_arg(ap, unsigned long long);
-	if (p.modifiers[0] == 'h' && p.modifiers[1] == 'h' && !p.modifiers[2])
-		i = (unsigned char) i;
-	else if (p.modifiers[0] == 'h' && !p.modifiers[1])
-		i = (unsigned short int) i;
-	else if (!p.modifiers[0])
-		i = (unsigned int) i;
-	else if (p.modifiers[0] == 'l' && !p.modifiers[1])
-		i = (unsigned long) i;
-	return (i);
-}
-
 int	ft_citoa_base(t_lambda f, t_ll i, t_pcstr b)
 {
 	int	r;

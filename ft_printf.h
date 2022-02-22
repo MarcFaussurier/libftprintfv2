@@ -19,11 +19,25 @@ typedef unsigned long long	t_64;
 typedef unsigned long long	t_ull;
 typedef long long			t_ll;
 typedef int					(*t_putchar)(char c, void *data);
+
 typedef struct s_pcstr
 {
 	int			l:			32;
 	const char	*s;
 }	t_pcstr;
+typedef struct s_pstr
+{
+	int			l:			32;
+	char		*s;
+}	t_pstr;
+typedef struct s_num_pad
+{
+	t_pstr	num;
+	t_pcstr	prefix;
+	char	sign;
+}	t_num_pad;
+
+
 typedef struct s_lambda
 {
 	void		*ptr;
@@ -53,6 +67,9 @@ typedef enum e_type
 	LI	= 8,
 	LLI	= LI,
 }	t_type;
+/**/
+void	pstr_write(char c, t_pstr *num);
+int		pad_num( t_lambda f, t_fmt_params p, t_num_pad s);
 /**/
 int		ft_printf(const char *fmt, ...);
 int		ft_vprintf(const char *fmt, va_list ap);

@@ -78,7 +78,7 @@ int	main(void)
 	test(__LINE__, "%*.0i", 1, 0);
 	test(__LINE__, "%*.1i", 1, 0);
 	test(__LINE__, "%1.i", 0);
-	test(__LINE__, "%0+-*.i", 10, 10);
+	test(__LINE__, "%-0+-*.i", 10, 10);	
 	test(__LINE__, "%-*.i", 0, 0);
 	test(__LINE__, "%*.i", 0, 0);
 	test(__LINE__, "%.i", 0);
@@ -86,6 +86,11 @@ int	main(void)
 	test(__LINE__, "%10.i", 0);
 	test(__LINE__, "%10.*i",0, 0);
 	test(__LINE__, "%10.0i", 0);
+
+	test(__LINE__, "%10.40i", 444);
+
+	test(__LINE__, "% +-#'444.444i", 444);
+	test(__LINE__, "% +-#'44444.44444i", 444);
 	test(__LINE__, "%.i", 1);
 	test(__LINE__, "%.*i",0, 1);
 	test(__LINE__, "%.0i", 1);
@@ -93,10 +98,21 @@ int	main(void)
 	test(__LINE__, "%+0 .5c", 42);
 	test(__LINE__, "%5.4c", 42);
 	test(__LINE__, "%4.5c", 42);
+
+	test(__LINE__, "st17 %*.0d\n", 10, 0);	
+	test(__LINE__, "st17 %0.*d\n", 10, 10);	
+	test(__LINE__, "st17 %0.*d\n", 10, 10);
+	test(__LINE__, "st17 %0.*d\n", 10, 0);	
+	test(__LINE__, "st17 %0.0d\n", 10, 10);	
+	test(__LINE__, "st17 %0.0d\n", 10, 0);	
 	test(__LINE__, "st17 %10.*x\n", 0, 0);	
 	test(__LINE__, "st17 %0.*x\n", 0, 0);	
 	test(__LINE__, "st17 %0.*c\n", 0, 0);	
-	test(__LINE__, "st17 %0.*d\n", 0, 0);	
+	test(__LINE__, "st17 %000+-'##*.*d dd\n", 0, 0, INT_MAX);	
+
+	test(__LINE__, "st17 %000+-'##*.*d dd\n", -10, 0, INT_MAX);	
+
+	test(__LINE__, "st17 %000+-'##*.10d dd\n", -10, 0, INT_MAX);	
 	test(__LINE__, "st17 %0.*d\n", 0, 10);	
 	test(__LINE__, "st17 %0.0d\n", 0, 0);	
 	test(__LINE__, "st17 %0.0d\n", 0, 10);	
@@ -104,20 +120,41 @@ int	main(void)
 	test(__LINE__, "st17 %0.*d\n", 10, 0);	
 	test(__LINE__, "st17 %0.0d\n", 10, 10);	
 	test(__LINE__, "st17 %0.0d\n", 10, 0);	
-	test(__LINE__, "%5.3X", 1);		// no zero pad	
-	test(__LINE__, "%5.3X", 1);		// no zero pad	
-	test(__LINE__, "%5.2X", 1);		// no zero pad	
-	test(__LINE__, "%05.2X", 1);		// no zero pad	
-	test(__LINE__, "%02.0X", 0);		// no zero pad	
-	test(__LINE__, "%02.0i", 0);		//
+	test(__LINE__, "%5.3X", 1);		
+	test(__LINE__, "%5.3X", 1);		
+	test(__LINE__, "%5.2X", 1);	
+	printf("%i\n", __LINE__);
+	test(__LINE__, "%05X", 1);		///	
+	test(__LINE__, "%05.2X", 1);	
+	test(__LINE__, "%02.0X", 0);		
+	test(__LINE__, "%02.0i", 0);	
 	test(__LINE__, "%2.0i", 0);			
-	test(__LINE__, "%02.0X", 1);		//	
-	test(__LINE__, "%02.0i", 1);		//	
+	test(__LINE__, "%02.0X", 1);	
+	test(__LINE__, "%02.0i", 1);		
 	test(__LINE__, "%2.0i", 1);			
-	test(__LINE__, "%02.1X", 1);		//	
-	test(__LINE__, "%02.1i", 1);		//	
+	test(__LINE__, "%02.1X", 1);			
+	test(__LINE__, "%02.1i", 1);	
 	test(__LINE__, "%2.1i", 1);			
-//	return (test(0,0));
+	
+
+
+	test(__LINE__, "%#2.0i", 0);			
+	test(__LINE__, "%#02.0X", 1);	
+	test(__LINE__, "%#02.0i", 1);		
+	test(__LINE__, "%#2.0i", 1);			
+	test(__LINE__, "%#02.1X", 1);			
+	test(__LINE__, "%#02.1i", 1);	
+	test(__LINE__, "%#2.1i", 1);			
+
+
+
+	test(__LINE__, "%+#2.0i", 0);			
+	test(__LINE__, "%#+02.0X", 1);	
+	test(__LINE__, "%#+02.0i", 1);		
+	test(__LINE__, "%+#2.0i", 1);			
+	test(__LINE__, "%#+02.1X", 1);			
+	test(__LINE__, "%+#02.1i", 1);	
+	test(__LINE__, "%#+2.1i", 1);			
 	test(__LINE__, "st17 %.*x\n", 0, 0);	
 	test(__LINE__, "st17 %.*c\n", 0, 0);	
 	test(__LINE__, "st17 %.*d\n", 0, 0);	
