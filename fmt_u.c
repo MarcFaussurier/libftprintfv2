@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:27:46 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 16:55:51 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 13:04:59 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,21 @@ typedef struct s_pad
 	char	space;
 }	t_pad;
 
-static inline int	pad_u(int a, t_lambda f, t_fmt_params p, t_pad s)
-{
-	int		r;
-
-	r = 0;
-	p.padding -= p.precision;
-	if (!(p.zero || p.minus))
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(' ', f.data));
-	if (!p.minus)
-		while (p.padding-- > 0)
-			r += (((t_putchar)f.ptr)(s.space, f.data));
-	while (a < p.precision--)
-		r += (((t_putchar)f.ptr)('0', f.data));
-	r += ft_cutoa_base(f, s.i, (t_pcstr){10, "0123456789"});
-	while (p.padding-- > 0)
-		r += (((t_putchar)f.ptr)(' ', f.data));
-	return (r);
-}
-
 int	fmt_u(t_lambda f, t_fmt_params p, va_list ap)
 {
 	int			a;
 	t_pad		s;
+	char		b[64];
+	t_pstr		num;
+	t_ull		i;
 
-	s.i = va_arg64(ft_modifiers_to_type(p.modifiers), ap);
-	a = ft_cutoa_base((t_lambda){&ft_one, 0}, s.i,
-			(t_pcstr){10, "0123456789"});
-	if ((p.plus && p.precision != -1) || p.minus)
-		p.zero = 0;
-	if (p.padding < p.precision)
-		p.padding = p.precision;
-	if (a > p.precision)
-		p.precision = a;
-	if (p.zero)
-		s.space = '0';
-	else
-		s.space = ' ';
-	return (pad_u(a, f, p, s));
+	i = va_arg64(ft_modifiers_to_type(p.modifiers), ap);
+	num = (t_pstr) {.l=0, .s=&b[0]};
+	ft_cutoa_base((t_lambda){&pstr_write, &num}, i, (t_pcstr){10, "0123456789"});
+	return (pad_num(f, p, (t_num_pad)
+				{
+				.num = (t_pstr) {.l=num.l, .s=num.s},
+				.prefix =  (t_pcstr) {.l=0, .s=0},
+				.sign = 0,
+				}));
 }

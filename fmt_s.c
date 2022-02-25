@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 15:50:16 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 12:27:20 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 13:22:08 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	pad_s(int a, t_lambda f, t_fmt_params p, char *s)
 		p.precision = a;
 	if (p.precision > a)
 		p.precision = a;
-	if (!p.minus || p.zero)
+	if (!p.minus)
 		while (p.padding && p.padding-- > p.precision)
 			r += (((t_putchar)f.ptr)(space, f.data));
 	while (*s && (p.precision--))
@@ -59,7 +59,7 @@ int	fmt_s(t_lambda f, t_fmt_params p, va_list ap)
 			prec = a;
 		if (p.precision > a)
 			prec = a;
-		if (!p.minus || p.zero)
+		if (!p.minus)
 			while (pad && pad-- > prec)
 				;
 		k = 0;

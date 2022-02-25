@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:38:33 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 12:34:47 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 13:19:58 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -975,12 +975,16 @@ int	main(int ac, char **av)
 	test(__LINE__, "%10o", 042);
 	test(__LINE__, "%.2o", 456789);
 	test(__LINE__, "%-10.3o", 456789);
+	test(__LINE__, "%'o", 123456789);
+	test(__LINE__, "%.1o", 2);
+	test(__LINE__, "%0.o", 0);
+	test(__LINE__, "%o", 0);
+	test(__LINE__, "%.o", 0);
+	test(__LINE__, "%.o", 1);
 	test(__LINE__, "%#-10o", 042);
 	test(__LINE__, "%#010o", 042);
 	test(__LINE__, "%0#10o", 042);
 	test(__LINE__, "%010o", 042);
-	test(__LINE__, "%'o", 123456789);
-	test(__LINE__, "%.1o", 2);
 	test(__LINE__, "%#.2o", 2);
 	test(__LINE__, "%#.1o", 2);
 	test(__LINE__, "%.1o", 2);
@@ -990,18 +994,17 @@ int	main(int ac, char **av)
 	test(__LINE__, "%#.o", 10);
 	test(__LINE__, "%#100.2o", 100000);
 	test(__LINE__, "%#.0o", 10);
+	test(__LINE__, "%#.0o", 10);	//
+	test(__LINE__, "%#.0o", 0);	//
 	test(__LINE__, "%#.10o", 10);	//
 	test(__LINE__, "%#+o", 0);		//
+	test(__LINE__, "%#o", 0);		//
 	test(__LINE__, "%+o", 125);
 	test(__LINE__, "% o", 125);
 	test(__LINE__, "%#0+10.o", 0);	
 	test(__LINE__, "%0#.o", 0);
 	test(__LINE__, "%#0.o", 0);
-	test(__LINE__, "%0.o", 0);
 	test(__LINE__, "%#.o", 0);
-	test(__LINE__, "%o", 0);
-	test(__LINE__, "%.o", 0);
-	test(__LINE__, "%.o", 1);
 	test(__LINE__, "%#.o", 1);
 	test(__LINE__, "%#.o", 0);
 	test(__LINE__, "%#.0o", 0);
@@ -1059,7 +1062,7 @@ int	main(int ac, char **av)
 	test(__LINE__, "%010u", UINT_MAX);
 	test(__LINE__, "%011u", UINT_MAX);
 	test(__LINE__, "%llu == %llu ?", ULONG_MAX, ULLONG_MAX);
-	test(__LINE__, "%.0u", 0);
+	test(__LINE__, "%.0u %.0i", 0, 0);
 	test(__LINE__, "%.1u", 0);
 	test(__LINE__, "%.2u", 0);
 	test(__LINE__, "%.0u", 5);
@@ -1657,7 +1660,10 @@ int	main(int ac, char **av)
 	test(__LINE__, "%%", 42);
 	test(__LINE__, "%+0.54%", 42);
 	test(__LINE__, "%+0 .5%", 42);
-	test(__LINE__, "%045.58%", 42);
+	test(__LINE__, "%045.58% %045.58c %045.58s ", '4', "s");
+
+	test(__LINE__, "%04.5% %0-40.5s ", "salut!");
+
 	test(__LINE__, "%---7.1 .8%", 42);
 	test(__LINE__, "%80+80+80%", 42);
 	test(__LINE__, "% 8 .5%", 42);

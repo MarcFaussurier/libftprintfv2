@@ -6,20 +6,18 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 10:54:42 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 15:44:30 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 13:02:28 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdarg.h>
-# define IMIN "-9223372036854775808"
 
 typedef unsigned long long	t_64;
 typedef unsigned long long	t_ull;
 typedef long long			t_ll;
 typedef int					(*t_putchar)(char c, void *data);
-
 typedef struct s_pcstr
 {
 	int			l:			32;
@@ -36,8 +34,6 @@ typedef struct s_num_pad
 	t_pcstr	prefix;
 	char	sign;
 }	t_num_pad;
-
-
 typedef struct s_lambda
 {
 	void		*ptr;

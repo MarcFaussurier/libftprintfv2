@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:38:17 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 10:46:05 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 13:05:13 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,23 @@ int				pad_num( t_lambda f, t_fmt_params p, t_num_pad s)
 	if (p.minus || (p.precision != -1 && p.padding))
 		p.zero = 0;
 	len = s.num.l;
+//	printf("sharp? %i prefix? %i precision? %i padding? %i len? %i num.l? %i\n", p.sharp, s.prefix.l, p.precision, p.padding, len, s.num.l);
+	if (/*(!p.minus || g)*/  s.prefix.l == 1 && p.sharp)
+	{
+		if (s.num.s[0] == '0' && p.precision <= 1)
+			s.prefix.l = 0;
+		p.precision -= 1;
+	}
 	if (s.sign)
 		p.padding -= 1;
 	if (s.prefix.l && s.num.l && p.sharp)
-		p.padding -= s.prefix.l;
+		if ((s.num.l && s.num.s[0] != '0') || s.prefix.l == 1)
+			p.padding -= s.prefix.l;
 	if (p.precision == -1)
 		p.precision = len;
 	if ( (long long) len > p.precision)
 		p.precision = len;
 	p.padding -= p.precision;
-/*	printf("padding: %i precision: %i len: %i prefixl: %i num.l: %i\n", 
-				p.padding,
-				p.precision,
-				len,
-				s.prefix.l,
-				s.num.l
-			);*/
 	if (!(p.minus || p.zero))
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(' ', f.data));
