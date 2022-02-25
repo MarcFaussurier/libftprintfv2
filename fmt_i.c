@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:38:17 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 17:02:47 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 10:46:05 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,44 +28,42 @@ int				pad_num( t_lambda f, t_fmt_params p, t_num_pad s)
 	if (p.padding < 0)
 	{
 		p.padding = -p.padding;
-		//  if (!state.flags.zero)
 		p.minus = 1;
 	}
-	//if (/*s.bl == 10 &&*/ (!p.precision) && s.num.s[0] == '0')
-
-	if (/*s.bl == 10 &&*/ (!p.precision) && s.num.s[0] == '0')
+	if (p.precision == 0 && s.prefix.l == 1)
+	{	p.padding -= 1; }
+	if ((!p.precision) && s.num.s[0] == '0')
 	{   s.num.s[0] = 0; s.num.l = 0; p.zero = 0; }
-	//  if (type == PREFIXED_NUMBER && input[1] == '0' && state.precision == NO_PRECISION)
-	//     s.num.s[0] = "";
 	if (p.minus || (p.precision != -1 && p.padding))
 		p.zero = 0;
 	len = s.num.l;
 	if (s.sign)
 		p.padding -= 1;
 	if (s.prefix.l && s.num.l && p.sharp)
-	{
 		p.padding -= s.prefix.l;
-	//	len -= s.prefix.l;
-	}
 	if (p.precision == -1)
 		p.precision = len;
 	if ( (long long) len > p.precision)
 		p.precision = len;
 	p.padding -= p.precision;
+/*	printf("padding: %i precision: %i len: %i prefixl: %i num.l: %i\n", 
+				p.padding,
+				p.precision,
+				len,
+				s.prefix.l,
+				s.num.l
+			);*/
 	if (!(p.minus || p.zero))
 		while (p.padding-- > 0)
 			r += (((t_putchar)f.ptr)(' ', f.data));
 	if (s.sign)
 			r += (((t_putchar)f.ptr)(s.sign, f.data));
-	if (s.num.l && s.num.s[0] != '0')
+	if ((s.num.l && s.num.s[0] != '0') || s.prefix.l == 1)
 	{
-		//printf("s.num.l: %i\ns.num.s: %.*s\n", s.num.l, s.num.l, s.num.s);
+		y = 0;
 		if (s.prefix.l && p.sharp)
-		{
-			y = 0;
 			while (y < s.prefix.l)
 				r += (((t_putchar)f.ptr)(s.prefix.s[y++], f.data));
-		}	
 	}
 	if (!p.minus)
 		while (p.padding-- > 0)
@@ -74,7 +72,7 @@ int				pad_num( t_lambda f, t_fmt_params p, t_num_pad s)
 			else
 				r += (((t_putchar)f.ptr)(' ', f.data));
 		}
-	if (s.num.l)
+	if (s.num.l && !(s.prefix.l == 1 && p.precision == 1))
 		while ((long long)len <  p.precision--)
 			r += (((t_putchar)f.ptr)('0', f.data));
 	y = 0;
