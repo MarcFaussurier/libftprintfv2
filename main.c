@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:38:33 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 11:46:07 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 12:34:47 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	main(int ac, char **av)
 	test(__LINE__, "%lc", 0x0376);
 	test(__LINE__, "%lc", 0x0376);
 	test(__LINE__, "%lc", WCHAR_MAX);
-	test(__LINE__, "%ls", (wchar_t[2]){'/', 0});
+
 	test(__LINE__, "%lc", INT_MAX / 2);
 	test(__LINE__, "%lc", INT_MAX - 2);
 	test(__LINE__, "%lc", WCHAR_MAX);
@@ -169,6 +169,7 @@ int	main(int ac, char **av)
 	if (!testc || testc == 's')
 	{
 	/*%s*/
+	test(__LINE__, "%ls", (wchar_t[2]){'/', 0});
 	test(__LINE__, "%.s", "hello world");
 	test(__LINE__, "%.0s", "hello world");
 	test(__LINE__, "%.s", "hello world");
@@ -355,6 +356,8 @@ int	main(int ac, char **av)
 	test(__LINE__, "%07.5p", 42);
 	test(__LINE__, "%---7.1 .8p", 42);
 	test(__LINE__, "%80+80+80p", 42);
+	test(__LINE__, "%80+80-80.-8p", 42);
+	test(__LINE__, "%80+80-80.*p", -8, 42);
 	test(__LINE__, "% 8 .5p", 42);
 	test(__LINE__, "%-0 +72.15p", 42);
 	test(__LINE__, "%669p", 42);

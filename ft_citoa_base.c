@@ -6,12 +6,13 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:47:33 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 16:26:43 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 12:39:44 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <limits.h>
+#define IMIN "9223372036854775808"
 
 int	ft_citoa_base(t_lambda f, t_ll i, t_pcstr b)
 {

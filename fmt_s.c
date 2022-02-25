@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 15:50:16 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/16 15:53:11 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 12:27:20 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	pad_s(int a, t_lambda f, t_fmt_params p, char *s)
 		space = '0';
 	else
 		space = ' ';
-	if (p.precision == -1)
+	if (p.precision < 0)
 		p.precision = a;
 	if (p.precision > a)
 		p.precision = a;
@@ -44,10 +44,32 @@ int	fmt_s(t_lambda f, t_fmt_params p, va_list ap)
 {
 	char		*s;
 	int			a;
+	int			k;
+	int			prec;
+	int			pad;
 
 	s = va_arg(ap, char *);
 	if (!s)
 		s = "(null)";
+
+	if (p.modifiers[0] == 'l' && !p.modifiers[1])
+	{
+		pad = p.padding;
+		if (p.precision == -1)
+			prec = a;
+		if (p.precision > a)
+			prec = a;
+		if (!p.minus || p.zero)
+			while (pad && pad-- > prec)
+				;
+		k = 0;
+		while (s[k] && (prec))
+		{
+			if ((s[k] < 0 || s[k] > 255))
+				((int(*)(char, void*))f.ptr)(0, f.data);
+			return (-1);
+		}
+	}
 	a = ft_strlen(s);
 	return (pad_s(a, f, p, s));
 }
