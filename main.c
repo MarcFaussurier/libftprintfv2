@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:38:33 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 18:27:55 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 19:10:03 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,6 +353,7 @@ int	main(int ac, char **av)
 	if (!testc || testc == 'p')
 	{
 	/*%p*/	
+	test(__LINE__, "%#x %x", 42, 42);
 	test(__LINE__, "%p", 42);
 	test(__LINE__, "%+0.54p", 42);
 	test(__LINE__, "%+0 .5p", 42);
@@ -1240,6 +1241,22 @@ int	main(int ac, char **av)
 	test(__LINE__, "%5p", (void*)42);
 	test(__LINE__, "%-1p", (void*)42);
 	test(__LINE__, "%-5p", (void*)42);
+   	test(__LINE__, "the address is %2p", (void *)0);
+   	test(__LINE__, "the address is %3p", (void *)0);
+   	test(__LINE__, "the address is %4p", (void *)0);
+   	test(__LINE__, "the address is %8p", (void *)0);
+   	test(__LINE__, "%4p is the address", (void *)0);
+   	test(__LINE__, "%2p is the address", (void *)0);
+   	test(__LINE__, "%3p is the address", (void *)0);
+   	test(__LINE__, "%8p is the address", (void *)0);
+   	test(__LINE__, "the address is %0.2p", (void *)0);
+   	test(__LINE__, "the address is %3.0p", (void *)0);
+   	test(__LINE__, "the address is %4.p", (void *)0);
+   	test(__LINE__, "the address is %8.5p", (void *)0);
+   	test(__LINE__, "%4.8p is the address", (void *)0);
+   	test(__LINE__, "%2.2p is the address", (void *)0);
+   	test(__LINE__, "%3.16p is the address", (void *)0);
+   	test(__LINE__, "%8.8p is the address", (void *)0);
 	}
 	/*%x%X*/
 	if (!testc || testc == 'x')

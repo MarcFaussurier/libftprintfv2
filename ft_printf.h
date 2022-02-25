@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 10:54:42 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 18:11:43 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 18:51:44 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_num_pad
 	t_pstr	num;
 	t_pcstr	prefix;
 	char	sign;
+	int		force_prefix;
 }	t_num_pad;
 typedef struct s_lambda
 {

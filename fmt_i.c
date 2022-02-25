@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:38:17 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 18:24:35 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 19:02:45 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	init_padding1(t_fmt_params *p, t_num_pad *s)
 	}
 	if (p->precision == 0 && s->prefix.l == 1)
 		p->padding -= 1;
-	if ((!p->precision) && s->num.s[0] == '0')
+	if (((!p->precision) && s->num.s[0] == '0'))
 	{
 		s->num.s[0] = 0;
 		s->num.l = 0;
@@ -48,8 +48,8 @@ static int	init_padding2(t_lambda f, t_fmt_params *p, t_num_pad *s, int len)
 
 	r = 0;
 	y = 0;
-	if ((s->prefix.l && s->num.l && p->sharp)
-		&& ((s->num.l && s->num.s[0] != '0') || s->prefix.l == 1))
+	if (s->force_prefix || ((s->prefix.l && s->num.l && p->sharp)
+		&& ((s->num.l && s->num.s[0] != '0') || s->prefix.l == 1)))
 		p->padding -= s->prefix.l;
 	if (p->precision == -1 || ((long long) len > p->precision))
 		p->precision = len;
@@ -59,8 +59,9 @@ static int	init_padding2(t_lambda f, t_fmt_params *p, t_num_pad *s, int len)
 			r += (((t_putchar)f.ptr)(' ', f.data));
 	if (s->sign)
 			r += (((t_putchar)f.ptr)(s->sign, f.data));
-	if (((s->num.l && s->num.s[0] != '0') || s->prefix.l == 1)
-		&& (s->prefix.l && p->sharp))
+	if (s->force_prefix || (((s->num.l && s->num.s[0] != '0')
+		|| s->prefix.l == 1)
+		&& (s->prefix.l && p->sharp)))
 		while (y < s->prefix.l)
 			r += (((t_putchar)f.ptr)(s->prefix.s[y++], f.data));
 	return (r);
@@ -121,6 +122,6 @@ int	fmt_i(t_lambda f, t_fmt_params p, va_list ap)
 			{
 				.num = (t_pstr){.l = num.l, .s = num.s},
 			.prefix = (t_pcstr){.l = 0, .s = 0},
-		.sign = sign,
+		.sign = sign, .force_prefix = 0
 	}));
 }

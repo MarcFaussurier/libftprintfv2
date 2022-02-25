@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 15:46:33 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 16:36:06 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 18:53:13 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static inline int	generic_fmt_x(t_lambda f, t_fmt_params p,
 			{
 				.num = (t_pstr){.l = num.l, .s = num.s},
 			.prefix = prefix,
-			.sign = 0
+			.sign = 0, .force_prefix = 0
 		}));
 }
 
