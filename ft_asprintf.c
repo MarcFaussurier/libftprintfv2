@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 14:38:42 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/19 17:15:42 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 13:25:31 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	ft_vasprintf(char **s, const char *fmt, va_list ap)
 	str.l = 4096;
 	str.i = 0;
 	va_copy(lap, ap);
-	str.l = (ft_vcprintf((t_lambda){.ptr=&f, .data=&str}, fmt, ap));
+	str.l = (ft_vcprintf((t_lambda){.ptr = &f, .data = &str}, fmt, ap));
 	if (str.l > 4096)
 	{
 		free(str.s);
 		str.i = 0;
 		str.s = malloc(str.l + 1);
-		str.l = (ft_vcprintf((t_lambda){.ptr=&f, .data=&str}, fmt, lap));
+		str.l = (ft_vcprintf((t_lambda){.ptr = &f, .data = &str}, fmt, lap));
 	}
 	va_end(lap);
 	if (str.l >= 0)

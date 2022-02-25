@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:38:33 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 13:19:58 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 18:27:55 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ int	main(int ac, char **av)
 
 	s = "yay";
 	t = s;
+	t2 = 4;
+	t2bis = 8;
+	t4 = 9;
 	testc = 0;
 	if (ac == 2)
 		testc = av[1][0];

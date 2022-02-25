@@ -6,7 +6,7 @@
 /*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 10:54:42 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/02/25 13:02:28 by mafaussu         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 18:11:43 by mafaussu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,13 @@ int		ft_printf(const char *fmt, ...);
 int		ft_vprintf(const char *fmt, va_list ap);
 int		ft_asprintf(char **s, const char *fmt, ...);
 int		ft_vasprintf(char **s, const char *fmt, va_list ap);
+int		read_num(const char **fmt, va_list ap);
 /**/
 int		ft_vcprintf(t_lambda f, const char *fmt, va_list ap);
 int		ft_cprintf(t_lambda f, const char *fmt, ...);
+int		parse_flag(const char **fmt, t_fmt_params *p, va_list ap);
+void	parse_star(const char **fmt, t_fmt_params *p, va_list ap);
+int		parse_percent(t_lambda f, const char **fmt, va_list ap, int *r);
 /**/
 int		ft_strlen(char *s);
 int		ft_one(char c, void *data);
